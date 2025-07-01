@@ -21,3 +21,6 @@ npm-debug.log*
 # System files
 .DS_Store
 Thumbs.db
+
+# Large files
+Git-Setup.exe
