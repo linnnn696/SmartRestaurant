@@ -1,0 +1,53 @@
+# Build
+/build
+/oh_modules
+/.hvigor
+
+# IDE
+/.idea
+/.vscode
+
+# System
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Local
+/local.properties
+
+/node_modules
+.cxx
+/.clangd
+/.clang-format
+/.clang-tidy
+**/.test
+/.appanalyzer
+# Node
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# IDE
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Build outputs
+/build/
+/dist/
+/out/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Harmony OS specific
+.hvigor/
+.cxx/
+.temp/

@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "Smart Restaurant App"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "Smart Restaurant App"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "Smart Restaurant"
+    },
+    {
+      "name": "camera_reason",
+      "value": "需要相机权限用于扫描点餐二维码"
+    }
+  ]
+}
