@@ -1,0 +1,71 @@
+{
+  "HVIGOR_OHOS_PLUGIN": {
+    "MODULES": [
+      {
+        "MODULE_NAME": "1043bfc77febe75fafec0c4309faccf1",
+        "API_TYPE": "stageMode",
+        "INCREMENTAL_TASKS": {
+          "COMPILE_ARKTS": true
+        }
+      }
+    ],
+    "NATIVE_COMPILER": "Default",
+    "BUILD_MODE": "debug",
+    "USE_NORMALIZED_OHMURL": true
+  },
+  "HVIGOR": {
+    "IS_INCREMENTAL": true,
+    "IS_DAEMON": true,
+    "IS_PARALLEL": true,
+    "IS_HVIGORFILE_TYPE_CHECK": false,
+    "TASK_TIME": {
+      "1043bfc77febe75fafec0c4309faccf1": {
+        "PreBuild": 97182900,
+        "CreateModuleInfo": 1369600,
+        "ConfigureCmake": 1075800,
+        "PreCheckSyscap": 1418900,
+        "ProcessIntegratedHsp": 2668200,
+        "BuildNativeWithCmake": 1047900,
+        "SyscapTransform": 11112700,
+        "ProcessStartupConfig": 9183600,
+        "BuildNativeWithNinja": 1967600,
+        "CompileResource": 522656200,
+        "BuildJS": 8275800,
+        "CompileArkTS": 4235102100,
+        "GeneratePkgModuleJson": 4168900,
+        "PackageHap": 80315600,
+        "SignHap": 3608800,
+        "CollectDebugSymbol": 2525200,
+        "assembleHap": 486900
+      }
+    },
+    "APIS": [
+      "getHvigorConfig",
+      "getRootNodeDescriptor",
+      "getChildNode",
+      "getNodeByName",
+      "getAllNodes",
+      "getRootNode",
+      "getNodeName",
+      "getNodePath",
+      "subNodes",
+      "getExtraOption",
+      "getExtParam",
+      "getExtParams",
+      "getProperty",
+      "getProperties",
+      "getParameter",
+      "getProductName",
+      "nodesEvaluated",
+      "getCommandEntryTask",
+      "getStartParams"
+    ],
+    "CONFIG_PROPERTIES": {
+      "enableSignTask": true,
+      "skipNativeIncremental": false,
+      "hvigor_keepDependency": true
+    },
+    "TOTAL_TIME": 5452714700,
+    "BUILD_ID": "202507012141194710"
+  }
+}

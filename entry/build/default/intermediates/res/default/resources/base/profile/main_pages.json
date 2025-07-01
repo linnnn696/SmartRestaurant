@@ -1,0 +1,12 @@
+{
+  "src": [
+    "pages/HomePage",
+    "pages/ScanPage",
+    "pages/DishDetailPage",
+    "pages/CartPage",
+    "pages/OrderTrackPage",
+    "pages/PaymentPage",
+    "pages/MapPage",
+    "pages/KitchenScreenPage"
+  ]
+}
