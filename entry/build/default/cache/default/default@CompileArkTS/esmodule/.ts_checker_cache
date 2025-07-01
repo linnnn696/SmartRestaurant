@@ -246,7 +246,9 @@
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.web.webview.d.ts",
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.security.cert.d.ts",
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.security.cryptoFramework.d.ts",
-        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.print.d.ts"
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.print.d.ts",
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.abilityAccessCtrl.d.ts",
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\ScanPage.ets"
       ],
       "error": false
     },
@@ -300,7 +302,8 @@
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\application\\AbilityStageContext.d.ts",
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.file.photoAccessHelper.d.ts",
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\common.d.ts",
-        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.print.d.ts"
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.print.d.ts",
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.abilityAccessCtrl.d.ts"
       ],
       "error": false
     },
@@ -457,7 +460,8 @@
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\bundleManager\\ExtensionAbilityInfo.d.ts",
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.window.d.ts",
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.app.ability.StartOptions.d.ts",
-        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\application\\ProcessInformation.d.ts"
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\application\\ProcessInformation.d.ts",
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\ScanPage.ets"
       ],
       "error": false
     },
@@ -847,7 +851,8 @@
       ],
       "parent": [
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.UIContext.d.ts",
-        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\HomePage.ets"
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\HomePage.ets",
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\ScanPage.ets"
       ],
       "error": false
     },
@@ -1422,10 +1427,12 @@
       "error": false
     },
     "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\HomePage.ets": {
-      "mtimeMs": 1751377146318.338,
+      "mtimeMs": 1751384132128.5208,
       "children": [
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
-        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.app.ability.common.d.ts"
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.app.ability.common.d.ts",
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\OrderListPage.ets",
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\ProfilePage.ets"
       ],
       "parent": [],
       "error": true,
@@ -1448,11 +1455,9 @@
       "error": false
     },
     "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\ScanPage.ets": {
-      "mtimeMs": 1751370743869.715,
+      "mtimeMs": 1751382099654.5757,
       "children": [
-        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
-        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.multimedia.camera.d.ts",
-        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.multimedia.image.d.ts"
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts"
       ],
       "parent": [],
       "error": true,
@@ -1977,6 +1982,51 @@
       ],
       "parent": [
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.security.cert.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.abilityAccessCtrl.d.ts": {
+      "mtimeMs": 1751107187000,
+      "children": [
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.base.d.ts",
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\permissions.d.ts",
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\application\\Context.d.ts",
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\security\\PermissionRequestResult.d.ts"
+      ],
+      "parent": [
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\ScanPage.ets"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\permissions.d.ts": {
+      "mtimeMs": 1751107187000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.abilityAccessCtrl.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\security\\PermissionRequestResult.d.ts": {
+      "mtimeMs": 1751107187000,
+      "children": [],
+      "parent": [
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.abilityAccessCtrl.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\OrderListPage.ets": {
+      "mtimeMs": 1751383244151.9202,
+      "children": [],
+      "parent": [
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\HomePage.ets"
+      ],
+      "error": false
+    },
+    "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\ProfilePage.ets": {
+      "mtimeMs": 1751383276065.7988,
+      "children": [],
+      "parent": [
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\HomePage.ets"
       ],
       "error": false
     }

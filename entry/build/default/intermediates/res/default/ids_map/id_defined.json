@@ -63,5 +63,17 @@
 			"type":	"profile",
 			"name":	"main_pages",
 			"id":	"0x0100000F"
+		}, {
+			"type":	"media",
+			"name":	"ic_back",
+			"id":	"0x01000010"
+		}, {
+			"type":	"media",
+			"name":	"ic_camera_permission",
+			"id":	"0x01000011"
+		}, {
+			"type":	"media",
+			"name":	"scan_frame",
+			"id":	"0x01000012"
 		}]
 }

@@ -2,7 +2,6 @@ if (!("finalizeConstruction" in ViewPU.prototype)) {
     Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
 }
 interface ScanPage_Params {
-    hasPermission?: boolean;
     scanResult?: string;
 }
 import router from "@ohos:router";
@@ -15,15 +14,11 @@ class ScanPage extends ViewPU {
         if (typeof paramsLambda === "function") {
             this.paramsGenerator_ = paramsLambda;
         }
-        this.__hasPermission = new ObservedPropertySimplePU(false, this, "hasPermission");
         this.__scanResult = new ObservedPropertySimplePU('', this, "scanResult");
         this.setInitiallyProvidedValue(params);
         this.finalizeConstruction();
     }
     setInitiallyProvidedValue(params: ScanPage_Params) {
-        if (params.hasPermission !== undefined) {
-            this.hasPermission = params.hasPermission;
-        }
         if (params.scanResult !== undefined) {
             this.scanResult = params.scanResult;
         }
@@ -31,21 +26,12 @@ class ScanPage extends ViewPU {
     updateStateVars(params: ScanPage_Params) {
     }
     purgeVariableDependenciesOnElmtId(rmElmtId) {
-        this.__hasPermission.purgeDependencyOnElmtId(rmElmtId);
         this.__scanResult.purgeDependencyOnElmtId(rmElmtId);
     }
     aboutToBeDeleted() {
-        this.__hasPermission.aboutToBeDeleted();
         this.__scanResult.aboutToBeDeleted();
         SubscriberManager.Get().delete(this.id__());
         this.aboutToBeDeletedInternal();
-    }
-    private __hasPermission: ObservedPropertySimplePU<boolean>;
-    get hasPermission() {
-        return this.__hasPermission.get();
-    }
-    set hasPermission(newValue: boolean) {
-        this.__hasPermission.set(newValue);
     }
     private __scanResult: ObservedPropertySimplePU<string>;
     get scanResult() {
@@ -53,19 +39,6 @@ class ScanPage extends ViewPU {
     }
     set scanResult(newValue: string) {
         this.__scanResult.set(newValue);
-    }
-    aboutToAppear() {
-        // 检查相机权限
-        this.checkPermission();
-    }
-    async checkPermission() {
-        try {
-            // 实际项目中需要添加权限检查逻辑
-            this.hasPermission = true;
-        }
-        catch (error) {
-            console.error('Failed to check camera permission:', error instanceof Error ? error.message : 'Unknown error');
-        }
     }
     initialRender() {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -85,9 +58,15 @@ class ScanPage extends ViewPU {
             Row.padding(15);
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Button.createWithLabel('返回');
+            Button.createWithChild();
+            Button.backgroundColor(Color.Transparent);
             Button.onClick(() => router.back());
         }, Button);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Image.create({ "id": 16777232, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
+            Image.width(24);
+            Image.height(24);
+        }, Image);
         Button.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('扫码点餐');
@@ -98,66 +77,32 @@ class ScanPage extends ViewPU {
         // 顶部导航栏
         Row.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            If.create();
-            if (this.hasPermission) {
-                this.ifElseBranchUpdateFunction(0, () => {
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        // 相机预览区域（占位）
-                        Column.create();
-                        // 相机预览区域（占位）
-                        Column.width('100%');
-                        // 相机预览区域（占位）
-                        Column.height('70%');
-                        // 相机预览区域（占位）
-                        Column.backgroundColor('#000000');
-                        // 相机预览区域（占位）
-                        Column.justifyContent(FlexAlign.Center);
-                    }, Column);
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('相机预览区域');
-                        Text.fontSize(16);
-                        Text.margin({ bottom: 20 });
-                    }, Text);
-                    Text.pop();
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('扫描二维码即可点餐');
-                        Text.fontSize(14);
-                        Text.fontColor('#666666');
-                    }, Text);
-                    Text.pop();
-                    // 相机预览区域（占位）
-                    Column.pop();
-                });
-            }
-            else {
-                this.ifElseBranchUpdateFunction(1, () => {
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        // 无权限提示
-                        Column.create();
-                        // 无权限提示
-                        Column.width('100%');
-                        // 无权限提示
-                        Column.height('70%');
-                        // 无权限提示
-                        Column.justifyContent(FlexAlign.Center);
-                    }, Column);
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('需要相机权限才能扫码点餐');
-                        Text.fontSize(16);
-                        Text.margin({ bottom: 20 });
-                    }, Text);
-                    Text.pop();
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Button.createWithLabel('授权相机权限');
-                        Button.onClick(() => this.checkPermission());
-                    }, Button);
-                    Button.pop();
-                    // 无权限提示
-                    Column.pop();
-                });
-            }
-        }, If);
-        If.pop();
+            // 扫码区域（占位）
+            Column.create();
+            // 扫码区域（占位）
+            Column.width('100%');
+            // 扫码区域（占位）
+            Column.height('70%');
+            // 扫码区域（占位）
+            Column.backgroundColor('#F5F5F5');
+            // 扫码区域（占位）
+            Column.justifyContent(FlexAlign.Center);
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Image.create({ "id": 16777234, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
+            Image.width('70%');
+            Image.height('70%');
+            Image.objectFit(ImageFit.Contain);
+        }, Image);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('扫描二维码即可点餐');
+            Text.fontSize(16);
+            Text.margin({ top: 20 });
+            Text.fontColor('#666666');
+        }, Text);
+        Text.pop();
+        // 扫码区域（占位）
+        Column.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             If.create();
             // 扫描结果展示
@@ -190,7 +135,13 @@ class ScanPage extends ViewPU {
         If.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // 手动输入按钮
-            Button.createWithLabel('手动输入桌号');
+            Button.createWithLabel('手动输入桌号', { type: ButtonType.Normal });
+            // 手动输入按钮
+            Button.width('80%');
+            // 手动输入按钮
+            Button.height(40);
+            // 手动输入按钮
+            Button.backgroundColor('#007DFF');
             // 手动输入按钮
             Button.onClick(() => {
                 // 模拟扫描结果
@@ -208,6 +159,7 @@ class ScanPage extends ViewPU {
         try {
             const data = JSON.parse(result) as TableData;
             if (data && typeof data === 'object' && data.tableId && typeof data.tableId === 'string') {
+                // 跳转到点餐页面
                 router.pushUrl({
                     url: 'pages/HomePage',
                     params: {

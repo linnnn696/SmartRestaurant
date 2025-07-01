@@ -7,10 +7,13 @@ color start_window_background 0x01000008
 float page_text_font_size 0x01000009
 media background 0x01000001
 media foreground 0x01000002
+media ic_back 0x01000010
+media ic_camera_permission 0x01000011
 media layered_image 0x01000003
 media order 0x0100000a
 media profile 0x0100000b
 media scan 0x0100000c
+media scan_frame 0x01000012
 media startIcon 0x0100000d
 profile backup_config 0x0100000e
 profile main_pages 0x0100000f
