@@ -1,6 +1,7 @@
 {
   "src": [
-    "pages/HomePage",
+    "pages/MainPage",
+    "pages/Index",
     "pages/ScanPage",
     "pages/DishDetailPage",
     "pages/CartPage",

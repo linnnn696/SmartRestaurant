@@ -2,11 +2,15 @@ if (!("finalizeConstruction" in ViewPU.prototype)) {
     Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
 }
 interface ScanPage_Params {
-    scanResult?: string;
+    scanLineTop?: number;
+    dinerCount?: number;
+    intervalId?: number;
+    scanFrameHeight?: number;
 }
 import router from "@ohos:router";
-interface TableData {
-    tableId: string;
+import promptAction from "@ohos:promptAction";
+interface RouterParams {
+    dinerCount: number;
 }
 class ScanPage extends ViewPU {
     constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
@@ -14,163 +18,179 @@ class ScanPage extends ViewPU {
         if (typeof paramsLambda === "function") {
             this.paramsGenerator_ = paramsLambda;
         }
-        this.__scanResult = new ObservedPropertySimplePU('', this, "scanResult");
+        this.__scanLineTop = new ObservedPropertySimplePU(0, this, "scanLineTop");
+        this.__dinerCount = new ObservedPropertySimplePU(1, this, "dinerCount");
+        this.intervalId = -1;
+        this.scanFrameHeight = 260;
         this.setInitiallyProvidedValue(params);
         this.finalizeConstruction();
     }
     setInitiallyProvidedValue(params: ScanPage_Params) {
-        if (params.scanResult !== undefined) {
-            this.scanResult = params.scanResult;
+        if (params.scanLineTop !== undefined) {
+            this.scanLineTop = params.scanLineTop;
+        }
+        if (params.dinerCount !== undefined) {
+            this.dinerCount = params.dinerCount;
+        }
+        if (params.intervalId !== undefined) {
+            this.intervalId = params.intervalId;
+        }
+        if (params.scanFrameHeight !== undefined) {
+            this.scanFrameHeight = params.scanFrameHeight;
         }
     }
     updateStateVars(params: ScanPage_Params) {
     }
     purgeVariableDependenciesOnElmtId(rmElmtId) {
-        this.__scanResult.purgeDependencyOnElmtId(rmElmtId);
+        this.__scanLineTop.purgeDependencyOnElmtId(rmElmtId);
+        this.__dinerCount.purgeDependencyOnElmtId(rmElmtId);
     }
     aboutToBeDeleted() {
-        this.__scanResult.aboutToBeDeleted();
+        this.__scanLineTop.aboutToBeDeleted();
+        this.__dinerCount.aboutToBeDeleted();
         SubscriberManager.Get().delete(this.id__());
         this.aboutToBeDeletedInternal();
     }
-    private __scanResult: ObservedPropertySimplePU<string>;
-    get scanResult() {
-        return this.__scanResult.get();
+    private __scanLineTop: ObservedPropertySimplePU<number>;
+    get scanLineTop() {
+        return this.__scanLineTop.get();
     }
-    set scanResult(newValue: string) {
-        this.__scanResult.set(newValue);
+    set scanLineTop(newValue: number) {
+        this.__scanLineTop.set(newValue);
+    }
+    private __dinerCount: ObservedPropertySimplePU<number>;
+    get dinerCount() {
+        return this.__dinerCount.get();
+    }
+    set dinerCount(newValue: number) {
+        this.__dinerCount.set(newValue);
+    }
+    private intervalId: number;
+    private scanFrameHeight: number;
+    aboutToAppear() {
+        // 获取路由参数中的就餐人数
+        const params = router.getParams() as RouterParams;
+        if (params?.dinerCount) {
+            this.dinerCount = params.dinerCount;
+        }
+        // 开始扫描线动画
+        this.intervalId = setInterval(() => {
+            this.scanLineTop = (this.scanLineTop + 2) % this.scanFrameHeight;
+        }, 20);
+        // 模拟2秒后扫码成功
+        setTimeout(() => {
+            clearInterval(this.intervalId);
+            promptAction.showToast({
+                message: '扫码成功',
+                duration: 2000
+            });
+            setTimeout(() => {
+                router.pushUrl({
+                    url: 'pages/MainPage',
+                    params: {
+                        activeTab: 0,
+                        dinerCount: this.dinerCount,
+                        tableId: '33' // 传递桌号
+                    }
+                });
+            }, 1000);
+        }, 2000);
+    }
+    aboutToDisappear() {
+        clearInterval(this.intervalId);
     }
     initialRender() {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Stack.create({ alignContent: Alignment.Center });
+            Stack.width('100%');
+            Stack.height('100%');
+            Stack.backgroundColor('#000000');
+            Stack.opacity(0.9);
+        }, Stack);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
             Column.width('100%');
             Column.height('100%');
-            Column.backgroundColor('#F5F5F5');
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // 顶部导航栏
+            // Header
             Row.create();
-            // 顶部导航栏
+            // Header
             Row.width('100%');
-            // 顶部导航栏
-            Row.justifyContent(FlexAlign.SpaceBetween);
-            // 顶部导航栏
-            Row.padding(15);
+            // Header
+            Row.height(56);
+            // Header
+            Row.backgroundColor(Color.White);
         }, Row);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Button.createWithChild();
-            Button.backgroundColor(Color.Transparent);
-            Button.onClick(() => router.back());
-        }, Button);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Image.create({ "id": 16777232, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
             Image.width(24);
             Image.height(24);
+            Image.margin({ left: 16 });
+            Image.onClick(() => router.back());
         }, Image);
-        Button.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('扫码点餐');
+            Text.create('扫描桌面二维码');
             Text.fontSize(20);
             Text.fontWeight(FontWeight.Bold);
+            Text.margin({ left: 16 });
         }, Text);
         Text.pop();
-        // 顶部导航栏
+        // Header
         Row.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // 扫码区域（占位）
+            // Scan area
             Column.create();
-            // 扫码区域（占位）
+            // Scan area
             Column.width('100%');
-            // 扫码区域（占位）
-            Column.height('70%');
-            // 扫码区域（占位）
-            Column.backgroundColor('#F5F5F5');
-            // 扫码区域（占位）
+            // Scan area
+            Column.layoutWeight(1);
+            // Scan area
             Column.justifyContent(FlexAlign.Center);
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Stack.create();
+            Stack.width(280);
+            Stack.height(this.scanFrameHeight);
+        }, Stack);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // Scan frame
             Image.create({ "id": 16777234, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
-            Image.width('70%');
-            Image.height('70%');
+            // Scan frame
+            Image.width(280);
+            // Scan frame
+            Image.height(this.scanFrameHeight);
+            // Scan frame
             Image.objectFit(ImageFit.Contain);
         }, Image);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('扫描二维码即可点餐');
+            // Scan line
+            Row.create();
+            // Scan line
+            Row.width(240);
+            // Scan line
+            Row.height(2);
+            // Scan line
+            Row.backgroundColor('#007DFF');
+            // Scan line
+            Row.position({ x: 20, y: this.scanLineTop });
+            // Scan line
+            Row.opacity(0.6);
+        }, Row);
+        // Scan line
+        Row.pop();
+        Stack.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('请将二维码放入框内');
             Text.fontSize(16);
+            Text.fontColor('#999999');
             Text.margin({ top: 20 });
-            Text.fontColor('#666666');
         }, Text);
         Text.pop();
-        // 扫码区域（占位）
+        // Scan area
         Column.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            If.create();
-            // 扫描结果展示
-            if (this.scanResult) {
-                this.ifElseBranchUpdateFunction(0, () => {
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Column.create();
-                        Column.padding(15);
-                    }, Column);
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('扫描结果：');
-                        Text.fontSize(16);
-                        Text.margin({ bottom: 10 });
-                    }, Text);
-                    Text.pop();
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create(this.scanResult);
-                        Text.fontSize(14);
-                    }, Text);
-                    Text.pop();
-                    Column.pop();
-                });
-            }
-            // 手动输入按钮
-            else {
-                this.ifElseBranchUpdateFunction(1, () => {
-                });
-            }
-        }, If);
-        If.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // 手动输入按钮
-            Button.createWithLabel('手动输入桌号', { type: ButtonType.Normal });
-            // 手动输入按钮
-            Button.width('80%');
-            // 手动输入按钮
-            Button.height(40);
-            // 手动输入按钮
-            Button.backgroundColor('#007DFF');
-            // 手动输入按钮
-            Button.onClick(() => {
-                // 模拟扫描结果
-                this.handleScanResult(JSON.stringify({ tableId: 'A001' }));
-            });
-            // 手动输入按钮
-            Button.margin({ top: 20 });
-        }, Button);
-        // 手动输入按钮
-        Button.pop();
         Column.pop();
-    }
-    handleScanResult(result: string) {
-        this.scanResult = result;
-        try {
-            const data = JSON.parse(result) as TableData;
-            if (data && typeof data === 'object' && data.tableId && typeof data.tableId === 'string') {
-                // 跳转到点餐页面
-                router.pushUrl({
-                    url: 'pages/HomePage',
-                    params: {
-                        tableId: data.tableId
-                    }
-                });
-            }
-        }
-        catch (error) {
-            console.error('Invalid QR code content:', error instanceof Error ? error.message : 'Parse error');
-        }
+        Stack.pop();
     }
     rerender() {
         this.updateDirtyElements();

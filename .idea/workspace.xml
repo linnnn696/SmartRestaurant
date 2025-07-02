@@ -2,32 +2,35 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cbeec96a-fd98-449c-b55b-1a418d6bb127" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.hvigor/cache/file-cache.json" beforeDir="false" afterPath="$PROJECT_DIR$/.hvigor/cache/file-cache.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.hvigor/cache/task-cache.json" beforeDir="false" afterPath="$PROJECT_DIR$/.hvigor/cache/task-cache.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.hvigor/outputs/build-logs/build.log" beforeDir="false" afterPath="$PROJECT_DIR$/.hvigor/outputs/build-logs/build.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.hvigor/outputs/logs/details/details.json" beforeDir="false" afterPath="$PROJECT_DIR$/.hvigor/outputs/logs/details/details.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.hvigor/report/report-202507011952295520.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.hvigor/report/report-202507012021199660.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.hvigor/report/report-202507012028189630.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.hvigor/report/report-202507012030269680.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.hvigor/report/report-202507012031220040.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.hvigor/report/report-202507012051053270.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.hvigor/report/report-202507012131592240.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.hvigor/report/report-202507012134056990.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.hvigor/report/report-202507012137460770.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.hvigor/report/report-202507012141194710.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Git使用指南.md" beforeDir="false" afterPath="$PROJECT_DIR$/Git使用指南.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/.ts_checker_cache" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/.ts_checker_cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/.tsbuildinfo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/.tsbuildinfo.linter" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/.tsbuildinfo.linter" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/compileContextInfo.json" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/compileContextInfo.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/compiler.cache/modules/CartPage.ets-f3d29601f62e2cc1fc271572a7e684eb.msgpack" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/compiler.cache/modules/CartPage.ets-f3d29601f62e2cc1fc271572a7e684eb.msgpack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/compiler.cache/modules/DishDetailPage.ets-e154de2e74ef6817793363ec274d9f5d.msgpack" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/compiler.cache/modules/DishDetailPage.ets-e154de2e74ef6817793363ec274d9f5d.msgpack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/compiler.cache/modules/EntryAbility.ets-00bdc9ef47919b27244939eeafa17be6.msgpack" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/compiler.cache/modules/EntryAbility.ets-00bdc9ef47919b27244939eeafa17be6.msgpack" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/compiler.cache/modules/HomePage.ets-09d82c621c239dc885b220e4c8a35638.msgpack" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/compiler.cache/modules/HomePage.ets-09d82c621c239dc885b220e4c8a35638.msgpack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/compiler.cache/modules/PaymentPage.ets-4cea4a7bb5fa1c6397f95adeb2e2b051.msgpack" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/compiler.cache/modules/PaymentPage.ets-4cea4a7bb5fa1c6397f95adeb2e2b051.msgpack" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/compiler.cache/modules/ScanPage.ets-6e234773fd9ce5abf6cfd82f8db18b7a.msgpack" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/compiler.cache/modules/ScanPage.ets-6e234773fd9ce5abf6cfd82f8db18b7a.msgpack" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/compiler.cache/plugins/plugins.msgpack" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/compiler.cache/plugins/plugins.msgpack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/entry/src/main/ets/entryability/EntryAbility.protoBin" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/entry/src/main/ets/entryability/EntryAbility.protoBin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/entry/src/main/ets/entryability/EntryAbility.ts" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/entry/src/main/ets/entryability/EntryAbility.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/entry/src/main/ets/pages/CartPage.protoBin" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/entry/src/main/ets/pages/CartPage.protoBin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/entry/src/main/ets/pages/CartPage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/entry/src/main/ets/pages/CartPage.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/entry/src/main/ets/pages/DishDetailPage.protoBin" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/entry/src/main/ets/pages/DishDetailPage.protoBin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/entry/src/main/ets/pages/DishDetailPage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/entry/src/main/ets/pages/DishDetailPage.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/entry/src/main/ets/pages/HomePage.protoBin" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/entry/src/main/ets/pages/HomePage.protoBin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/entry/src/main/ets/pages/HomePage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/entry/src/main/ets/pages/HomePage.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/entry/src/main/ets/pages/OrderListPage.protoBin" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/entry/src/main/ets/pages/OrderListPage.protoBin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/entry/src/main/ets/pages/OrderListPage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/entry/src/main/ets/pages/OrderListPage.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/entry/src/main/ets/pages/PaymentPage.protoBin" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/entry/src/main/ets/pages/PaymentPage.protoBin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/entry/src/main/ets/pages/PaymentPage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/entry/src/main/ets/pages/PaymentPage.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/entry/src/main/ets/pages/ProfilePage.protoBin" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/entry/src/main/ets/pages/ProfilePage.protoBin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/entry/src/main/ets/pages/ProfilePage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/entry/src/main/ets/pages/ProfilePage.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/entry/src/main/ets/pages/ScanPage.protoBin" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug/entry/src/main/ets/pages/ScanPage.protoBin" afterDir="false" />
@@ -41,11 +44,20 @@
       <change beforePath="$PROJECT_DIR$/entry/build/default/intermediates/res/default/ResourceTable.txt" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/intermediates/res/default/ResourceTable.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entry/build/default/intermediates/res/default/ids_map/id_defined.json" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/intermediates/res/default/ids_map/id_defined.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entry/build/default/intermediates/res/default/resources.index" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/intermediates/res/default/resources.index" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entry/build/default/intermediates/res/default/resources/base/profile/main_pages.json" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/intermediates/res/default/resources/base/profile/main_pages.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entry/build/default/intermediates/source_map/default/sourceMaps.map" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/intermediates/source_map/default/sourceMaps.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entry/build/default/outputs/default/entry-default-unsigned.hap" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/outputs/default/entry-default-unsigned.hap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entry/build/default/outputs/default/mapping/sourceMaps.map" beforeDir="false" afterPath="$PROJECT_DIR$/entry/build/default/outputs/default/mapping/sourceMaps.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entry/src/main/ets/entryability/EntryAbility.ets" beforeDir="false" afterPath="$PROJECT_DIR$/entry/src/main/ets/entryability/EntryAbility.ets" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entry/src/main/ets/pages/CartPage.ets" beforeDir="false" afterPath="$PROJECT_DIR$/entry/src/main/ets/pages/CartPage.ets" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entry/src/main/ets/pages/DishDetailPage.ets" beforeDir="false" afterPath="$PROJECT_DIR$/entry/src/main/ets/pages/DishDetailPage.ets" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entry/src/main/ets/pages/HomePage.ets" beforeDir="false" afterPath="$PROJECT_DIR$/entry/src/main/ets/pages/HomePage.ets" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entry/src/main/ets/pages/Index.ets" beforeDir="false" afterPath="$PROJECT_DIR$/entry/src/main/ets/pages/Index.ets" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entry/src/main/ets/pages/OrderListPage.ets" beforeDir="false" afterPath="$PROJECT_DIR$/entry/src/main/ets/pages/OrderListPage.ets" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entry/src/main/ets/pages/PaymentPage.ets" beforeDir="false" afterPath="$PROJECT_DIR$/entry/src/main/ets/pages/PaymentPage.ets" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entry/src/main/ets/pages/ProfilePage.ets" beforeDir="false" afterPath="$PROJECT_DIR$/entry/src/main/ets/pages/ProfilePage.ets" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entry/src/main/ets/pages/ScanPage.ets" beforeDir="false" afterPath="$PROJECT_DIR$/entry/src/main/ets/pages/ScanPage.ets" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entry/src/main/resources/base/profile/main_pages.json" beforeDir="false" afterPath="$PROJECT_DIR$/entry/src/main/resources/base/profile/main_pages.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,9 +88,9 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "127.0.0.1:5555": "5372126501751384213651",
+    "127.0.0.1:5555": "5372126501751469083324",
     "Application.entry.executor": "Run",
-    "MODULE_HAP_TIME": "{\"127.0.0.1:5555entry\":\"2025-07-01T15:36:51.984162500Z\"}",
+    "MODULE_HAP_TIME": "{\"127.0.0.1:5555entry\":\"2025-07-02T15:11:24.017108200Z\"}",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "ace.nodejs.version": "18.20.1",

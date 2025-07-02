@@ -3,6 +3,7 @@ if (!("finalizeConstruction" in ViewPU.prototype)) {
 }
 interface ProfilePage_Params {
 }
+import router from "@ohos:router";
 export class ProfilePage extends ViewPU {
     constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
         super(parent, __localStorage, elmtId, extraInfo);
@@ -107,6 +108,9 @@ export class ProfilePage extends ViewPU {
                     Row.create();
                     Row.width('100%');
                     Row.padding(15);
+                    Row.onClick(() => {
+                        router.replaceUrl({ url: 'pages/OrderListPage' });
+                    });
                 }, Row);
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Image.create({ "id": 16777226, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
@@ -235,4 +239,8 @@ export class ProfilePage extends ViewPU {
     rerender() {
         this.updateDirtyElements();
     }
+    static getEntryName(): string {
+        return "ProfilePage";
+    }
 }
+registerNamedRoute(() => new ProfilePage(undefined, {}), "", { bundleName: "com.example.smartrestaurant", moduleName: "entry", pagePath: "pages/ProfilePage", pageFullPath: "entry/src/main/ets/pages/ProfilePage", integratedHsp: "false", moduleType: "followWithHap" });

@@ -1,3 +1,6 @@
+import router from '@ohos.router';
+
+@Entry
 @Component
 export struct ProfilePage {
   build() {
@@ -50,6 +53,9 @@ export struct ProfilePage {
           }
           .width('100%')
           .padding(15)
+          .onClick(() => {
+            router.replaceUrl({ url: 'pages/OrderListPage' });
+          })
         }
         .backgroundColor(Color.White)
 

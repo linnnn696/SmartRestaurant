@@ -90,4 +90,52 @@ git reset --hard 版本哈希值
 例如：
 - git commit -m "feat: 添加购物车功能"
 - git commit -m "fix: 修复订单页面显示bug"
-- git commit -m "docs: 更新README文档" 
+- git commit -m "docs: 更新README文档"
+
+## 六、发布新版本
+
+发布新版本时，建议使用Git标签（tag）来标记版本号。步骤如下：
+
+```bash
+# 1. 确保所有更改已提交
+git status    # 检查是否有未提交的更改
+
+# 2. 创建新的标签
+git tag -a v版本号 -m "版本描述"
+# 例如：git tag -a v2.0 -m "完成订单管理功能"
+
+# 3. 推送标签到GitHub
+git push origin v版本号
+# 例如：git push origin v2.0
+
+# 4. 查看所有标签
+git tag    # 显示所有标签列表
+```
+
+### 处理大文件问题
+
+如果推送时遇到大文件（>50MB）导致的错误：
+
+1. 将大文件添加到 .gitignore：
+```bash
+# 在 .gitignore 中添加大文件
+echo "大文件路径" >> .gitignore
+```
+
+2. 从Git历史中删除大文件：
+```bash
+# 删除大文件的Git历史
+git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch 大文件路径' --prune-empty --tag-name-filter cat -- --all
+
+# 强制更新仓库
+git push origin --force --all
+git push origin --force --tags
+```
+
+3. 清理本地Git仓库：
+```bash
+# 清理和回收空间
+git for-each-ref --format='delete %(refname)' refs/original | git update-ref --stdin
+git reflog expire --expire=now --all
+git gc --prune=now
+``` 
