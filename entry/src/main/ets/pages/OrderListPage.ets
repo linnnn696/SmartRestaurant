@@ -1,6 +1,6 @@
 import router from '@ohos.router';
-import { OrderModel, Order, OrderItem, OrderStatus } from '../model/OrderModel';
-import { CartItem, DishItem, SAMPLE_DISHES } from '../model/DishModel';
+import promptAction from '@ohos.promptAction';
+import { OrderService, OrderItem, Order, OrderStatus } from '../service/OrderService';
 
 interface RouterParams {
   newOrderId?: string;
@@ -10,49 +10,93 @@ interface RouterParams {
 export struct OrderListPage {
   @State orders: Order[] = [];
   @State currentIndex: number = 1;  // 当前选中的是订单页面
-  private orderModel: OrderModel = OrderModel.getInstance();
+  @State isLoading: boolean = false;
   @State newOrderId: string = '';
+  @State errorMessage: string = '';
+  private loadOrdersTimer: number | null = null;
 
   aboutToAppear() {
-    this.refreshOrders();
+    // 首次加载订单
+    this.loadOrders();
   }
 
-  onPageShow() {
-    // 每次页面显示时刷新订单列表
-    this.refreshOrders();
-  }
-
-  refreshOrders() {
-    // 获取所有订单
-    this.orders = this.orderModel.getOrders();
-    
-    // 获取路由参数中的新订单ID
-    const params = router.getParams() as RouterParams;
-    if (params?.newOrderId) {
-      this.newOrderId = params.newOrderId;
-      // 3秒后清除高亮效果
-      setTimeout(() => {
-        this.newOrderId = '';
-      }, 3000);
+  aboutToDisappear() {
+    // 清理定时器
+    if (this.loadOrdersTimer !== null) {
+      clearTimeout(this.loadOrdersTimer);
+      this.loadOrdersTimer = null;
     }
   }
 
-  getDish(dishId: number): DishItem | undefined {
-    return SAMPLE_DISHES.find(dish => dish.id === dishId);
+  onPageShow() {
+    // 页面显示时，如果不是首次加载，延迟刷新订单列表
+    if (this.orders.length > 0) {
+      this.loadOrdersTimer = setTimeout(() => {
+        this.loadOrders();
+      }, 500) as number;
+    }
+  }
+
+  async loadOrders() {
+    // 如果正在加载中，不重复加载
+    if (this.isLoading) {
+      return;
+    }
+
+    try {
+      this.isLoading = true;
+      this.errorMessage = '';
+      
+      // 从后端获取订单列表
+      const orderList = await OrderService.getAllOrders();
+      
+      // 检查返回数据的有效性
+      if (!Array.isArray(orderList)) {
+        throw new Error('返回的订单数据格式无效');
+      }
+      
+      this.orders = orderList;
+    
+      // 获取路由参数中的新订单ID
+      const params: RouterParams = router.getParams() as RouterParams;
+      if (params?.newOrderId) {
+        this.newOrderId = params.newOrderId;
+        // 3秒后清除高亮效果
+        const timer: number = setTimeout(() => {
+          this.newOrderId = '';
+        }, 3000) as number;
+      }
+    } catch (error) {
+      console.error('加载订单失败:', error);
+      this.errorMessage = error instanceof Error ? error.message : '加载订单失败';
+      
+      // 显示错误提示
+      try {
+        await promptAction.showToast({
+          message: this.errorMessage,
+          duration: 3000,
+          bottom: 50
+        });
+      } catch (toastError) {
+        console.error('显示错误提示失败:', toastError);
+      }
+    } finally {
+      this.isLoading = false;
+    }
   }
 
   @Builder
   OrderStatusTag(status: OrderStatus) {
-    Text(status === 'pending' ? '待处理' :
-         status === 'processing' ? '进行中' :
-         status === 'completed' ? '已完成' : '已取消')
+    Text(status === OrderStatus.PENDING ? '待处理' :
+         status === OrderStatus.PREPARING ? '进行中' :
+         status === OrderStatus.COMPLETED ? '已完成' : '已取消')
       .fontSize(12)
-      .fontColor(status === 'processing' ? '#FF6B6B' :
-                 status === 'completed' ? '#67C23A' :
-                 status === 'cancelled' ? '#909399' : '#E6A23C')
-      .backgroundColor(status === 'processing' ? '#FFF0F0' :
-                      status === 'completed' ? '#F0F9EB' :
-                      status === 'cancelled' ? '#F4F4F5' : '#FDF6EC')
+      .fontColor(status === OrderStatus.PREPARING ? '#FF6B6B' :
+                 status === OrderStatus.COMPLETED ? '#67C23A' :
+                 status === OrderStatus.CANCELLED ? '#909399' : '#E6A23C')
+      .backgroundColor(status === OrderStatus.PREPARING ? '#FFF0F0' :
+                      status === OrderStatus.COMPLETED ? '#F0F9EB' :
+                      status === OrderStatus.CANCELLED ? '#F4F4F5' : '#FDF6EC')
       .padding({ left: 8, right: 8, top: 4, bottom: 4 })
       .borderRadius(4)
   }
@@ -80,13 +124,13 @@ export struct OrderListPage {
 
   getStatusText(status: OrderStatus): string {
     switch (status) {
-      case 'pending':
+      case OrderStatus.PENDING:
         return '待支付';
-      case 'processing':
+      case OrderStatus.PREPARING:
         return '制作中';
-      case 'completed':
+      case OrderStatus.COMPLETED:
         return '已完成';
-      case 'cancelled':
+      case OrderStatus.CANCELLED:
         return '已取消';
       default:
         return '未知状态';
@@ -95,13 +139,13 @@ export struct OrderListPage {
 
   getStatusColor(status: OrderStatus): string {
     switch (status) {
-      case 'processing':
+      case OrderStatus.PREPARING:
         return '#FF6B6B';
-      case 'completed':
+      case OrderStatus.COMPLETED:
         return '#52C41A';
-      case 'cancelled':
+      case OrderStatus.CANCELLED:
         return '#999999';
-      case 'pending':
+      case OrderStatus.PENDING:
         return '#FF9500';
       default:
         return '#999999';
@@ -125,9 +169,15 @@ export struct OrderListPage {
 
       // 订单商品列表
       Column() {
-        ForEach(order.items, (item: OrderItem) => {
-          this.OrderItemRow(item)
-        })
+        if (Array.isArray(order.items) && order.items.length > 0) {
+          ForEach(order.items, (item: OrderItem) => {
+            this.OrderItemRow(item)
+          })
+        } else {
+          Text('暂无商品信息')
+            .fontSize(14)
+            .fontColor('#999999')
+        }
       }
       .width('100%')
       .margin({ bottom: 12 })
@@ -137,17 +187,17 @@ export struct OrderListPage {
         .margin({ bottom: 12 })
 
       Row() {
-        Text(`下单时间：${order.createTime}`)
+        Text(`下单时间：${order.createdAt || '未知'}`)
           .fontSize(14)
           .fontColor('#666666')
       }
       .margin({ bottom: 8 })
 
       Row() {
-        Text(`共${order.items.reduce((sum, item) => sum + item.quantity, 0)}件商品`)
+        Text(`共${order.items?.reduce((sum: number, item: OrderItem) => sum + item.quantity, 0) || 0}件商品`)
           .fontSize(14)
           .fontColor('#666666')
-        Text(`合计：¥${order.totalAmount.toFixed(2)}`)
+        Text(`合计：¥${(order.totalAmount || 0).toFixed(2)}`)
           .fontSize(16)
           .fontColor('#FF6B6B')
           .fontWeight(FontWeight.Bold)
@@ -160,53 +210,22 @@ export struct OrderListPage {
     .backgroundColor(this.newOrderId === order.id ? '#FFF0F0' : Color.White)
     .borderRadius(12)
     .margin({ bottom: 12 })
-  }
-
-  @Builder BottomTabs() {
-    Row() {
-      Column() {
-        Image($r('app.media.scan'))
-          .width(24)
-          .height(24)
-        Text('点餐')
-          .fontSize(12)
-          .margin({ top: 4 })
-          .fontColor(this.currentIndex === 0 ? '#FF4081' : '#999999')
+    .onClick(() => {
+      try {
+        router.pushUrl({
+          url: 'pages/OrderTrackPage',
+          params: { orderId: order.id }
+        }).catch((error: Error) => {
+          console.error('导航到订单跟踪页面失败:', error);
+          promptAction.showToast({
+            message: '页面跳转失败',
+            duration: 2000
+          });
+        });
+      } catch (error) {
+        console.error('导航错误:', error);
       }
-      .onClick(() => {
-        router.replaceUrl({ url: 'pages/HomePage' });
-      })
-
-      Column() {
-        Image($r('app.media.order'))
-          .width(24)
-          .height(24)
-        Text('我的订单')
-          .fontSize(12)
-          .margin({ top: 4 })
-          .fontColor(this.currentIndex === 1 ? '#FF4081' : '#999999')
-      }
-      .onClick(() => {
-        // 已经在订单页面，不需要操作
-      })
-
-      Column() {
-        Image($r('app.media.profile'))
-          .width(24)
-          .height(24)
-        Text('个人中心')
-          .fontSize(12)
-          .margin({ top: 4 })
-          .fontColor(this.currentIndex === 2 ? '#FF4081' : '#999999')
-      }
-      .onClick(() => {
-        router.replaceUrl({ url: 'pages/ProfilePage' });
-      })
-    }
-    .width('100%')
-    .height(56)
-    .justifyContent(FlexAlign.SpaceEvenly)
-    .backgroundColor(Color.White)
+    })
   }
 
   build() {
@@ -222,7 +241,42 @@ export struct OrderListPage {
       .padding({ left: 16, right: 16 })
       .backgroundColor(Color.White)
 
-      if (this.orders.length === 0) {
+      // 加载中状态
+      if (this.isLoading) {
+        Column() {
+          LoadingProgress()
+            .width(32)
+            .height(32)
+          Text('加载中...')
+            .fontSize(14)
+            .fontColor('#999999')
+            .margin({ top: 8 })
+        }
+        .width('100%')
+        .layoutWeight(1)
+        .justifyContent(FlexAlign.Center)
+      }
+      // 错误状态
+      else if (this.errorMessage) {
+        Column() {
+          Image($r('app.media.order'))
+            .width(120)
+            .height(120)
+            .fillColor('#CCCCCC')
+            .margin({ bottom: 16 })
+          Text(this.errorMessage)
+            .fontSize(16)
+            .fontColor('#999999')
+          Button('重试')
+            .onClick(() => this.loadOrders())
+            .margin({ top: 16 })
+        }
+        .width('100%')
+        .layoutWeight(1)
+        .justifyContent(FlexAlign.Center)
+      }
+      // 空状态
+      else if (this.orders.length === 0) {
         Column() {
           Image($r('app.media.order'))
             .width(120)
@@ -236,7 +290,9 @@ export struct OrderListPage {
         .width('100%')
         .layoutWeight(1)
         .justifyContent(FlexAlign.Center)
-      } else {
+      }
+      // 订单列表
+      else {
         List() {
           ForEach(this.orders, (order: Order) => {
             ListItem() {

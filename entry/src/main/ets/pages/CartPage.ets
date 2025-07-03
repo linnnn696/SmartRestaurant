@@ -7,7 +7,7 @@ import promptAction from '@ohos.promptAction'
 struct CartPage {
   @State cartItems: CartItem[] = []
   @State totalAmount: number = 0
-  @State animatingItems: Set<number> = new Set()
+  @State animatingItems: Set<string> = new Set()
   private cartModel: CartModel = CartModel.getInstance()
 
   aboutToAppear() {
@@ -19,7 +19,7 @@ struct CartPage {
     this.totalAmount = this.cartModel.getTotalAmount()
   }
 
-  getDish(dishId: number): DishItem | undefined {
+  getDish(dishId: string): DishItem | undefined {
     return SAMPLE_DISHES.find(dish => dish.id === dishId)
   }
 
@@ -61,12 +61,12 @@ struct CartPage {
       .width(28)
       .height(28)
       .backgroundColor('#FF4081')
-      .scale(this.animatingItems.has(-item.dishId) ? { x: 0.8, y: 0.8 } : { x: 1, y: 1 })
+      .scale(this.animatingItems.has(`add-${item.dishId}`) ? { x: 0.8, y: 0.8 } : { x: 1, y: 1 })
       .onClick(() => {
         this.cartModel.addToCart(item.dishId)
-        this.animatingItems.add(-item.dishId)
+        this.animatingItems.add(`add-${item.dishId}`)
         animateTo({ duration: 300, curve: Curve.Smooth }, () => {
-          this.animatingItems.delete(-item.dishId)
+          this.animatingItems.delete(`add-${item.dishId}`)
         })
         this.updateCart()
       })

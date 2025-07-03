@@ -603,7 +603,7 @@ export class HomePage extends ViewPU {
         this.updateDirtyElements();
     }
 }
-//# sourceMappingURL=HomePage.js.mapÂ“ÙQ hvigor_ignore_D:_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.router.d.tsÙW hvigor_ignore_D:_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.promptAction.d.tsÙ9D:\SmartRestaurant\entry\src\main\ets\model\DishModel.etsÙ8D:\SmartRestaurant\entry\src\main\ets\pages\HomePage.etsÔrB›ªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo¯hostModulesInfo°belongModulePath¬shouldEmitJs¥entryÃÂ¸D:\SmartRestaurant\entry²D:\SmartRestaurant¥entry¥1.0.0Ô  ‘ÔrC’²hostDependencyName®hostModuleNameª./HomePage¥entry¸D:\SmartRestaurant\entryÃÃÚ(5import router from '@ohos.router';
+//# sourceMappingURL=HomePage.js.mapÂ“ÙQ hvigor_ignore_D:_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.router.d.tsÙW hvigor_ignore_D:_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.promptAction.d.tsÙ9D:\SmartRestaurant\entry\src\main\ets\model\DishModel.etsÙ8D:\SmartRestaurant\entry\src\main\ets\pages\HomePage.etsÔrB›ªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo¯hostModulesInfo°belongModulePath¬shouldEmitJs¥entryÃÂ¸D:\SmartRestaurant\entry²D:\SmartRestaurant¥entry¥1.0.0Ô  ‘ÔrC’²hostDependencyName®hostModuleNameª./HomePage¥entry¸D:\SmartRestaurant\entryÃÃÚ&çimport router from '@ohos.router';
 import promptAction from '@ohos.promptAction';
 import { DishItem, SAMPLE_DISHES, DISH_CATEGORIES, CategoryItem, CartModel, eventBus } from '../model/DishModel';
 
@@ -629,7 +629,7 @@ export struct HomePage {
     this.cartItemCount = this.cartModel.getTotalCount();
   };
 
-  @State private animatingItems: Set<number> = new Set<number>()
+  @State private animatingItems: Set<string> = new Set<string>()
 
   aboutToAppear() {
     // è·å–è·¯ç”±å‚æ•°ä¸­çš„å°±é¤äººæ•°å’Œæ¡Œå·

@@ -127,5 +127,9 @@
 			"type":	"media",
 			"name":	"ic_remove",
 			"id":	"0x0100001F"
+		}, {
+			"type":	"string",
+			"name":	"internet_reason",
+			"id":	"0x01000020"
 		}]
 }

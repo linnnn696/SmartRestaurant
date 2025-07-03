@@ -2,7 +2,7 @@ import router from '@ohos.router';
 import { DishItem, CartModel, SAMPLE_DISHES } from '../model/DishModel';
 
 interface RouteParams {
-  dishId: number;
+  dishId: string;
 }
 
 @Entry

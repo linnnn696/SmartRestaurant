@@ -249,7 +249,10 @@
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.security.cryptoFramework.d.ts",
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.print.d.ts",
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.abilityAccessCtrl.d.ts",
-        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\ScanPage.ets"
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\ScanPage.ets",
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.http.d.ts",
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.connection.d.ts",
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.socket.d.ts"
       ],
       "error": false
     },
@@ -766,7 +769,8 @@
         "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\PaymentPage.ets",
         "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\ScanPage.ets",
         "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\ProfilePage.ets",
-        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\ReviewPage.ets"
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\ReviewPage.ets",
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\OrderListPage.ets"
       ],
       "error": false
     },
@@ -1440,7 +1444,7 @@
       "error": false
     },
     "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\HomePage.ets": {
-      "mtimeMs": 1751470068552.0483,
+      "mtimeMs": 1751538836378.837,
       "children": [
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.promptAction.d.ts",
@@ -1512,7 +1516,7 @@
       "error": false
     },
     "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\DishDetailPage.ets": {
-      "mtimeMs": 1751454157441.469,
+      "mtimeMs": 1751538836383.468,
       "children": [
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
         "D:\\SmartRestaurant\\entry\\src\\main\\ets\\model\\DishModel.ets"
@@ -1524,7 +1528,7 @@
       ]
     },
     "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\CartPage.ets": {
-      "mtimeMs": 1751461229706.611,
+      "mtimeMs": 1751538836383.468,
       "children": [
         "D:\\SmartRestaurant\\entry\\src\\main\\ets\\model\\DishModel.ets",
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
@@ -1973,7 +1977,8 @@
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.security.cryptoFramework.d.ts"
       ],
       "parent": [
-        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.web.webview.d.ts"
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.web.webview.d.ts",
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.socket.d.ts"
       ],
       "error": false
     },
@@ -2036,11 +2041,11 @@
       "error": false
     },
     "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\OrderListPage.ets": {
-      "mtimeMs": 1751469059641.302,
+      "mtimeMs": 1751548728997.6267,
       "children": [
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
-        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\model\\OrderModel.ets",
-        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\model\\DishModel.ets"
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.promptAction.d.ts",
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\service\\OrderService.ets"
       ],
       "parent": [
         "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\HomePage.ets",
@@ -2068,7 +2073,7 @@
       ]
     },
     "D:\\SmartRestaurant\\entry\\src\\main\\ets\\model\\DishModel.ets": {
-      "mtimeMs": 1751466753215.4998,
+      "mtimeMs": 1751538836382.4658,
       "children": [],
       "parent": [
         "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\HomePage.ets",
@@ -2088,7 +2093,7 @@
       ]
     },
     "D:\\SmartRestaurant\\entry\\src\\main\\ets\\model\\OrderModel.ets": {
-      "mtimeMs": 1751511902715.2852,
+      "mtimeMs": 1751538836383.468,
       "children": [
         "D:\\SmartRestaurant\\entry\\src\\main\\ets\\model\\DishModel.ets"
       ],
@@ -2148,6 +2153,75 @@
       "errorCodes": [
         28007
       ]
+    },
+    "D:\\SmartRestaurant\\entry\\src\\main\\ets\\service\\MenuService.ets": {
+      "mtimeMs": 1751534560984.795,
+      "children": [
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.http.d.ts"
+      ],
+      "parent": [
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\HomePage.ets"
+      ],
+      "error": false
+    },
+    "D:\\SmartRestaurant\\entry\\src\\main\\ets\\service\\HttpService.ets": {
+      "mtimeMs": 1751538919087.7551,
+      "children": [
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.http.d.ts"
+      ],
+      "parent": [
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\service\\MenuService.ets",
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\service\\OrderService.ets"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.http.d.ts": {
+      "mtimeMs": 1751107187000,
+      "children": [
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.base.d.ts",
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.connection.d.ts"
+      ],
+      "parent": [
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\service\\HttpService.ets",
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.connection.d.ts",
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\service\\MenuService.ets"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.connection.d.ts": {
+      "mtimeMs": 1751107187000,
+      "children": [
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.base.d.ts",
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.http.d.ts",
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.socket.d.ts"
+      ],
+      "parent": [
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.http.d.ts",
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.socket.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.socket.d.ts": {
+      "mtimeMs": 1751107187000,
+      "children": [
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.base.d.ts",
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.connection.d.ts",
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.security.cert.d.ts"
+      ],
+      "parent": [
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.connection.d.ts"
+      ],
+      "error": false
+    },
+    "D:\\SmartRestaurant\\entry\\src\\main\\ets\\service\\OrderService.ets": {
+      "mtimeMs": 1751549565808.5005,
+      "children": [
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\service\\HttpService.ets"
+      ],
+      "parent": [
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\OrderListPage.ets"
+      ],
+      "error": false
     }
   }
 }

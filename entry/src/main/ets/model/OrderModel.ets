@@ -4,7 +4,7 @@ export type OrderStatus = 'pending' | 'processing' | 'completed' | 'cancelled';
 
 // 定义基础订单项接口
 export interface BaseOrderItem {
-  dishId: number;
+  dishId: string;
   name: string;
   price: number;
   quantity: number;
@@ -12,7 +12,7 @@ export interface BaseOrderItem {
 
 // 实现订单项类
 export class OrderItem implements BaseOrderItem {
-  dishId: number;
+  dishId: string;
   name: string;
   price: number;
   quantity: number;

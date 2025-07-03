@@ -12,7 +12,7 @@ interface HomePage_Params {
     cartModel?: CartModel;
     categories?: CategoryItem[];
     cartUpdateCallback?;
-    animatingItems?: Set<number>;
+    animatingItems?: Set<string>;
 }
 import router from "@ohos:router";
 import promptAction from "@ohos:promptAction";
@@ -42,7 +42,7 @@ export class HomePage extends ViewPU {
         this.cartUpdateCallback = () => {
             this.cartItemCount = this.cartModel.getTotalCount();
         };
-        this.__animatingItems = new ObservedPropertyObjectPU(new Set<number>(), this, "animatingItems");
+        this.__animatingItems = new ObservedPropertyObjectPU(new Set<string>(), this, "animatingItems");
         this.setInitiallyProvidedValue(params);
         this.finalizeConstruction();
     }
@@ -165,11 +165,11 @@ export class HomePage extends ViewPU {
         this.__categories.set(newValue);
     }
     private cartUpdateCallback;
-    private __animatingItems: ObservedPropertyObjectPU<Set<number>>;
+    private __animatingItems: ObservedPropertyObjectPU<Set<string>>;
     get animatingItems() {
         return this.__animatingItems.get();
     }
-    set animatingItems(newValue: Set<number>) {
+    set animatingItems(newValue: Set<string>) {
         this.__animatingItems.set(newValue);
     }
     aboutToAppear() {

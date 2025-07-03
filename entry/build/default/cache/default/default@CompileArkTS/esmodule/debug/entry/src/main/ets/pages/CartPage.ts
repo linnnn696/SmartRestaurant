@@ -4,7 +4,7 @@ if (!("finalizeConstruction" in ViewPU.prototype)) {
 interface CartPage_Params {
     cartItems?: CartItem[];
     totalAmount?: number;
-    animatingItems?: Set<number>;
+    animatingItems?: Set<string>;
     cartModel?: CartModel;
 }
 import { CartModel, SAMPLE_DISHES } from "@normalized:N&&&entry/src/main/ets/model/DishModel&";
@@ -66,11 +66,11 @@ class CartPage extends ViewPU {
     set totalAmount(newValue: number) {
         this.__totalAmount.set(newValue);
     }
-    private __animatingItems: ObservedPropertyObjectPU<Set<number>>;
+    private __animatingItems: ObservedPropertyObjectPU<Set<string>>;
     get animatingItems() {
         return this.__animatingItems.get();
     }
-    set animatingItems(newValue: Set<number>) {
+    set animatingItems(newValue: Set<string>) {
         this.__animatingItems.set(newValue);
     }
     private cartModel: CartModel;
@@ -81,7 +81,7 @@ class CartPage extends ViewPU {
         this.cartItems = this.cartModel.getItems();
         this.totalAmount = this.cartModel.getTotalAmount();
     }
-    getDish(dishId: number): DishItem | undefined {
+    getDish(dishId: string): DishItem | undefined {
         return SAMPLE_DISHES.find(dish => dish.id === dishId);
     }
     QuantityControl(item: CartItem, parent = null) {
@@ -137,13 +137,13 @@ class CartPage extends ViewPU {
             // 加号按钮
             Button.backgroundColor('#FF4081');
             // 加号按钮
-            Button.scale(this.animatingItems.has(-item.dishId) ? { x: 0.8, y: 0.8 } : { x: 1, y: 1 });
+            Button.scale(this.animatingItems.has(`add-${item.dishId}`) ? { x: 0.8, y: 0.8 } : { x: 1, y: 1 });
             // 加号按钮
             Button.onClick(() => {
                 this.cartModel.addToCart(item.dishId);
-                this.animatingItems.add(-item.dishId);
+                this.animatingItems.add(`add-${item.dishId}`);
                 Context.animateTo({ duration: 300, curve: Curve.Smooth }, () => {
-                    this.animatingItems.delete(-item.dishId);
+                    this.animatingItems.delete(`add-${item.dishId}`);
                 });
                 this.updateCart();
             });

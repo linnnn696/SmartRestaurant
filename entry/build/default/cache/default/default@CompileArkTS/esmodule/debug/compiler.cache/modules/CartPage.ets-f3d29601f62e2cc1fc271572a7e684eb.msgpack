@@ -1,4 +1,4 @@
-Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚGif (!("finalizeConstruction" in ViewPU.prototype)) {
+Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚG/if (!("finalizeConstruction" in ViewPU.prototype)) {
     Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
 }
 import { CartModel, SAMPLE_DISHES } from '../model/DishModel';
@@ -126,13 +126,13 @@ class CartPage extends ViewPU {
             // åŠ å·æŒ‰é’®
             Button.backgroundColor('#FF4081');
             // åŠ å·æŒ‰é’®
-            Button.scale(this.animatingItems.has(-item.dishId) ? { x: 0.8, y: 0.8 } : { x: 1, y: 1 });
+            Button.scale(this.animatingItems.has(`add-${item.dishId}`) ? { x: 0.8, y: 0.8 } : { x: 1, y: 1 });
             // åŠ å·æŒ‰é’®
             Button.onClick(() => {
                 this.cartModel.addToCart(item.dishId);
-                this.animatingItems.add(-item.dishId);
+                this.animatingItems.add(`add-${item.dishId}`);
                 Context.animateTo({ duration: 300, curve: Curve.Smooth }, () => {
-                    this.animatingItems.delete(-item.dishId);
+                    this.animatingItems.delete(`add-${item.dishId}`);
                 });
                 this.updateCart();
             });
@@ -386,7 +386,7 @@ class CartPage extends ViewPU {
     }
 }
 registerNamedRoute(() => new CartPage(undefined, {}), "", { bundleName: "com.example.smartrestaurant", moduleName: "entry", pagePath: "pages/CartPage", pageFullPath: "entry/src/main/ets/pages/CartPage", integratedHsp: "false", moduleType: "followWithHap" });
-//# sourceMappingURL=CartPage.js.mapÂ“Ù9D:\SmartRestaurant\entry\src\main\ets\model\DishModel.etsÙQ hvigor_ignore_D:_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.router.d.tsÙW hvigor_ignore_D:_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.promptAction.d.tsÙ8D:\SmartRestaurant\entry\src\main\ets\pages\CartPage.etsÔrBšªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo°belongModulePath¬shouldEmitJs¥entryÃÂ¸D:\SmartRestaurant\entry²D:\SmartRestaurant¥entry¥1.0.0Ô  ¸D:\SmartRestaurant\entryÃÃÚimport { CartItem, CartModel, DishItem, SAMPLE_DISHES } from '../model/DishModel'
+//# sourceMappingURL=CartPage.js.mapÂ“Ù9D:\SmartRestaurant\entry\src\main\ets\model\DishModel.etsÙQ hvigor_ignore_D:_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.router.d.tsÙW hvigor_ignore_D:_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.promptAction.d.tsÙ8D:\SmartRestaurant\entry\src\main\ets\pages\CartPage.etsÔrBšªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo°belongModulePath¬shouldEmitJs¥entryÃÂ¸D:\SmartRestaurant\entry²D:\SmartRestaurant¥entry¥1.0.0Ô  ¸D:\SmartRestaurant\entryÃÃÚYimport { CartItem, CartModel, DishItem, SAMPLE_DISHES } from '../model/DishModel'
 import router from '@ohos.router'
 import promptAction from '@ohos.promptAction'
 
@@ -395,7 +395,7 @@ import promptAction from '@ohos.promptAction'
 struct CartPage {
   @State cartItems: CartItem[] = []
   @State totalAmount: number = 0
-  @State animatingItems: Set<number> = new Set()
+  @State animatingItems: Set<string> = new Set()
   private cartModel: CartModel = CartModel.getInstance()
 
   aboutToAppear() {
@@ -407,7 +407,7 @@ struct CartPage {
     this.totalAmount = this.cartModel.getTotalAmount()
   }
 
-  getDish(dishId: number): DishItem | undefined {
+  getDish(dishId: string): DishItem | undefined {
     return SAMPLE_DISHES.find(dish => dish.id === dishId)
   }
 
@@ -449,12 +449,12 @@ struct CartPage {
       .width(28)
       .height(28)
       .backgroundColor('#FF4081')
-      .scale(this.animatingItems.has(-item.dishId) ? { x: 0.8, y: 0.8 } : { x: 1, y: 1 })
+      .scale(this.animatingItems.has(`add-${item.dishId}`) ? { x: 0.8, y: 0.8 } : { x: 1, y: 1 })
       .onClick(() => {
         this.cartModel.addToCart(item.dishId)
-        this.animatingItems.add(-item.dishId)
+        this.animatingItems.add(`add-${item.dishId}`)
         animateTo({ duration: 300, curve: Curve.Smooth }, () => {
-          this.animatingItems.delete(-item.dishId)
+          this.animatingItems.delete(`add-${item.dishId}`)
         })
         this.updateCart()
       })
@@ -604,8 +604,8 @@ struct CartPage {
 ” 1” 1” 1”% 1”& 1”. 1!”0 1#’” 0” 0–” 1” 1
 ” 2	” 2” 2” 2’” 0” 0” 1” 1
 ” 3	” 3” 3” 3” 3”  3”" 3”$ 3”) 3!”+ 3#”- 3%”/ 3'’” 0” 0’” 1” 1
-’” 5” 5š” 6” 6”# 6”% 6”) 6”+ 6”5 6”6 6 ”< 6&”> 6(’” 5” 5–” 6” 6” <” <” <” <’” 5” 5–” 6” 6” =” =” =” =’” 5” 5–” 6” 6” >”" >”# >”, > ’” 5” 5Ü (” 6” 6” ?” ?” ?” ?” ?”, ? ”- ?!”0 ?$”1 ?%”2 ?&”6 ?*”7 ?+”= ?1”> ?2”? ?3”Ì@ ?4”ÌA ?5”ÌC ?7”ÌD ?8”ÌF ?:”ÌI ?=”ÌK ??”ÌL ?Ì@”ÌN ?ÌB”ÌQ ?ÌE”ÌS ?ÌG”ÌT ?ÌH”ÌU ?ÌI”ÌV ?ÌJ”ÌX ?ÌL”ÌY ?ÌM”Ì[ ?ÌO”Ì\ ?ÌP”Ì^ ?ÌR”Ì_ ?ÌS”Ìa ?ÌU”Ìb ?ÌV”Ìd ?ÌX’” 5” 5—” 6” 6” Ì@” Ì@” Ì@” Ì@”  Ì@œ” ÌA” ÌA” ÌA” ÌA” ÌA”( ÌA ”) ÌA!”- ÌA%”. ÌA&”4 ÌA,”5 ÌA-”6 ÌA-” ÌB” ÌB” ÌB”# ÌB”$ ÌB”' ÌB”( ÌB ”) ÌB!”- ÌB%”. ÌB&”4 ÌB,”5 ÌB-”6 ÌB-Ü ” ÌC”" ÌC”$ ÌC”, ÌC”. ÌC”1 ÌC!”3 ÌC#”8 ÌC(”: ÌC*”? ÌC/”Ì@ ÌC0”ÌF ÌC6”ÌH ÌC8”ÌJ ÌC:”ÌM ÌC=”ÌO ÌC?” ÌD
-” ÌD” ÌD”' ÌD”( ÌD”. ÌD$”/ ÌD%”0 ÌD&”4 ÌD*”5 ÌD+”; ÌD1”< ÌD2”= ÌD2”” ÌE” ÌE	” ÌE
+’” 5” 5š” 6” 6”# 6”% 6”) 6”+ 6”5 6”6 6 ”< 6&”> 6(’” 5” 5–” 6” 6” <” <” <” <’” 5” 5–” 6” 6” =” =” =” =’” 5” 5–” 6” 6” >”" >”# >”, > ’” 5” 5Ü )” 6” 6” ?” ?” ?” ?” ?”, ? ”- ?!”0 ?$”1 ?%”8 ?,”< ?0”= ?1”ÌC ?7”ÌE ?9”ÌF ?:”ÌG ?;”ÌH ?<”ÌI ?=”ÌK ??”ÌL ?Ì@”ÌN ?ÌB”ÌQ ?ÌE”ÌS ?ÌG”ÌT ?ÌH”ÌV ?ÌJ”ÌY ?ÌM”Ì[ ?ÌO”Ì\ ?ÌP”Ì] ?ÌQ”Ì^ ?ÌR”Ì` ?ÌT”Ìa ?ÌU”Ìc ?ÌW”Ìd ?ÌX”Ìf ?ÌZ”Ìg ?Ì[”Ìi ?Ì]”Ìj ?Ì^”Ìl ?Ì`’” 5” 5—” 6” 6” Ì@” Ì@” Ì@” Ì@”  Ì@œ” ÌA” ÌA” ÌA” ÌA” ÌA”( ÌA ”) ÌA!”- ÌA%”. ÌA&”4 ÌA,”5 ÌA-”6 ÌA-” ÌB” ÌB” ÌB”# ÌB”$ ÌB”' ÌB”( ÌB ”/ ÌB'”3 ÌB+”4 ÌB,”: ÌB2”< ÌB4”= ÌB5”> ÌB5Ü ” ÌC”" ÌC”$ ÌC”, ÌC”. ÌC”1 ÌC!”3 ÌC#”8 ÌC(”: ÌC*”? ÌC/”Ì@ ÌC0”ÌF ÌC6”ÌH ÌC8”ÌJ ÌC:”ÌM ÌC=”ÌO ÌC?” ÌD
+” ÌD” ÌD”' ÌD”( ÌD”. ÌD$”/ ÌD%”6 ÌD,”: ÌD0”; ÌD1”ÌA ÌD7”ÌC ÌD9”ÌD ÌD:”ÌE ÌD:”” ÌE” ÌE	” ÌE
 ” ÌE
 –” ÌF” ÌF” ÌF” ÌF”! ÌF”" ÌF’” ÌG” ÌG’” 7” 7–” 7” 7” 8” 8” 8” 8–” 7” 7” 9” 9” 9” 9˜” 7” 7” :” :” :”! :”" :”' : ’” 5” 5’” 6” 6’” ” ‘” ÌI‘” ÌK’” ÌL” ÌL
 –” ÌL” ÌL

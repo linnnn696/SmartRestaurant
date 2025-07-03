@@ -24,7 +24,7 @@ export struct HomePage {
     this.cartItemCount = this.cartModel.getTotalCount();
   };
 
-  @State private animatingItems: Set<number> = new Set<number>()
+  @State private animatingItems: Set<string> = new Set<string>()
 
   aboutToAppear() {
     // 获取路由参数中的就餐人数和桌号

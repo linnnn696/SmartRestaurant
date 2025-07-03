@@ -223,11 +223,12 @@ class DishDetailPage extends ViewPU {
     }
 }
 registerNamedRoute(() => new DishDetailPage(undefined, {}), "", { bundleName: "com.example.smartrestaurant", moduleName: "entry", pagePath: "pages/DishDetailPage", pageFullPath: "entry/src/main/ets/pages/DishDetailPage", integratedHsp: "false", moduleType: "followWithHap" });
-//# sourceMappingURL=DishDetailPage.js.mapÂ’ÙQ hvigor_ignore_D:_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.router.d.tsÙ9D:\SmartRestaurant\entry\src\main\ets\model\DishModel.etsÙ>D:\SmartRestaurant\entry\src\main\ets\pages\DishDetailPage.etsÔrBšªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo°belongModulePath¬shouldEmitJs¥entryÃÂ¸D:\SmartRestaurant\entry²D:\SmartRestaurant¥entry¥1.0.0Ô  ¸D:\SmartRestaurant\entryÃÃÚ]import router from '@ohos.router';
+//# sourceMappingURL=DishDetailPage.js.mapÂ’ÙQ hvigor_ignore_D:_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.router.d.tsÙ9D:\SmartRestaurant\entry\src\main\ets\model\DishModel.etsÙ>D:\SmartRestaurant\entry\src\main\ets\pages\DishDetailPage.etsÔrBšªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo°belongModulePath¬shouldEmitJs¥entryÃÂ¸D:\SmartRestaurant\entry²D:\SmartRestaurant¥entry¥1.0.0Ô  ¸D:\SmartRestaurant\entryÃÃÚ
+ïimport router from '@ohos.router';
 import { DishItem, CartModel, SAMPLE_DISHES } from '../model/DishModel';
 
 interface RouteParams {
-  dishId: number;
+  dishId: string;
 }
 
 @Entry

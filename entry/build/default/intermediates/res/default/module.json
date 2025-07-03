@@ -28,6 +28,14 @@
 		"installationFree":	false,
 		"pages":	"$profile:main_pages",
 		"requestPermissions":	[{
+				"name":	"ohos.permission.INTERNET",
+				"reason":	"$string:internet_reason",
+				"usedScene":	{
+					"abilities":	["EntryAbility"],
+					"when":	"always"
+				},
+				"reasonId":	16777248
+			}, {
 				"name":	"ohos.permission.CAMERA",
 				"reason":	"$string:camera_reason",
 				"usedScene":	{

@@ -9,7 +9,7 @@ import router from "@ohos:router";
 import { CartModel, SAMPLE_DISHES } from "@normalized:N&&&entry/src/main/ets/model/DishModel&";
 import type { DishItem } from "@normalized:N&&&entry/src/main/ets/model/DishModel&";
 interface RouteParams {
-    dishId: number;
+    dishId: string;
 }
 class DishDetailPage extends ViewPU {
     constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
