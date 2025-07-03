@@ -8,6 +8,7 @@
     "pages/OrderTrackPage",
     "pages/PaymentPage",
     "pages/MapPage",
-    "pages/KitchenScreenPage"
+    "pages/KitchenScreenPage",
+    "pages/ReviewPage"
   ]
 }

@@ -764,7 +764,9 @@
         "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\HomePage.ets",
         "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\CartPage.ets",
         "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\PaymentPage.ets",
-        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\ScanPage.ets"
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\ScanPage.ets",
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\ProfilePage.ets",
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\ReviewPage.ets"
       ],
       "error": false
     },
@@ -787,7 +789,8 @@
         "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\Index.ets",
         "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\DinerCountPage.ets",
         "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\ProfilePage.ets",
-        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\MainPage.ets"
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\MainPage.ets",
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\ReviewPage.ets"
       ],
       "error": false
     },
@@ -2049,9 +2052,11 @@
       ]
     },
     "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\ProfilePage.ets": {
-      "mtimeMs": 1751463855525.205,
+      "mtimeMs": 1751511464379.7776,
       "children": [
-        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts"
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.promptAction.d.ts",
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\model\\OrderModel.ets"
       ],
       "parent": [
         "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\HomePage.ets",
@@ -2083,13 +2088,15 @@
       ]
     },
     "D:\\SmartRestaurant\\entry\\src\\main\\ets\\model\\OrderModel.ets": {
-      "mtimeMs": 1751465349651.0405,
+      "mtimeMs": 1751511902715.2852,
       "children": [
         "D:\\SmartRestaurant\\entry\\src\\main\\ets\\model\\DishModel.ets"
       ],
       "parent": [
         "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\OrderListPage.ets",
-        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\PaymentPage.ets"
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\PaymentPage.ets",
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\ProfilePage.ets",
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\ReviewPage.ets"
       ],
       "error": false
     },
@@ -2116,12 +2123,25 @@
       ]
     },
     "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\MainPage.ets": {
-      "mtimeMs": 1751465578145.568,
+      "mtimeMs": 1751510203983.8372,
       "children": [
         "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\HomePage.ets",
         "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\OrderListPage.ets",
         "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\ProfilePage.ets",
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts"
+      ],
+      "parent": [],
+      "error": true,
+      "errorCodes": [
+        28007
+      ]
+    },
+    "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\ReviewPage.ets": {
+      "mtimeMs": 1751512226608.3853,
+      "children": [
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.promptAction.d.ts",
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\model\\OrderModel.ets"
       ],
       "parent": [],
       "error": true,

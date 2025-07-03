@@ -59,7 +59,7 @@ export class OrderModel {
       id: Math.floor(100000 + Math.random() * 900000).toString(), // 6位随机数
       items: orderItems,
       totalAmount: cartModel.getTotalAmount(),
-      status: 'processing',
+      status: 'completed',
       createTime: new Date().toLocaleString('zh-CN', {
         year: 'numeric',
         month: '2-digit',
