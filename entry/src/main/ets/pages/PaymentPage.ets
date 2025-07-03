@@ -31,7 +31,7 @@ struct PaymentPage {
     }
 
     try {
-      // 创建订单（在支付前就创建，这样可以显示待支付状态）
+      // 创建订单（状态直接为completed）
       const order = this.orderModel.createOrder();
 
       // 显示支付中状态
@@ -43,8 +43,6 @@ struct PaymentPage {
       // 模拟支付过程
       await new Promise<void>((resolve) => setTimeout(resolve, PAYMENT_DELAY));
       
-      // 更新订单状态为处理中
-      this.orderModel.updateOrderStatus(order.id, 'processing');
       // 清空购物车
       this.orderModel.clearCart();
 

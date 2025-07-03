@@ -10484,3 +10484,1225 @@ Require stack:
 [2025-07-03T14:38:48.474] [DEBUG] debug-file - worker[1] exits with exit code 0.
 [2025-07-03T14:38:48.476] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
 [2025-07-03T14:38:48.476] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-07-03T14:44:20.128] [DEBUG] debug-file - session manager: set active socket. socketId=ULk-fN5S4fM1825GAAAD
+[2025-07-03T14:44:20.169] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-07-03T14:44:20.189] [DEBUG] debug-file - Hvigor init with startParameters:{
+  hvigorfileTypeCheck: false,
+  parallelExecution: true,
+  incrementalExecution: true,
+  printStackTrace: false,
+  daemon: true,
+  analyze: 0,
+  logLevel: Level { level: 20000, levelStr: 'INFO', colour: 'green' },
+  optimizationStrategy: 'memory',
+  hotCompile: undefined,
+  hotReloadBuild: undefined
+}
+[2025-07-03T14:44:20.202] [DEBUG] debug-file - Cache service initialization finished in 12 ms 
+[2025-07-03T14:44:20.204] [DEBUG] debug-file - hvigorfile, resolving D:\SmartRestaurant\hvigorfile.ts
+[2025-07-03T14:44:20.226] [DEBUG] debug-file - hvigorfile, require result:  { default: { plugins: [] } }
+[2025-07-03T14:44:20.226] [DEBUG] debug-file - hvigorfile, binding system plugins null
+[2025-07-03T14:44:20.240] [DEBUG] debug-file - Start initialize project's product build option map with build mode debug.
+[2025-07-03T14:44:20.240] [DEBUG] debug-file - Picking option from product 'default' with build mode 'debug'.
+[2025-07-03T14:44:20.241] [DEBUG] debug-file - Product 'default' build option: {}
+[2025-07-03T14:44:20.241] [DEBUG] debug-file - End initialize project's product build option map with build mode 'debug'.
+[2025-07-03T14:44:20.243] [DEBUG] debug-file - Product 'default' using build option: {
+  "debuggable": true,
+  "strictMode": {
+    "caseSensitiveCheck": true,
+    "useNormalizedOHMUrl": true
+  }
+} in this build.
+[2025-07-03T14:44:20.263] [DEBUG] debug-file - No signingConfig found, initRemoteHspCache failed.
+[2025-07-03T14:44:20.275] [DEBUG] debug-file - Start recording SDK configuration permission data.
+[2025-07-03T14:44:20.362] [DEBUG] debug-file - Sdk init in 96 ms 
+[2025-07-03T14:44:20.371] [DEBUG] debug-file - Project task initialization takes 8 ms 
+[2025-07-03T14:44:20.371] [DEBUG] debug-file - hvigorfile, binding custom plugins []
+[2025-07-03T14:44:20.372] [DEBUG] debug-file - hvigorfile, no custom plugins were found in D:\SmartRestaurant\hvigorfile.ts
+[2025-07-03T14:44:20.372] [DEBUG] debug-file - hvigorfile, resolve finished D:\SmartRestaurant\hvigorfile.ts
+[2025-07-03T14:44:20.374] [DEBUG] debug-file - hvigorfile, resolving D:\SmartRestaurant\entry\hvigorfile.ts
+[2025-07-03T14:44:20.387] [DEBUG] debug-file - hvigorfile, require result:  { default: { plugins: [] } }
+[2025-07-03T14:44:20.387] [DEBUG] debug-file - hvigorfile, binding system plugins null
+[2025-07-03T14:44:20.395] [DEBUG] debug-file - failed to load cangjie to dynamically generate schemas: Error: Cannot find module '@ohos/cangjie-build-support/index'
+Require stack:
+- D:\DevEco Studio\tools\hvigor\hvigor-ohos-plugin\src\plugin\factory\plugin-factory.js
+- D:\DevEco Studio\tools\hvigor\hvigor-ohos-plugin\index.js
+- D:\SmartRestaurant\hvigorfile.ts
+- D:\DevEco Studio\tools\hvigor\hvigor\src\base\internal\lifecycle\configuration.js
+- D:\DevEco Studio\tools\hvigor\hvigor\src\base\boot\index.js
+- D:\DevEco Studio\tools\hvigor\hvigor\src\base\daemon\cluster\worker-process-lifecycle.js
+- D:\DevEco Studio\tools\hvigor\hvigor\src\base\daemon\process\daemon-process-boot-script.js
+[2025-07-03T14:44:20.402] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-07-03T14:44:20.402] [DEBUG] debug-file - Target 'default' config: {}
+[2025-07-03T14:44:20.403] [DEBUG] debug-file - Target 'ohosTest' config: {}
+[2025-07-03T14:44:20.403] [DEBUG] debug-file - Module 'entry' target 'default' build option: {
+  "debuggable": true,
+  "copyFrom": "default",
+  "strictMode": {
+    "caseSensitiveCheck": true,
+    "useNormalizedOHMUrl": true
+  },
+  "name": "debug"
+}
+[2025-07-03T14:44:20.404] [DEBUG] debug-file - Module 'entry' target 'ohosTest' build option: {
+  "debuggable": true,
+  "strictMode": {
+    "caseSensitiveCheck": true,
+    "useNormalizedOHMUrl": true
+  },
+  "name": "default"
+}
+[2025-07-03T14:44:20.405] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-07-03T14:44:20.405] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=release
+[2025-07-03T14:44:20.405] [DEBUG] debug-file - Target 'default' config: {}
+[2025-07-03T14:44:20.408] [DEBUG] debug-file - Target 'ohosTest' config: {}
+[2025-07-03T14:44:20.409] [DEBUG] debug-file - Module 'entry' target 'default' build option: {
+  "debuggable": false,
+  "copyFrom": "default",
+  "strictMode": {
+    "caseSensitiveCheck": true,
+    "useNormalizedOHMUrl": true
+  },
+  "name": "release",
+  "arkOptions": {
+    "obfuscation": {
+      "ruleOptions": {
+        "enable": false,
+        "files": [
+          "./obfuscation-rules.txt"
+        ]
+      }
+    }
+  }
+}
+[2025-07-03T14:44:20.409] [DEBUG] debug-file - Module 'entry' target 'ohosTest' build option: {
+  "debuggable": true,
+  "strictMode": {
+    "caseSensitiveCheck": true,
+    "useNormalizedOHMUrl": true
+  },
+  "name": "default"
+}
+[2025-07-03T14:44:20.409] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-07-03T14:44:20.410] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-07-03T14:44:20.410] [DEBUG] debug-file - Target 'default' config: {}
+[2025-07-03T14:44:20.410] [DEBUG] debug-file - Target 'ohosTest' config: {}
+[2025-07-03T14:44:20.411] [DEBUG] debug-file - Module 'entry' target 'default' build option: {
+  "debuggable": true,
+  "copyFrom": "default",
+  "strictMode": {
+    "caseSensitiveCheck": true,
+    "useNormalizedOHMUrl": true
+  },
+  "name": "debug"
+}
+[2025-07-03T14:44:20.411] [DEBUG] debug-file - Module 'entry' target 'ohosTest' build option: {
+  "debuggable": true,
+  "strictMode": {
+    "caseSensitiveCheck": true,
+    "useNormalizedOHMUrl": true
+  },
+  "name": "default"
+}
+[2025-07-03T14:44:20.411] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-07-03T14:44:20.411] [DEBUG] debug-file - Module 'entry' target 'default' using build option: {
+  "debuggable": true,
+  "copyFrom": "default",
+  "strictMode": {
+    "caseSensitiveCheck": true,
+    "useNormalizedOHMUrl": true
+  },
+  "name": "debug"
+} in this build.
+[2025-07-03T14:44:20.415] [DEBUG] debug-file - Module entry task initialization takes 2 ms 
+[2025-07-03T14:44:20.415] [DEBUG] debug-file - hvigorfile, binding custom plugins []
+[2025-07-03T14:44:20.415] [DEBUG] debug-file - hvigorfile, no custom plugins were found in D:\SmartRestaurant\entry\hvigorfile.ts
+[2025-07-03T14:44:20.415] [DEBUG] debug-file - hvigorfile, resolve finished D:\SmartRestaurant\entry\hvigorfile.ts
+[2025-07-03T14:44:20.463] [DEBUG] debug-file - hvigorfile, resolve hvigorfile dependencies in 47 ms 
+[2025-07-03T14:44:20.465] [DEBUG] debug-file - project has submodules:entry
+[2025-07-03T14:44:20.470] [DEBUG] debug-file - start to load updatedOhPackageInfo to the disk
+[2025-07-03T14:44:20.489] [DEBUG] debug-file - load to the disk finished
+[2025-07-03T14:44:20.493] [DEBUG] debug-file - Start to initialize dependency information.
+[2025-07-03T14:44:20.513] [DEBUG] debug-file - Module SmartRestaurant Collected Dependency: 
+[2025-07-03T14:44:20.513] [DEBUG] debug-file - Module SmartRestaurant's total dependency: 0
+[2025-07-03T14:44:20.515] [DEBUG] debug-file - Start to initialize dependency information.
+[2025-07-03T14:44:20.523] [DEBUG] debug-file - Module entry Collected Dependency: 
+[2025-07-03T14:44:20.523] [DEBUG] debug-file - Module entry's total dependency: 0
+[2025-07-03T14:44:20.529] [DEBUG] debug-file - Configuration phase cost:327 ms 
+[2025-07-03T14:44:20.532] [DEBUG] debug-file - Configuration task cost before running: 355 ms 
+[2025-07-03T14:44:20.535] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:44:20.535] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:44:20.545] [DEBUG] debug-file - Executing task :entry:default@PreBuild
+[2025-07-03T14:44:20.576] [DEBUG] debug-file - Incremental task entry:default@PreBuild pre-execution cost: 22 ms .
+[2025-07-03T14:44:20.576] [DEBUG] debug-file - entry : default@PreBuild cost memory 0.3766326904296875
+[2025-07-03T14:44:20.585] [INFO] debug-file - UP-TO-DATE :entry:default@PreBuild...  
+[2025-07-03T14:44:20.587] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:44:20.588] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:44:20.588] [DEBUG] debug-file - Executing task :entry:default@CreateModuleInfo
+[2025-07-03T14:44:20.588] [DEBUG] debug-file - Task 'entry:default@CreateModuleInfo' cost while wrapping incremental declarations: 1 ms 
+[2025-07-03T14:44:20.589] [DEBUG] debug-file - entry : default@CreateModuleInfo cost memory 0.04132843017578125
+[2025-07-03T14:44:20.589] [DEBUG] debug-file - runTaskFromQueue task cost before running: 413 ms 
+[2025-07-03T14:44:20.590] [INFO] debug-file - Finished :entry:default@CreateModuleInfo... after 2 ms 
+[2025-07-03T14:44:20.592] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:44:20.592] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:44:20.594] [DEBUG] debug-file - Executing task :entry:default@GenerateMetadata
+[2025-07-03T14:44:20.595] [DEBUG] debug-file - Task 'entry:default@GenerateMetadata' cost while wrapping incremental declarations: 1 ms 
+[2025-07-03T14:44:20.598] [DEBUG] debug-file - Incremental task entry:default@GenerateMetadata pre-execution cost: 3 ms .
+[2025-07-03T14:44:20.598] [DEBUG] debug-file - entry : default@GenerateMetadata cost memory 0.0894775390625
+[2025-07-03T14:44:20.599] [INFO] debug-file - UP-TO-DATE :entry:default@GenerateMetadata...  
+[2025-07-03T14:44:20.602] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:44:20.603] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:44:20.603] [DEBUG] debug-file - Executing task :entry:default@ConfigureCmake
+[2025-07-03T14:44:20.604] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:44:20.604] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:44:20.604] [DEBUG] debug-file - entry : default@ConfigureCmake cost memory 0.0409698486328125
+[2025-07-03T14:44:20.604] [DEBUG] debug-file - runTaskFromQueue task cost before running: 428 ms 
+[2025-07-03T14:44:20.605] [INFO] debug-file - Finished :entry:default@ConfigureCmake... after 2 ms 
+[2025-07-03T14:44:20.607] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:44:20.608] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:44:20.608] [DEBUG] debug-file - Executing task :entry:default@MergeProfile
+[2025-07-03T14:44:20.615] [DEBUG] debug-file - Incremental task entry:default@MergeProfile pre-execution cost: 6 ms .
+[2025-07-03T14:44:20.616] [DEBUG] debug-file - entry : default@MergeProfile cost memory 0.12178802490234375
+[2025-07-03T14:44:20.618] [INFO] debug-file - UP-TO-DATE :entry:default@MergeProfile...  
+[2025-07-03T14:44:20.621] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:44:20.621] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:44:20.622] [DEBUG] debug-file - Executing task :entry:default@CreateBuildProfile
+[2025-07-03T14:44:20.624] [DEBUG] debug-file - Task 'entry:default@CreateBuildProfile' cost while wrapping incremental declarations: 2 ms 
+[2025-07-03T14:44:20.629] [DEBUG] debug-file - Incremental task entry:default@CreateBuildProfile pre-execution cost: 5 ms .
+[2025-07-03T14:44:20.629] [DEBUG] debug-file - entry : default@CreateBuildProfile cost memory 0.09679412841796875
+[2025-07-03T14:44:20.630] [INFO] debug-file - UP-TO-DATE :entry:default@CreateBuildProfile...  
+[2025-07-03T14:44:20.632] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:44:20.633] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:44:20.634] [DEBUG] debug-file - Executing task :entry:default@PreCheckSyscap
+[2025-07-03T14:44:20.634] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:44:20.634] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:44:20.634] [DEBUG] debug-file - entry : default@PreCheckSyscap cost memory 0.040924072265625
+[2025-07-03T14:44:20.635] [DEBUG] debug-file - runTaskFromQueue task cost before running: 458 ms 
+[2025-07-03T14:44:20.635] [INFO] debug-file - Finished :entry:default@PreCheckSyscap... after 2 ms 
+[2025-07-03T14:44:20.638] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:44:20.638] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:44:20.639] [DEBUG] debug-file - Executing task :entry:default@GeneratePkgContextInfo
+[2025-07-03T14:44:20.652] [DEBUG] debug-file - Task 'entry:default@GeneratePkgContextInfo' cost while wrapping incremental declarations: 1 ms 
+[2025-07-03T14:44:20.654] [DEBUG] debug-file - Incremental task entry:default@GeneratePkgContextInfo pre-execution cost: 2 ms .
+[2025-07-03T14:44:20.654] [DEBUG] debug-file - entry : default@GeneratePkgContextInfo cost memory 0.21067047119140625
+[2025-07-03T14:44:20.655] [INFO] debug-file - UP-TO-DATE :entry:default@GeneratePkgContextInfo...  
+[2025-07-03T14:44:20.657] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:44:20.658] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:44:20.666] [DEBUG] debug-file - Executing task :entry:default@ProcessIntegratedHsp
+[2025-07-03T14:44:20.667] [DEBUG] debug-file - entry:default@ProcessIntegratedHsp is not up-to-date, since the output file 'D:\SmartRestaurant\build\cache\default\integrated_hsp\integratedHspCache.json' does not exist.
+[2025-07-03T14:44:20.667] [DEBUG] debug-file - Incremental task entry:default@ProcessIntegratedHsp pre-execution cost: 1 ms .
+[2025-07-03T14:44:20.667] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:44:20.667] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:44:20.668] [DEBUG] debug-file - entry : default@ProcessIntegratedHsp cost memory 0.08380126953125
+[2025-07-03T14:44:20.668] [DEBUG] debug-file - runTaskFromQueue task cost before running: 491 ms 
+[2025-07-03T14:44:20.668] [INFO] debug-file - Finished :entry:default@ProcessIntegratedHsp... after 3 ms 
+[2025-07-03T14:44:20.670] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:44:20.671] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:44:20.672] [DEBUG] debug-file - Executing task :entry:default@BuildNativeWithCmake
+[2025-07-03T14:44:20.672] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:44:20.672] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:44:20.672] [DEBUG] debug-file - entry : default@BuildNativeWithCmake cost memory 0.04181671142578125
+[2025-07-03T14:44:20.673] [DEBUG] debug-file - runTaskFromQueue task cost before running: 496 ms 
+[2025-07-03T14:44:20.673] [INFO] debug-file - Finished :entry:default@BuildNativeWithCmake... after 2 ms 
+[2025-07-03T14:44:20.675] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:44:20.675] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:44:20.676] [DEBUG] debug-file - Executing task :entry:default@MakePackInfo
+[2025-07-03T14:44:20.682] [DEBUG] debug-file - Incremental task entry:default@MakePackInfo pre-execution cost: 6 ms .
+[2025-07-03T14:44:20.682] [DEBUG] debug-file - entry : default@MakePackInfo cost memory 0.1215362548828125
+[2025-07-03T14:44:20.683] [INFO] debug-file - UP-TO-DATE :entry:default@MakePackInfo...  
+[2025-07-03T14:44:20.685] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:44:20.685] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:44:20.686] [DEBUG] debug-file - Executing task :entry:default@SyscapTransform
+[2025-07-03T14:44:20.686] [DEBUG] debug-file - File: 'D:\SmartRestaurant\entry\src\main\syscap.json' from 'sysCapJsonPath' is not exists, just ignore.
+[2025-07-03T14:44:20.688] [DEBUG] debug-file - Task 'entry:default@SyscapTransform' cost while wrapping incremental declarations: 2 ms 
+[2025-07-03T14:44:20.696] [DEBUG] debug-file - entry:default@SyscapTransform is not up-to-date, since the output file 'D:\SmartRestaurant\entry\build\default\intermediates\syscap\default\rpcid.sc' does not exist.
+[2025-07-03T14:44:20.696] [DEBUG] debug-file - Incremental task entry:default@SyscapTransform pre-execution cost: 8 ms .
+[2025-07-03T14:44:20.696] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:44:20.696] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:44:20.697] [DEBUG] debug-file - entry : default@SyscapTransform cost memory -1.4135208129882812
+[2025-07-03T14:44:20.697] [DEBUG] debug-file - runTaskFromQueue task cost before running: 520 ms 
+[2025-07-03T14:44:20.698] [INFO] debug-file - Finished :entry:default@SyscapTransform... after 12 ms 
+[2025-07-03T14:44:20.700] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:44:20.700] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:44:20.701] [DEBUG] debug-file - Executing task :entry:default@ProcessProfile
+[2025-07-03T14:44:20.706] [DEBUG] debug-file - Incremental task entry:default@ProcessProfile pre-execution cost: 3 ms .
+[2025-07-03T14:44:20.706] [DEBUG] debug-file - entry : default@ProcessProfile cost memory 0.123046875
+[2025-07-03T14:44:20.707] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessProfile...  
+[2025-07-03T14:44:20.708] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:44:20.709] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:44:20.709] [DEBUG] debug-file - Executing task :entry:default@ProcessRouterMap
+[2025-07-03T14:44:20.719] [DEBUG] debug-file - Incremental task entry:default@ProcessRouterMap pre-execution cost: 8 ms .
+[2025-07-03T14:44:20.719] [DEBUG] debug-file - entry : default@ProcessRouterMap cost memory 0.14244842529296875
+[2025-07-03T14:44:20.720] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessRouterMap...  
+[2025-07-03T14:44:20.722] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:44:20.722] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:44:20.722] [DEBUG] debug-file - Executing task :entry:default@ProcessStartupConfig
+[2025-07-03T14:44:20.722] [DEBUG] debug-file - Task 'entry:default@ProcessStartupConfig' cost while wrapping incremental declarations: 1 ms 
+[2025-07-03T14:44:20.725] [DEBUG] debug-file - entry:default@ProcessStartupConfig is not up-to-date, since the output file 'D:\SmartRestaurant\entry\build\default\intermediates\startup\default\startup_config.json' does not exist.
+[2025-07-03T14:44:20.725] [DEBUG] debug-file - Incremental task entry:default@ProcessStartupConfig pre-execution cost: 3 ms .
+[2025-07-03T14:44:20.725] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:44:20.725] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:44:20.727] [DEBUG] debug-file - entry : default@ProcessStartupConfig cost memory 0.15915679931640625
+[2025-07-03T14:44:20.727] [DEBUG] debug-file - runTaskFromQueue task cost before running: 551 ms 
+[2025-07-03T14:44:20.728] [INFO] debug-file - Finished :entry:default@ProcessStartupConfig... after 6 ms 
+[2025-07-03T14:44:20.730] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:44:20.731] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:44:20.732] [DEBUG] debug-file - Executing task :entry:default@BuildNativeWithNinja
+[2025-07-03T14:44:20.732] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:44:20.732] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:44:20.733] [DEBUG] debug-file - entry : default@BuildNativeWithNinja cost memory 0.04883575439453125
+[2025-07-03T14:44:20.733] [DEBUG] debug-file - runTaskFromQueue task cost before running: 557 ms 
+[2025-07-03T14:44:20.734] [INFO] debug-file - Finished :entry:default@BuildNativeWithNinja... after 2 ms 
+[2025-07-03T14:44:20.735] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:44:20.736] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:44:20.737] [DEBUG] debug-file - restool module names: entry; moduleName=entry, taskName=default@ProcessResource
+[2025-07-03T14:44:20.739] [DEBUG] debug-file - Executing task :entry:default@ProcessResource
+[2025-07-03T14:44:20.740] [DEBUG] debug-file - Task 'entry:default@ProcessResource' cost while wrapping incremental declarations: 1 ms 
+[2025-07-03T14:44:20.742] [DEBUG] debug-file - Incremental task entry:default@ProcessResource pre-execution cost: 3 ms .
+[2025-07-03T14:44:20.742] [DEBUG] debug-file - entry : default@ProcessResource cost memory 0.12364959716796875
+[2025-07-03T14:44:20.746] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessResource...  
+[2025-07-03T14:44:20.748] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:44:20.749] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:44:20.751] [DEBUG] debug-file - Executing task :entry:default@GenerateLoaderJson
+[2025-07-03T14:44:20.753] [DEBUG] debug-file - Task 'entry:default@GenerateLoaderJson' cost while wrapping incremental declarations: 1 ms 
+[2025-07-03T14:44:20.783] [DEBUG] debug-file - Incremental task entry:default@GenerateLoaderJson pre-execution cost: 19 ms .
+[2025-07-03T14:44:20.784] [DEBUG] debug-file - entry : default@GenerateLoaderJson cost memory -0.9392929077148438
+[2025-07-03T14:44:20.796] [INFO] debug-file - UP-TO-DATE :entry:default@GenerateLoaderJson...  
+[2025-07-03T14:44:20.798] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:44:20.798] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:44:20.799] [DEBUG] debug-file - Executing task :entry:default@ProcessLibs
+[2025-07-03T14:44:20.809] [DEBUG] debug-file - Incremental task entry:default@ProcessLibs pre-execution cost: 8 ms .
+[2025-07-03T14:44:20.810] [DEBUG] debug-file - entry : default@ProcessLibs cost memory 0.09515380859375
+[2025-07-03T14:44:20.811] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessLibs...  
+[2025-07-03T14:44:20.813] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:44:20.813] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:44:20.815] [DEBUG] debug-file - restool module names: entry; moduleName=entry, taskName=default@CompileResource
+[2025-07-03T14:44:20.816] [DEBUG] debug-file - Executing task :entry:default@CompileResource
+[2025-07-03T14:44:20.894] [DEBUG] debug-file - Incremental task entry:default@CompileResource pre-execution cost: 77 ms .
+[2025-07-03T14:44:20.894] [DEBUG] debug-file - entry : default@CompileResource cost memory 0.9152755737304688
+[2025-07-03T14:44:20.896] [INFO] debug-file - UP-TO-DATE :entry:default@CompileResource...  
+[2025-07-03T14:44:20.899] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:44:20.900] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:44:20.902] [DEBUG] debug-file - Executing task :entry:default@DoNativeStrip
+[2025-07-03T14:44:20.903] [DEBUG] debug-file - Task 'entry:default@DoNativeStrip' cost while wrapping incremental declarations: 1 ms 
+[2025-07-03T14:44:20.907] [DEBUG] debug-file - Incremental task entry:default@DoNativeStrip pre-execution cost: 4 ms .
+[2025-07-03T14:44:20.907] [DEBUG] debug-file - entry : default@DoNativeStrip cost memory -1.6729812622070312
+[2025-07-03T14:44:20.909] [INFO] debug-file - UP-TO-DATE :entry:default@DoNativeStrip...  
+[2025-07-03T14:44:20.911] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:44:20.911] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:44:20.912] [DEBUG] debug-file - Executing task :entry:default@CompileArkTS
+[2025-07-03T14:44:20.913] [DEBUG] debug-file - obfuscationOptions: undefined
+[2025-07-03T14:44:20.962] [DEBUG] debug-file - entry:default@CompileArkTS is not up-to-date, since the input file 'D:\SmartRestaurant\entry\src\main\ets' has been changed.
+[2025-07-03T14:44:20.962] [DEBUG] debug-file - Incremental task entry:default@CompileArkTS pre-execution cost: 41 ms .
+[2025-07-03T14:44:21.049] [DEBUG] debug-file - build config:
+[2025-07-03T14:44:21.050] [DEBUG] debug-file - {
+  moduleType: 'entry',
+  perf: 0,
+  targetName: '.default',
+  packageManagerType: 'ohpm',
+  localPropertiesPath: 'D:\\SmartRestaurant\\local.properties',
+  isPreview: false,
+  isOhosTest: false,
+  isLocalTest: false,
+  buildMode: 'Debug',
+  hotReloadBuild: undefined,
+  watchMode: 'false',
+  aceProfilePath: 'D:\\SmartRestaurant\\entry\\build\\default\\intermediates\\res\\default\\resources\\base\\profile',
+  etsLoaderPath: 'D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader',
+  modulePath: 'D:\\SmartRestaurant\\entry',
+  testFrameworkPar: {
+    testMode: undefined,
+    coveragePathFilter: undefined,
+    coverageMode: undefined
+  },
+  needCoverageInsert: false,
+  debugLine: false,
+  projectTopDir: 'D:\\SmartRestaurant',
+  compileSdkVersion: 19,
+  compatibleSdkVersion: 19,
+  compatibleSdkVersionStage: undefined,
+  bundleName: 'c***t',
+  etsLoaderVersion: '5.1.1.202',
+  etsLoaderReleaseType: 'Release',
+  aotCompileMode: 'type',
+  apPath: 'D:\\SmartRestaurant\\entry\\modules.ap',
+  entryModuleName: 'entry',
+  entryModuleVersion: '1.0.0',
+  entryPackageName: 'entry',
+  allModuleNameHash: 'af08562b9cd389da7dbcf6a08d9eb303',
+  externalApiPaths: [ 'D:\\DevEco Studio\\sdk\\default\\hms\\ets' ],
+  compilerTypes: undefined,
+  isCrossplatform: false,
+  hvigorPluginFile: undefined,
+  compilePluginPath: undefined,
+  buildGeneratedProfilePath: 'D:\\SmartRestaurant\\entry\\build\\default\\generated\\profile\\default',
+  bundleType: 'app',
+  arkTSVersion: undefined,
+  apiVersion: 19,
+  needCompleteSourcesMap: false,
+  isFaMode: false,
+  strictMode: {
+    caseSensitiveCheck: true,
+    useNormalizedOHMUrl: true,
+    noExternalImportByPath: true
+  },
+  buildDir: 'D:\\SmartRestaurant\\entry\\build',
+  deviceTypes: [ 'phone' ],
+  useNormalizedOHMUrl: true,
+  pkgContextInfo: {
+    '@ohos/hypium': {
+      packageName: '@ohos/hypium',
+      bundleName: '*****',
+      moduleName: '',
+      version: '1.0.21',
+      entryPath: 'index.js',
+      isSO: false,
+      dependencyAlias: ''
+    },
+    '@ohos/hamock': {
+      packageName: '@ohos/hamock',
+      bundleName: '*****',
+      moduleName: '',
+      version: '1.0.0',
+      entryPath: 'index.ets',
+      isSO: false,
+      dependencyAlias: ''
+    },
+    entry: {
+      packageName: 'entry',
+      bundleName: '*****',
+      moduleName: '',
+      version: '',
+      entryPath: 'src/main/',
+      isSO: false,
+      dependencyAlias: ''
+    }
+  },
+  ohPackagePathMap: {},
+  dependencyAliasMap: {},
+  permission: { requestPermissions: [ [Object] ], definePermissions: undefined },
+  integratedHsp: false,
+  projectArkOption: undefined,
+  sourceMapDir: undefined,
+  branchElimination: false,
+  transformLib: undefined,
+  caseSensitiveCheck: true,
+  tsImportSendable: false,
+  resolveConflictMode: true,
+  depName2RootPath: {},
+  depName2DepInfo: {},
+  rootPathSet: [ 'D:\\SmartRestaurant' ],
+  useNativeResolver: true,
+  shouldEmitJs: true,
+  useTscResolve: false,
+  singleFileEmit: false,
+  userProjectConfig: {
+    autoLazyImport: false,
+    allowEmptyBundleName: false,
+    reExportCheckMode: 'noCheck',
+    executionMode: 'memory'
+  },
+  executionMode: 'memory',
+  autoLazyImport: false,
+  allowEmptyBundleName: false,
+  reExportCheckMode: 'noCheck',
+  arkCompileCachePath: 'D:\\SmartRestaurant\\entry\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule',
+  aceModuleJsonPath: 'D:\\SmartRestaurant\\entry\\build\\default\\intermediates\\res\\default\\ark_module.json',
+  appResource: 'D:\\SmartRestaurant\\entry\\build\\default\\intermediates\\res\\default\\ResourceTable.txt',
+  rawFileResource: 'D:\\SmartRestaurant\\entry\\build\\default\\intermediates\\res\\default\\resources\\rawfile',
+  resourceTableHash: '3f5d436ffaf04161055bcae8d5e78666',
+  runtimeOS: 'HarmonyOS',
+  sdkInfo: 'false:19:5.1.1.202:Release',
+  aceModuleRoot: 'D:\\SmartRestaurant\\entry\\src\\main\\ets',
+  compileMode: 'esmodule',
+  aceSuperVisualPath: 'D:\\SmartRestaurant\\entry\\src\\main\\supervisual',
+  aceBuildJson: 'D:\\SmartRestaurant\\entry\\build\\default\\intermediates\\loader\\default\\loader.json',
+  cachePath: 'D:\\SmartRestaurant\\entry\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule\\debug',
+  aceModuleBuild: 'D:\\SmartRestaurant\\entry\\build\\default\\intermediates\\loader_out\\default\\ets',
+  supportChunks: true,
+  declaredFilesPath: undefined,
+  shouldCollectDirectImportees: false,
+  isByteCodeHarOptimize: false,
+  pkgNameToPkgBriefInfo: {
+    entry: {
+      pkgRoot: 'D:\\SmartRestaurant\\entry',
+      originalSourceRoots: undefined,
+      sourceRoots: [Array],
+      pkgName: 'entry'
+    }
+  },
+  projectModel: {
+    'D:\\SmartRestaurant\\entry\\src\\main': {
+      moduleName: 'entry',
+      modulePkgPath: 'D:\\SmartRestaurant\\entry',
+      belongProjectPath: 'D:\\SmartRestaurant'
+    },
+    'D:\\SmartRestaurant\\entry\\build\\default\\intermediates\\src\\ohosTest\\ets': {
+      moduleName: 'entry_test',
+      modulePkgPath: 'D:\\SmartRestaurant\\entry',
+      belongProjectPath: 'D:\\SmartRestaurant'
+    },
+    'D:\\SmartRestaurant\\entry\\src\\ohosTest': {
+      moduleName: 'entry_test',
+      modulePkgPath: 'D:\\SmartRestaurant\\entry',
+      belongProjectPath: 'D:\\SmartRestaurant'
+    },
+    'D:\\SmartRestaurant\\entry': {
+      moduleName: 'entry',
+      modulePkgPath: 'D:\\SmartRestaurant\\entry',
+      belongProjectPath: 'D:\\SmartRestaurant'
+    },
+    'D:\\SmartRestaurant': {
+      moduleName: 'SmartRestaurant',
+      modulePkgPath: 'D:\\SmartRestaurant',
+      belongProjectPath: 'D:\\SmartRestaurant'
+    }
+  },
+  pkgJsonFileHash: 'e6d5b9ac351c9055590aeacedda2d029',
+  allModulePaths: [ 'D:\\SmartRestaurant\\entry' ],
+  routerMap: {},
+  obfuscationOptions: undefined,
+  compileBlockPkg: [],
+  mockParams: {
+    decorator: '@MockSetup',
+    packageName: '@ohos/hamock',
+    etsSourceRootPath: 'src/main/ets',
+    mockConfigPath: 'D:\\SmartRestaurant\\entry\\src\\mock\\mock-config.json5',
+    mockConfigKey2ModuleInfo: {},
+    source2ModuleIdMap: {}
+  },
+  copyCodeResourceEnable: true,
+  copyCodeResourceExcludes: [],
+  uiTransformOptimization: false,
+  otherPaths: {
+    'entry/*': [
+      '..\\*',
+      '..\\..\\..\\build\\default\\generated\\profile\\default\\*'
+    ]
+  },
+  collectImportersConfig: undefined
+}
+[2025-07-03T14:44:21.051] [DEBUG] debug-file - Compile arkts with external api path: D:\DevEco Studio\sdk\default\hms\ets
+[2025-07-03T14:44:21.056] [DEBUG] debug-file - default@CompileArkTS work[0] is submitted.
+[2025-07-03T14:44:21.058] [DEBUG] debug-file - default@CompileArkTS work[0] is pushed to ready queue.
+[2025-07-03T14:44:21.058] [DEBUG] debug-file - A work dispatched to worker[15] failed because unable to get work from ready queue.
+[2025-07-03T14:44:21.059] [DEBUG] debug-file - A work dispatched to worker[14] failed because unable to get work from ready queue.
+[2025-07-03T14:44:21.059] [DEBUG] debug-file - A work dispatched to worker[13] failed because unable to get work from ready queue.
+[2025-07-03T14:44:21.059] [DEBUG] debug-file - A work dispatched to worker[12] failed because unable to get work from ready queue.
+[2025-07-03T14:44:21.059] [DEBUG] debug-file - A work dispatched to worker[11] failed because unable to get work from ready queue.
+[2025-07-03T14:44:21.059] [DEBUG] debug-file - A work dispatched to worker[10] failed because unable to get work from ready queue.
+[2025-07-03T14:44:21.059] [DEBUG] debug-file - A work dispatched to worker[9] failed because unable to get work from ready queue.
+[2025-07-03T14:44:21.059] [DEBUG] debug-file - A work dispatched to worker[8] failed because unable to get work from ready queue.
+[2025-07-03T14:44:21.060] [DEBUG] debug-file - A work dispatched to worker[7] failed because unable to get work from ready queue.
+[2025-07-03T14:44:21.060] [DEBUG] debug-file - A work dispatched to worker[6] failed because unable to get work from ready queue.
+[2025-07-03T14:44:21.060] [DEBUG] debug-file - A work dispatched to worker[5] failed because unable to get work from ready queue.
+[2025-07-03T14:44:21.060] [DEBUG] debug-file - Create  resident worker with id: 4.
+[2025-07-03T14:44:21.063] [DEBUG] debug-file - default@CompileArkTS work[0] has been dispatched to worker[4].
+[2025-07-03T14:44:21.064] [DEBUG] debug-file - default@CompileArkTS work[0] is dispatched.
+[2025-07-03T14:44:21.064] [DEBUG] debug-file - CopyResources startTime: 22568959839000
+[2025-07-03T14:44:21.064] [DEBUG] debug-file - default@CompileArkTS work[1] is submitted.
+[2025-07-03T14:44:21.064] [DEBUG] debug-file - default@CompileArkTS work[1] is pushed to ready queue.
+[2025-07-03T14:44:21.065] [DEBUG] debug-file - A work dispatched to worker[15] failed because unable to get work from ready queue.
+[2025-07-03T14:44:21.065] [DEBUG] debug-file - Create  resident worker with id: 14.
+[2025-07-03T14:44:21.067] [DEBUG] debug-file - default@CompileArkTS work[1] has been dispatched to worker[14].
+[2025-07-03T14:44:21.067] [DEBUG] debug-file - default@CompileArkTS work[1] is dispatched.
+[2025-07-03T14:44:21.067] [DEBUG] debug-file - entry : default@CompileArkTS cost memory 1.5175933837890625
+[2025-07-03T14:44:21.070] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:44:21.070] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:44:21.073] [DEBUG] debug-file - Executing task :entry:default@BuildJS
+[2025-07-03T14:44:21.079] [DEBUG] debug-file - entry : default@BuildJS cost memory 0.1099090576171875
+[2025-07-03T14:44:21.080] [DEBUG] debug-file - runTaskFromQueue task cost before running: 903 ms 
+[2025-07-03T14:44:21.080] [INFO] debug-file - Finished :entry:default@BuildJS... after 7 ms 
+[2025-07-03T14:44:21.081] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:44:21.082] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:44:21.082] [DEBUG] debug-file - Executing task :entry:default@CacheNativeLibs
+[2025-07-03T14:44:21.084] [DEBUG] debug-file - Task 'entry:default@CacheNativeLibs' cost while wrapping incremental declarations: 1 ms 
+[2025-07-03T14:44:21.088] [DEBUG] debug-file - Incremental task entry:default@CacheNativeLibs pre-execution cost: 5 ms .
+[2025-07-03T14:44:21.089] [DEBUG] debug-file - entry : default@CacheNativeLibs cost memory 0.09595489501953125
+[2025-07-03T14:44:21.089] [INFO] debug-file - UP-TO-DATE :entry:default@CacheNativeLibs...  
+[2025-07-03T14:44:23.932] [DEBUG] debug-file - worker[14] has one work done.
+[2025-07-03T14:44:23.932] [DEBUG] debug-file - CopyResources is end, endTime: 22571828042600
+[2025-07-03T14:44:23.933] [DEBUG] debug-file - default@CompileArkTS work[1] done.
+[2025-07-03T14:44:23.933] [DEBUG] debug-file - A work dispatched to worker[14] failed because unable to get work from ready queue.
+[2025-07-03T14:45:05.539] [INFO] debug-file - [33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/HomePage.ets:31:27
+ 'getParams' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/HomePage.ets:236:19
+ 'animateTo' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/HomePage.ets:290:14
+ 'pushUrl' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/HomePage.ets:303:18
+ 'showToast' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/HomePage.ets:309:18
+ 'showToast' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/OrderListPage.ets:30:27
+ 'getParams' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/OrderListPage.ets:177:16
+ 'replaceUrl' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/OrderListPage.ets:203:16
+ 'replaceUrl' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/ProfilePage.ets:41:18
+ 'showDialog' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/ProfilePage.ets:100:18
+ 'pushUrl' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/ProfilePage.ets:105:26
+ 'showToast' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/ProfilePage.ets:111:24
+ 'showToast' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/MainPage.ets:19:27
+ 'getParams' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/Index.ets:56:18
+ 'pushUrl' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/ScanPage.ets:18:27
+ 'getParams' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/ScanPage.ets:31:20
+ 'showToast' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/ScanPage.ets:36:16
+ 'pushUrl' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/ScanPage.ets:61:35
+ 'back' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/DishDetailPage.ets:16:29
+ 'getParams' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/DishDetailPage.ets:32:33
+ 'back' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/DishDetailPage.ets:96:22
+ 'back' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/CartPage.ets:43:9
+ 'animateTo' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/CartPage.ets:68:9
+ 'animateTo' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/CartPage.ets:86:31
+ 'back' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/CartPage.ets:111:35
+ 'back' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/CartPage.ets:186:22
+ 'pushUrl' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/CartPage.ets:193:28
+ 'showToast' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/OrderTrackPage.ets:10:41
+ 'back' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/PaymentPage.ets:29:20
+ 'showToast' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/PaymentPage.ets:38:20
+ 'showToast' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/PaymentPage.ets:49:20
+ 'showToast' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/PaymentPage.ets:57:16
+ 'pushUrl' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/PaymentPage.ets:66:20
+ 'showToast' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/PaymentPage.ets:123:31
+ 'back' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/MapPage.ets:10:41
+ 'back' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/KitchenScreenPage.ets:10:41
+ 'back' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/ReviewPage.ets:108:31
+ 'back' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/ReviewPage.ets:212:36
+ 'showToast' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/ReviewPage.ets:216:34
+ 'showToast' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/SmartRestaurant/entry/src/main/ets/pages/ReviewPage.ets:217:28
+ 'back' has been deprecated.
+[39m[39m
+
+[2025-07-03T14:45:05.541] [DEBUG] debug-file - worker[4] has one work done.
+[2025-07-03T14:45:05.540] [DEBUG] debug-file - Ark compile task finished.finished time is 22613435808300
+[2025-07-03T14:45:05.543] [DEBUG] debug-file - default@CompileArkTS work[0] done.
+[2025-07-03T14:45:05.543] [DEBUG] debug-file - A work dispatched to worker[4] failed because unable to get work from ready queue.
+[2025-07-03T14:45:05.548] [INFO] debug-file - Finished :entry:default@CompileArkTS... after 37 s 589 ms 
+[2025-07-03T14:45:05.550] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:45:05.550] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:45:05.551] [DEBUG] debug-file - Executing task :entry:default@GeneratePkgModuleJson
+[2025-07-03T14:45:05.551] [DEBUG] debug-file - Task 'entry:default@GeneratePkgModuleJson' cost while wrapping incremental declarations: 1 ms 
+[2025-07-03T14:45:05.553] [DEBUG] debug-file - Incremental task entry:default@GeneratePkgModuleJson pre-execution cost: 2 ms .
+[2025-07-03T14:45:05.554] [DEBUG] debug-file - entry : default@GeneratePkgModuleJson cost memory 0.07883453369140625
+[2025-07-03T14:45:05.554] [INFO] debug-file - UP-TO-DATE :entry:default@GeneratePkgModuleJson...  
+[2025-07-03T14:45:05.556] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:45:05.557] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:45:05.558] [DEBUG] debug-file - Executing task :entry:default@PackageHap
+[2025-07-03T14:45:05.586] [DEBUG] debug-file - entry:default@PackageHap is not up-to-date, since the input file 'D:\SmartRestaurant\entry\build\default\intermediates\loader_out\default\ets' has been changed.
+[2025-07-03T14:45:05.587] [DEBUG] debug-file - Incremental task entry:default@PackageHap pre-execution cost: 27 ms .
+[2025-07-03T14:45:05.587] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:45:05.587] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:45:05.590] [DEBUG] debug-file - Use tool [D:\DevEco Studio\sdk\default\openharmony\toolchains\lib\app_packing_tool.jar]
+ [
+  'java',
+  '-Dfile.encoding=GBK',
+  '-jar',
+  'D:\\DevEco Studio\\sdk\\default\\openharmony\\toolchains\\lib\\app_packing_tool.jar',
+  '--mode',
+  'hap',
+  '--force',
+  'true',
+  '--lib-path',
+  'D:\\SmartRestaurant\\entry\\build\\default\\intermediates\\stripped_native_libs\\default',
+  '--json-path',
+  'D:\\SmartRestaurant\\entry\\build\\default\\intermediates\\package\\default\\module.json',
+  '--resources-path',
+  'D:\\SmartRestaurant\\entry\\build\\default\\intermediates\\res\\default\\resources',
+  '--index-path',
+  'D:\\SmartRestaurant\\entry\\build\\default\\intermediates\\res\\default\\resources.index',
+  '--pack-info-path',
+  'D:\\SmartRestaurant\\entry\\build\\default\\outputs\\default\\pack.info',
+  '--out-path',
+  'D:\\SmartRestaurant\\entry\\build\\default\\outputs\\default\\entry-default-unsigned.hap',
+  '--ets-path',
+  'D:\\SmartRestaurant\\entry\\build\\default\\intermediates\\loader_out\\default\\ets',
+  '--pkg-context-path',
+  'D:\\SmartRestaurant\\entry\\build\\default\\intermediates\\loader\\default\\pkgContextInfo.json'
+]
+[2025-07-03T14:45:06.728] [DEBUG] debug-file - java daemon socket received message:{"code":0,"message":"pack success"}
+[2025-07-03T14:45:06.738] [DEBUG] debug-file - entry : default@PackageHap cost memory -0.6701812744140625
+[2025-07-03T14:45:06.738] [DEBUG] debug-file - runTaskFromQueue task cost before running: 46 s 561 ms 
+[2025-07-03T14:45:06.740] [INFO] debug-file - Finished :entry:default@PackageHap... after 1 s 180 ms 
+[2025-07-03T14:45:06.742] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:45:06.742] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:45:06.744] [DEBUG] debug-file - Executing task :entry:default@SignHap
+[2025-07-03T14:45:06.744] [WARN] debug-file - Will skip sign 'hos_hap'. No signingConfigs profile is configured in current project.
+             If needed, configure the signingConfigs in D:\SmartRestaurant\build-profile.json5.
+[2025-07-03T14:45:06.747] [DEBUG] debug-file - entry:default@SignHap is not up-to-date, since the input file 'D:\SmartRestaurant\entry\build\default\outputs\default\entry-default-unsigned.hap' has been changed.
+[2025-07-03T14:45:06.747] [DEBUG] debug-file - Incremental task entry:default@SignHap pre-execution cost: 3 ms .
+[2025-07-03T14:45:06.747] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:45:06.747] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:45:06.748] [DEBUG] debug-file - entry : default@SignHap cost memory 0.12085723876953125
+[2025-07-03T14:45:06.748] [DEBUG] debug-file - runTaskFromQueue task cost before running: 46 s 571 ms 
+[2025-07-03T14:45:06.749] [INFO] debug-file - Finished :entry:default@SignHap... after 5 ms 
+[2025-07-03T14:45:06.750] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:45:06.751] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:45:06.751] [DEBUG] debug-file - Executing task :entry:default@CollectDebugSymbol
+[2025-07-03T14:45:06.753] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:45:06.754] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:45:06.754] [DEBUG] debug-file - entry : default@CollectDebugSymbol cost memory 0.1007843017578125
+[2025-07-03T14:45:06.754] [DEBUG] debug-file - runTaskFromQueue task cost before running: 46 s 577 ms 
+[2025-07-03T14:45:06.754] [INFO] debug-file - Finished :entry:default@CollectDebugSymbol... after 3 ms 
+[2025-07-03T14:45:06.755] [DEBUG] debug-file - Executing task :entry:assembleHap
+[2025-07-03T14:45:06.755] [DEBUG] debug-file - entry : assembleHap cost memory 0.01428985595703125
+[2025-07-03T14:45:06.755] [DEBUG] debug-file - runTaskFromQueue task cost before running: 46 s 578 ms 
+[2025-07-03T14:45:06.755] [INFO] debug-file - Finished :entry:assembleHap... after 1 ms 
+[2025-07-03T14:45:06.774] [DEBUG] debug-file - BUILD SUCCESSFUL in 46 s 597 ms 
+[2025-07-03T14:45:06.774] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@PreBuild is up-to-date.
+[2025-07-03T14:45:06.775] [DEBUG] debug-file - Update task entry:default@CreateModuleInfo output file:D:\SmartRestaurant\entry\build\default\generated\profile\default\ModuleInfo.ts cache.
+[2025-07-03T14:45:06.776] [DEBUG] debug-file - Incremental task entry:default@CreateModuleInfo post-execution cost:1 ms .
+[2025-07-03T14:45:06.776] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@GenerateMetadata is up-to-date.
+[2025-07-03T14:45:06.776] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@MergeProfile is up-to-date.
+[2025-07-03T14:45:06.776] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@CreateBuildProfile is up-to-date.
+[2025-07-03T14:45:06.776] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@GeneratePkgContextInfo is up-to-date.
+[2025-07-03T14:45:06.776] [DEBUG] debug-file - Update task entry:default@ProcessIntegratedHsp output file:D:\SmartRestaurant\build\cache\default\integrated_hsp\integratedHspCache.json cache.
+[2025-07-03T14:45:06.777] [DEBUG] debug-file - Incremental task entry:default@ProcessIntegratedHsp post-execution cost:2 ms .
+[2025-07-03T14:45:06.778] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@MakePackInfo is up-to-date.
+[2025-07-03T14:45:06.778] [DEBUG] debug-file - Update task entry:default@SyscapTransform input file:D:\DevEco Studio\sdk\default\openharmony\toolchains\syscap_tool.exe cache by regenerate.
+[2025-07-03T14:45:06.779] [DEBUG] debug-file - Update task entry:default@SyscapTransform input file:D:\DevEco Studio\sdk\default\openharmony\ets\api\device-define cache by regenerate.
+[2025-07-03T14:45:06.782] [DEBUG] debug-file - Update task entry:default@SyscapTransform output file:D:\SmartRestaurant\entry\build\default\intermediates\syscap\default\rpcid.sc cache.
+[2025-07-03T14:45:06.783] [DEBUG] debug-file - Incremental task entry:default@SyscapTransform post-execution cost:6 ms .
+[2025-07-03T14:45:06.783] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessProfile is up-to-date.
+[2025-07-03T14:45:06.783] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessRouterMap is up-to-date.
+[2025-07-03T14:45:06.784] [DEBUG] debug-file - Update task entry:default@ProcessStartupConfig input file:D:\SmartRestaurant\entry\build\default\intermediates\loader\default\pkgContextInfo.json cache by regenerate.
+[2025-07-03T14:45:06.785] [DEBUG] debug-file - Update task entry:default@ProcessStartupConfig output file:D:\SmartRestaurant\entry\build\default\intermediates\startup\default\startup_config.json cache.
+[2025-07-03T14:45:06.785] [DEBUG] debug-file - Incremental task entry:default@ProcessStartupConfig post-execution cost:2 ms .
+[2025-07-03T14:45:06.786] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessResource is up-to-date.
+[2025-07-03T14:45:06.786] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@GenerateLoaderJson is up-to-date.
+[2025-07-03T14:45:06.786] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessLibs is up-to-date.
+[2025-07-03T14:45:06.786] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@CompileResource is up-to-date.
+[2025-07-03T14:45:06.786] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@DoNativeStrip is up-to-date.
+[2025-07-03T14:45:06.791] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:D:\SmartRestaurant\entry\build\default\intermediates\loader\default cache by regenerate.
+[2025-07-03T14:45:06.793] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:D:\SmartRestaurant\entry\build\default\intermediates\res\default\resources\rawfile cache by regenerate.
+[2025-07-03T14:45:06.794] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:D:\SmartRestaurant\entry\build\default\intermediates\res\default\ResourceTable.txt cache by regenerate.
+[2025-07-03T14:45:06.795] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:D:\SmartRestaurant\entry\build\default\intermediates\res\default\ark_module.json cache by regenerate.
+[2025-07-03T14:45:06.796] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:D:\SmartRestaurant\entry\build\default\intermediates\res\default\resources\base\profile cache by regenerate.
+[2025-07-03T14:45:06.799] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:D:\SmartRestaurant\entry\src\main\ets cache from map.
+[2025-07-03T14:45:06.799] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:D:\SmartRestaurant\entry\build\default\intermediates\loader\default\pkgContextInfo.json cache by regenerate.
+[2025-07-03T14:45:06.800] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:D:\SmartRestaurant\entry\build\default\generated\profile\default\BuildProfile.ets cache by regenerate.
+[2025-07-03T14:45:06.802] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:D:\SmartRestaurant\entry\src\mock\mock-config.json5 cache by regenerate.
+[2025-07-03T14:45:06.803] [DEBUG] debug-file - Update task entry:default@CompileArkTS output file:D:\SmartRestaurant\entry\build\default\intermediates\loader_out\default\ets cache.
+[2025-07-03T14:45:06.806] [DEBUG] debug-file - Incremental task entry:default@CompileArkTS post-execution cost:20 ms .
+[2025-07-03T14:45:06.808] [DEBUG] debug-file - Update task entry:default@BuildJS input file:D:\SmartRestaurant\entry\build\default\intermediates\loader\default cache by regenerate.
+[2025-07-03T14:45:06.811] [DEBUG] debug-file - Update task entry:default@BuildJS input file:D:\SmartRestaurant\entry\build\default\intermediates\res\default\resources\rawfile cache by regenerate.
+[2025-07-03T14:45:06.812] [DEBUG] debug-file - Update task entry:default@BuildJS input file:D:\SmartRestaurant\entry\build\default\intermediates\res\default\ResourceTable.txt cache by regenerate.
+[2025-07-03T14:45:06.813] [DEBUG] debug-file - Update task entry:default@BuildJS input file:D:\SmartRestaurant\entry\build\default\intermediates\res\default\ark_module.json cache by regenerate.
+[2025-07-03T14:45:06.814] [DEBUG] debug-file - Update task entry:default@BuildJS input file:D:\SmartRestaurant\entry\build\default\intermediates\res\default\resources\base\profile cache by regenerate.
+[2025-07-03T14:45:06.818] [DEBUG] debug-file - Update task entry:default@BuildJS input file:D:\SmartRestaurant\entry\build\default\intermediates\loader\default\pkgContextInfo.json cache by regenerate.
+[2025-07-03T14:45:06.820] [DEBUG] debug-file - Update task entry:default@BuildJS output file:D:\SmartRestaurant\entry\build\default\intermediates\loader_out\default\js cache.
+[2025-07-03T14:45:06.821] [DEBUG] debug-file - Incremental task entry:default@BuildJS post-execution cost:15 ms .
+[2025-07-03T14:45:06.821] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@CacheNativeLibs is up-to-date.
+[2025-07-03T14:45:06.821] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@GeneratePkgModuleJson is up-to-date.
+[2025-07-03T14:45:06.823] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\SmartRestaurant\entry\build\default\intermediates\stripped_native_libs\default cache by regenerate.
+[2025-07-03T14:45:06.824] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\SmartRestaurant\entry\build\default\intermediates\res\default\module.json cache by regenerate.
+[2025-07-03T14:45:06.825] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\SmartRestaurant\entry\build\default\intermediates\res\default\resources cache by regenerate.
+[2025-07-03T14:45:06.845] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\SmartRestaurant\entry\build\default\intermediates\res\default\resources.index cache by regenerate.
+[2025-07-03T14:45:06.846] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\SmartRestaurant\entry\build\default\outputs\default\pack.info cache by regenerate.
+[2025-07-03T14:45:06.847] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\SmartRestaurant\entry\build\default\intermediates\loader_out\default\ets cache from map.
+[2025-07-03T14:45:06.847] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\SmartRestaurant\entry\build\default\intermediates\loader\default\pkgContextInfo.json cache by regenerate.
+[2025-07-03T14:45:06.848] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\SmartRestaurant\entry\build\default\intermediates\loader_out\default\ets\sourceMaps.map cache by regenerate.
+[2025-07-03T14:45:06.848] [DEBUG] debug-file - Update task entry:default@PackageHap input file:D:\SmartRestaurant\entry\build\default\generated\profile\default\BuildProfile.ets cache by regenerate.
+[2025-07-03T14:45:06.849] [DEBUG] debug-file - Update task entry:default@PackageHap output file:D:\SmartRestaurant\entry\build\default\outputs\default\entry-default-unsigned.hap cache.
+[2025-07-03T14:45:06.850] [DEBUG] debug-file - Update task entry:default@PackageHap output file:D:\SmartRestaurant\entry\build\default\intermediates\source_map\default\sourceMaps.map cache.
+[2025-07-03T14:45:06.851] [DEBUG] debug-file - Update task entry:default@PackageHap output file:D:\SmartRestaurant\entry\build\default\outputs\default\mapping\sourceMaps.map cache.
+[2025-07-03T14:45:06.852] [DEBUG] debug-file - Incremental task entry:default@PackageHap post-execution cost:32 ms .
+[2025-07-03T14:45:06.853] [DEBUG] debug-file - Update task entry:default@SignHap input file:D:\SmartRestaurant\entry\build\default\outputs\default\entry-default-unsigned.hap cache from map.
+[2025-07-03T14:45:06.853] [DEBUG] debug-file - Update task entry:default@SignHap output file:D:\SmartRestaurant\entry\build\default\outputs\default\entry-default-signed.hap cache.
+[2025-07-03T14:45:06.854] [DEBUG] debug-file - Incremental task entry:default@SignHap post-execution cost:2 ms .
+[2025-07-03T14:45:06.855] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol input file:D:\SmartRestaurant\entry\build\default\intermediates\loader_out\default\ets\sourceMaps.map cache by regenerate.
+[2025-07-03T14:45:06.856] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol input file:D:\SmartRestaurant\entry\build\default\intermediates\libs\default cache by regenerate.
+[2025-07-03T14:45:06.857] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol output file:D:\SmartRestaurant\entry\build\default\outputs\default\symbol cache.
+[2025-07-03T14:45:06.857] [DEBUG] debug-file - Incremental task entry:default@CollectDebugSymbol post-execution cost:4 ms .
+[2025-07-03T14:45:06.914] [DEBUG] debug-file - Cleanup worker 14.
+[2025-07-03T14:45:06.915] [DEBUG] debug-file - Worker 14 has been cleaned up.
+[2025-07-03T14:45:06.915] [DEBUG] debug-file - Current idle worker size: 1.
+[2025-07-03T14:45:06.915] [DEBUG] debug-file - Current resident worker size: 2.
+[2025-07-03T14:45:06.917] [DEBUG] debug-file - hvigor build process will be closed.
+[2025-07-03T14:45:06.918] [DEBUG] debug-file - java daemon socket close code:1000 reason:close by user
+[2025-07-03T14:45:06.924] [DEBUG] debug-file - worker[14] exits with exit code 1.
+[2025-07-03T14:45:06.931] [DEBUG] debug-file - session manager: send message to worker process.
+[2025-07-03T14:45:06.933] [DEBUG] debug-file - session manager: send message to worker process.
+[2025-07-03T14:45:06.932] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-07-03T14:45:06.934] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-07-03T14:46:45.042] [DEBUG] debug-file - session manager: set active socket. socketId=EKg0gCCeJMlhnQNmAAAF
+[2025-07-03T14:46:45.082] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-07-03T14:46:45.098] [DEBUG] debug-file - Hvigor init with startParameters:{
+  hvigorfileTypeCheck: false,
+  parallelExecution: true,
+  incrementalExecution: true,
+  printStackTrace: false,
+  daemon: true,
+  analyze: 0,
+  logLevel: Level { level: 20000, levelStr: 'INFO', colour: 'green' },
+  optimizationStrategy: 'memory',
+  hotCompile: undefined,
+  hotReloadBuild: undefined
+}
+[2025-07-03T14:46:45.109] [DEBUG] debug-file - Cache service initialization finished in 11 ms 
+[2025-07-03T14:46:45.111] [DEBUG] debug-file - hvigorfile, resolving D:\SmartRestaurant\hvigorfile.ts
+[2025-07-03T14:46:45.127] [DEBUG] debug-file - hvigorfile, require result:  { default: { plugins: [] } }
+[2025-07-03T14:46:45.128] [DEBUG] debug-file - hvigorfile, binding system plugins null
+[2025-07-03T14:46:45.143] [DEBUG] debug-file - Start initialize project's product build option map with build mode debug.
+[2025-07-03T14:46:45.143] [DEBUG] debug-file - Picking option from product 'default' with build mode 'debug'.
+[2025-07-03T14:46:45.144] [DEBUG] debug-file - Product 'default' build option: {}
+[2025-07-03T14:46:45.144] [DEBUG] debug-file - End initialize project's product build option map with build mode 'debug'.
+[2025-07-03T14:46:45.147] [DEBUG] debug-file - Product 'default' using build option: {
+  "debuggable": true,
+  "strictMode": {
+    "caseSensitiveCheck": true,
+    "useNormalizedOHMUrl": true
+  }
+} in this build.
+[2025-07-03T14:46:45.159] [DEBUG] debug-file - No signingConfig found, initRemoteHspCache failed.
+[2025-07-03T14:46:45.168] [DEBUG] debug-file - Start recording SDK configuration permission data.
+[2025-07-03T14:46:45.220] [DEBUG] debug-file - Sdk init in 59 ms 
+[2025-07-03T14:46:45.228] [DEBUG] debug-file - Project task initialization takes 8 ms 
+[2025-07-03T14:46:45.229] [DEBUG] debug-file - hvigorfile, binding custom plugins []
+[2025-07-03T14:46:45.229] [DEBUG] debug-file - hvigorfile, no custom plugins were found in D:\SmartRestaurant\hvigorfile.ts
+[2025-07-03T14:46:45.229] [DEBUG] debug-file - hvigorfile, resolve finished D:\SmartRestaurant\hvigorfile.ts
+[2025-07-03T14:46:45.230] [DEBUG] debug-file - hvigorfile, resolving D:\SmartRestaurant\entry\hvigorfile.ts
+[2025-07-03T14:46:45.241] [DEBUG] debug-file - hvigorfile, require result:  { default: { plugins: [] } }
+[2025-07-03T14:46:45.242] [DEBUG] debug-file - hvigorfile, binding system plugins null
+[2025-07-03T14:46:45.246] [DEBUG] debug-file - failed to load cangjie to dynamically generate schemas: Error: Cannot find module '@ohos/cangjie-build-support/index'
+Require stack:
+- D:\DevEco Studio\tools\hvigor\hvigor-ohos-plugin\src\plugin\factory\plugin-factory.js
+- D:\DevEco Studio\tools\hvigor\hvigor-ohos-plugin\index.js
+- D:\SmartRestaurant\hvigorfile.ts
+- D:\DevEco Studio\tools\hvigor\hvigor\src\base\internal\lifecycle\configuration.js
+- D:\DevEco Studio\tools\hvigor\hvigor\src\base\boot\index.js
+- D:\DevEco Studio\tools\hvigor\hvigor\src\base\daemon\cluster\worker-process-lifecycle.js
+- D:\DevEco Studio\tools\hvigor\hvigor\src\base\daemon\process\daemon-process-boot-script.js
+[2025-07-03T14:46:45.252] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-07-03T14:46:45.252] [DEBUG] debug-file - Target 'default' config: {}
+[2025-07-03T14:46:45.252] [DEBUG] debug-file - Target 'ohosTest' config: {}
+[2025-07-03T14:46:45.253] [DEBUG] debug-file - Module 'entry' target 'default' build option: {
+  "debuggable": true,
+  "copyFrom": "default",
+  "strictMode": {
+    "caseSensitiveCheck": true,
+    "useNormalizedOHMUrl": true
+  },
+  "name": "debug"
+}
+[2025-07-03T14:46:45.253] [DEBUG] debug-file - Module 'entry' target 'ohosTest' build option: {
+  "debuggable": true,
+  "strictMode": {
+    "caseSensitiveCheck": true,
+    "useNormalizedOHMUrl": true
+  },
+  "name": "default"
+}
+[2025-07-03T14:46:45.253] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-07-03T14:46:45.253] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=release
+[2025-07-03T14:46:45.254] [DEBUG] debug-file - Target 'default' config: {}
+[2025-07-03T14:46:45.254] [DEBUG] debug-file - Target 'ohosTest' config: {}
+[2025-07-03T14:46:45.255] [DEBUG] debug-file - Module 'entry' target 'default' build option: {
+  "debuggable": false,
+  "copyFrom": "default",
+  "strictMode": {
+    "caseSensitiveCheck": true,
+    "useNormalizedOHMUrl": true
+  },
+  "name": "release",
+  "arkOptions": {
+    "obfuscation": {
+      "ruleOptions": {
+        "enable": false,
+        "files": [
+          "./obfuscation-rules.txt"
+        ]
+      }
+    }
+  }
+}
+[2025-07-03T14:46:45.255] [DEBUG] debug-file - Module 'entry' target 'ohosTest' build option: {
+  "debuggable": true,
+  "strictMode": {
+    "caseSensitiveCheck": true,
+    "useNormalizedOHMUrl": true
+  },
+  "name": "default"
+}
+[2025-07-03T14:46:45.256] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-07-03T14:46:45.256] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-07-03T14:46:45.256] [DEBUG] debug-file - Target 'default' config: {}
+[2025-07-03T14:46:45.258] [DEBUG] debug-file - Target 'ohosTest' config: {}
+[2025-07-03T14:46:45.258] [DEBUG] debug-file - Module 'entry' target 'default' build option: {
+  "debuggable": true,
+  "copyFrom": "default",
+  "strictMode": {
+    "caseSensitiveCheck": true,
+    "useNormalizedOHMUrl": true
+  },
+  "name": "debug"
+}
+[2025-07-03T14:46:45.258] [DEBUG] debug-file - Module 'entry' target 'ohosTest' build option: {
+  "debuggable": true,
+  "strictMode": {
+    "caseSensitiveCheck": true,
+    "useNormalizedOHMUrl": true
+  },
+  "name": "default"
+}
+[2025-07-03T14:46:45.258] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-07-03T14:46:45.259] [DEBUG] debug-file - Module 'entry' target 'default' using build option: {
+  "debuggable": true,
+  "copyFrom": "default",
+  "strictMode": {
+    "caseSensitiveCheck": true,
+    "useNormalizedOHMUrl": true
+  },
+  "name": "debug"
+} in this build.
+[2025-07-03T14:46:45.261] [DEBUG] debug-file - Module entry task initialization takes 2 ms 
+[2025-07-03T14:46:45.262] [DEBUG] debug-file - hvigorfile, binding custom plugins []
+[2025-07-03T14:46:45.262] [DEBUG] debug-file - hvigorfile, no custom plugins were found in D:\SmartRestaurant\entry\hvigorfile.ts
+[2025-07-03T14:46:45.262] [DEBUG] debug-file - hvigorfile, resolve finished D:\SmartRestaurant\entry\hvigorfile.ts
+[2025-07-03T14:46:45.295] [DEBUG] debug-file - hvigorfile, resolve hvigorfile dependencies in 33 ms 
+[2025-07-03T14:46:45.296] [DEBUG] debug-file - project has submodules:entry
+[2025-07-03T14:46:45.299] [DEBUG] debug-file - start to load updatedOhPackageInfo to the disk
+[2025-07-03T14:46:45.313] [DEBUG] debug-file - load to the disk finished
+[2025-07-03T14:46:45.316] [DEBUG] debug-file - Start to initialize dependency information.
+[2025-07-03T14:46:45.334] [DEBUG] debug-file - Module SmartRestaurant Collected Dependency: 
+[2025-07-03T14:46:45.334] [DEBUG] debug-file - Module SmartRestaurant's total dependency: 0
+[2025-07-03T14:46:45.335] [DEBUG] debug-file - Start to initialize dependency information.
+[2025-07-03T14:46:45.342] [DEBUG] debug-file - Module entry Collected Dependency: 
+[2025-07-03T14:46:45.342] [DEBUG] debug-file - Module entry's total dependency: 0
+[2025-07-03T14:46:45.348] [DEBUG] debug-file - Configuration phase cost:239 ms 
+[2025-07-03T14:46:45.350] [DEBUG] debug-file - Configuration task cost before running: 262 ms 
+[2025-07-03T14:46:45.353] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.353] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.363] [DEBUG] debug-file - Executing task :entry:default@PreBuild
+[2025-07-03T14:46:45.392] [DEBUG] debug-file - Incremental task entry:default@PreBuild pre-execution cost: 20 ms .
+[2025-07-03T14:46:45.392] [DEBUG] debug-file - entry : default@PreBuild cost memory 0.2772674560546875
+[2025-07-03T14:46:45.401] [INFO] debug-file - UP-TO-DATE :entry:default@PreBuild...  
+[2025-07-03T14:46:45.403] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.403] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.403] [DEBUG] debug-file - Executing task :entry:default@CreateModuleInfo
+[2025-07-03T14:46:45.404] [DEBUG] debug-file - Task 'entry:default@CreateModuleInfo' cost while wrapping incremental declarations: 1 ms 
+[2025-07-03T14:46:45.405] [DEBUG] debug-file - entry : default@CreateModuleInfo cost memory 0.0411529541015625
+[2025-07-03T14:46:45.405] [DEBUG] debug-file - runTaskFromQueue task cost before running: 317 ms 
+[2025-07-03T14:46:45.405] [INFO] debug-file - Finished :entry:default@CreateModuleInfo... after 2 ms 
+[2025-07-03T14:46:45.407] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.408] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.409] [DEBUG] debug-file - Executing task :entry:default@GenerateMetadata
+[2025-07-03T14:46:45.410] [DEBUG] debug-file - Task 'entry:default@GenerateMetadata' cost while wrapping incremental declarations: 1 ms 
+[2025-07-03T14:46:45.413] [DEBUG] debug-file - Incremental task entry:default@GenerateMetadata pre-execution cost: 3 ms .
+[2025-07-03T14:46:45.413] [DEBUG] debug-file - entry : default@GenerateMetadata cost memory 0.08905792236328125
+[2025-07-03T14:46:45.414] [INFO] debug-file - UP-TO-DATE :entry:default@GenerateMetadata...  
+[2025-07-03T14:46:45.416] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.417] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.417] [DEBUG] debug-file - Executing task :entry:default@ConfigureCmake
+[2025-07-03T14:46:45.418] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.418] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.418] [DEBUG] debug-file - entry : default@ConfigureCmake cost memory 0.04007720947265625
+[2025-07-03T14:46:45.418] [DEBUG] debug-file - runTaskFromQueue task cost before running: 330 ms 
+[2025-07-03T14:46:45.419] [INFO] debug-file - Finished :entry:default@ConfigureCmake... after 2 ms 
+[2025-07-03T14:46:45.422] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.422] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.422] [DEBUG] debug-file - Executing task :entry:default@MergeProfile
+[2025-07-03T14:46:45.428] [DEBUG] debug-file - Incremental task entry:default@MergeProfile pre-execution cost: 6 ms .
+[2025-07-03T14:46:45.428] [DEBUG] debug-file - entry : default@MergeProfile cost memory 0.121612548828125
+[2025-07-03T14:46:45.429] [INFO] debug-file - UP-TO-DATE :entry:default@MergeProfile...  
+[2025-07-03T14:46:45.432] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.432] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.433] [DEBUG] debug-file - Executing task :entry:default@CreateBuildProfile
+[2025-07-03T14:46:45.435] [DEBUG] debug-file - Task 'entry:default@CreateBuildProfile' cost while wrapping incremental declarations: 2 ms 
+[2025-07-03T14:46:45.439] [DEBUG] debug-file - Incremental task entry:default@CreateBuildProfile pre-execution cost: 4 ms .
+[2025-07-03T14:46:45.440] [DEBUG] debug-file - entry : default@CreateBuildProfile cost memory 0.09619140625
+[2025-07-03T14:46:45.440] [INFO] debug-file - UP-TO-DATE :entry:default@CreateBuildProfile...  
+[2025-07-03T14:46:45.444] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.445] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.446] [DEBUG] debug-file - Executing task :entry:default@PreCheckSyscap
+[2025-07-03T14:46:45.447] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.447] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.447] [DEBUG] debug-file - entry : default@PreCheckSyscap cost memory 0.0402984619140625
+[2025-07-03T14:46:45.447] [DEBUG] debug-file - runTaskFromQueue task cost before running: 360 ms 
+[2025-07-03T14:46:45.449] [INFO] debug-file - Finished :entry:default@PreCheckSyscap... after 1 ms 
+[2025-07-03T14:46:45.454] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.454] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.457] [DEBUG] debug-file - Executing task :entry:default@GeneratePkgContextInfo
+[2025-07-03T14:46:45.470] [DEBUG] debug-file - Task 'entry:default@GeneratePkgContextInfo' cost while wrapping incremental declarations: 1 ms 
+[2025-07-03T14:46:45.472] [DEBUG] debug-file - Incremental task entry:default@GeneratePkgContextInfo pre-execution cost: 2 ms .
+[2025-07-03T14:46:45.472] [DEBUG] debug-file - entry : default@GeneratePkgContextInfo cost memory 0.20082855224609375
+[2025-07-03T14:46:45.473] [INFO] debug-file - UP-TO-DATE :entry:default@GeneratePkgContextInfo...  
+[2025-07-03T14:46:45.475] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.476] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.488] [DEBUG] debug-file - Executing task :entry:default@ProcessIntegratedHsp
+[2025-07-03T14:46:45.489] [DEBUG] debug-file - entry:default@ProcessIntegratedHsp is not up-to-date, since the output file 'D:\SmartRestaurant\build\cache\default\integrated_hsp\integratedHspCache.json' does not exist.
+[2025-07-03T14:46:45.489] [DEBUG] debug-file - Incremental task entry:default@ProcessIntegratedHsp pre-execution cost: 1 ms .
+[2025-07-03T14:46:45.489] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.490] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.490] [DEBUG] debug-file - entry : default@ProcessIntegratedHsp cost memory 0.0830535888671875
+[2025-07-03T14:46:45.490] [DEBUG] debug-file - runTaskFromQueue task cost before running: 402 ms 
+[2025-07-03T14:46:45.491] [INFO] debug-file - Finished :entry:default@ProcessIntegratedHsp... after 3 ms 
+[2025-07-03T14:46:45.493] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.494] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.495] [DEBUG] debug-file - Executing task :entry:default@BuildNativeWithCmake
+[2025-07-03T14:46:45.495] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.495] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.495] [DEBUG] debug-file - entry : default@BuildNativeWithCmake cost memory 0.041046142578125
+[2025-07-03T14:46:45.496] [DEBUG] debug-file - runTaskFromQueue task cost before running: 408 ms 
+[2025-07-03T14:46:45.496] [INFO] debug-file - Finished :entry:default@BuildNativeWithCmake... after 1 ms 
+[2025-07-03T14:46:45.499] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.499] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.500] [DEBUG] debug-file - Executing task :entry:default@MakePackInfo
+[2025-07-03T14:46:45.509] [DEBUG] debug-file - Incremental task entry:default@MakePackInfo pre-execution cost: 9 ms .
+[2025-07-03T14:46:45.510] [DEBUG] debug-file - entry : default@MakePackInfo cost memory 0.12155914306640625
+[2025-07-03T14:46:45.510] [INFO] debug-file - UP-TO-DATE :entry:default@MakePackInfo...  
+[2025-07-03T14:46:45.514] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.514] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.515] [DEBUG] debug-file - Executing task :entry:default@SyscapTransform
+[2025-07-03T14:46:45.515] [DEBUG] debug-file - File: 'D:\SmartRestaurant\entry\src\main\syscap.json' from 'sysCapJsonPath' is not exists, just ignore.
+[2025-07-03T14:46:45.518] [DEBUG] debug-file - Task 'entry:default@SyscapTransform' cost while wrapping incremental declarations: 3 ms 
+[2025-07-03T14:46:45.525] [DEBUG] debug-file - entry:default@SyscapTransform is not up-to-date, since the output file 'D:\SmartRestaurant\entry\build\default\intermediates\syscap\default\rpcid.sc' does not exist.
+[2025-07-03T14:46:45.525] [DEBUG] debug-file - Incremental task entry:default@SyscapTransform pre-execution cost: 7 ms .
+[2025-07-03T14:46:45.525] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.526] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.526] [DEBUG] debug-file - entry : default@SyscapTransform cost memory 0.16919708251953125
+[2025-07-03T14:46:45.526] [DEBUG] debug-file - runTaskFromQueue task cost before running: 438 ms 
+[2025-07-03T14:46:45.527] [INFO] debug-file - Finished :entry:default@SyscapTransform... after 12 ms 
+[2025-07-03T14:46:45.529] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.530] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.530] [DEBUG] debug-file - Executing task :entry:default@ProcessProfile
+[2025-07-03T14:46:45.536] [DEBUG] debug-file - Incremental task entry:default@ProcessProfile pre-execution cost: 3 ms .
+[2025-07-03T14:46:45.536] [DEBUG] debug-file - entry : default@ProcessProfile cost memory 0.1213226318359375
+[2025-07-03T14:46:45.536] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessProfile...  
+[2025-07-03T14:46:45.538] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.539] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.541] [DEBUG] debug-file - Executing task :entry:default@ProcessRouterMap
+[2025-07-03T14:46:45.551] [DEBUG] debug-file - Incremental task entry:default@ProcessRouterMap pre-execution cost: 8 ms .
+[2025-07-03T14:46:45.551] [DEBUG] debug-file - entry : default@ProcessRouterMap cost memory 0.14003753662109375
+[2025-07-03T14:46:45.553] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessRouterMap...  
+[2025-07-03T14:46:45.555] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.555] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.556] [DEBUG] debug-file - Executing task :entry:default@ProcessStartupConfig
+[2025-07-03T14:46:45.556] [DEBUG] debug-file - Task 'entry:default@ProcessStartupConfig' cost while wrapping incremental declarations: 1 ms 
+[2025-07-03T14:46:45.560] [DEBUG] debug-file - entry:default@ProcessStartupConfig is not up-to-date, since the output file 'D:\SmartRestaurant\entry\build\default\intermediates\startup\default\startup_config.json' does not exist.
+[2025-07-03T14:46:45.560] [DEBUG] debug-file - Incremental task entry:default@ProcessStartupConfig pre-execution cost: 3 ms .
+[2025-07-03T14:46:45.561] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.561] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.562] [DEBUG] debug-file - entry : default@ProcessStartupConfig cost memory 0.156494140625
+[2025-07-03T14:46:45.563] [DEBUG] debug-file - runTaskFromQueue task cost before running: 475 ms 
+[2025-07-03T14:46:45.564] [INFO] debug-file - Finished :entry:default@ProcessStartupConfig... after 7 ms 
+[2025-07-03T14:46:45.566] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.566] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.567] [DEBUG] debug-file - Executing task :entry:default@BuildNativeWithNinja
+[2025-07-03T14:46:45.568] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.568] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.568] [DEBUG] debug-file - entry : default@BuildNativeWithNinja cost memory 0.04608154296875
+[2025-07-03T14:46:45.569] [DEBUG] debug-file - runTaskFromQueue task cost before running: 481 ms 
+[2025-07-03T14:46:45.570] [INFO] debug-file - Finished :entry:default@BuildNativeWithNinja... after 2 ms 
+[2025-07-03T14:46:45.573] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.573] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.576] [DEBUG] debug-file - restool module names: entry; moduleName=entry, taskName=default@ProcessResource
+[2025-07-03T14:46:45.579] [DEBUG] debug-file - Executing task :entry:default@ProcessResource
+[2025-07-03T14:46:45.580] [DEBUG] debug-file - Task 'entry:default@ProcessResource' cost while wrapping incremental declarations: 1 ms 
+[2025-07-03T14:46:45.583] [DEBUG] debug-file - Incremental task entry:default@ProcessResource pre-execution cost: 3 ms .
+[2025-07-03T14:46:45.584] [DEBUG] debug-file - entry : default@ProcessResource cost memory 0.12328338623046875
+[2025-07-03T14:46:45.591] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessResource...  
+[2025-07-03T14:46:45.593] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.594] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.596] [DEBUG] debug-file - Executing task :entry:default@GenerateLoaderJson
+[2025-07-03T14:46:45.599] [DEBUG] debug-file - Task 'entry:default@GenerateLoaderJson' cost while wrapping incremental declarations: 1 ms 
+[2025-07-03T14:46:45.637] [DEBUG] debug-file - Incremental task entry:default@GenerateLoaderJson pre-execution cost: 24 ms .
+[2025-07-03T14:46:45.638] [DEBUG] debug-file - entry : default@GenerateLoaderJson cost memory 0.689483642578125
+[2025-07-03T14:46:45.654] [INFO] debug-file - UP-TO-DATE :entry:default@GenerateLoaderJson...  
+[2025-07-03T14:46:45.657] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.657] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.660] [DEBUG] debug-file - Executing task :entry:default@ProcessLibs
+[2025-07-03T14:46:45.668] [DEBUG] debug-file - Incremental task entry:default@ProcessLibs pre-execution cost: 6 ms .
+[2025-07-03T14:46:45.669] [DEBUG] debug-file - entry : default@ProcessLibs cost memory 0.09210205078125
+[2025-07-03T14:46:45.670] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessLibs...  
+[2025-07-03T14:46:45.673] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.673] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.674] [DEBUG] debug-file - restool module names: entry; moduleName=entry, taskName=default@CompileResource
+[2025-07-03T14:46:45.675] [DEBUG] debug-file - Executing task :entry:default@CompileResource
+[2025-07-03T14:46:45.770] [DEBUG] debug-file - Incremental task entry:default@CompileResource pre-execution cost: 91 ms .
+[2025-07-03T14:46:45.770] [DEBUG] debug-file - entry : default@CompileResource cost memory 0.8282928466796875
+[2025-07-03T14:46:45.773] [INFO] debug-file - UP-TO-DATE :entry:default@CompileResource...  
+[2025-07-03T14:46:45.775] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.776] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.777] [DEBUG] debug-file - Executing task :entry:default@DoNativeStrip
+[2025-07-03T14:46:45.778] [DEBUG] debug-file - Task 'entry:default@DoNativeStrip' cost while wrapping incremental declarations: 1 ms 
+[2025-07-03T14:46:45.781] [DEBUG] debug-file - Incremental task entry:default@DoNativeStrip pre-execution cost: 4 ms .
+[2025-07-03T14:46:45.782] [DEBUG] debug-file - entry : default@DoNativeStrip cost memory 0.0802154541015625
+[2025-07-03T14:46:45.782] [INFO] debug-file - UP-TO-DATE :entry:default@DoNativeStrip...  
+[2025-07-03T14:46:45.785] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.785] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.787] [DEBUG] debug-file - Executing task :entry:default@CompileArkTS
+[2025-07-03T14:46:45.787] [DEBUG] debug-file - obfuscationOptions: undefined
+[2025-07-03T14:46:45.845] [DEBUG] debug-file - Incremental task entry:default@CompileArkTS pre-execution cost: 48 ms .
+[2025-07-03T14:46:45.845] [DEBUG] debug-file - entry : default@CompileArkTS cost memory -1.1966018676757812
+[2025-07-03T14:46:45.851] [INFO] debug-file - UP-TO-DATE :entry:default@CompileArkTS...  
+[2025-07-03T14:46:45.854] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.854] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.856] [DEBUG] debug-file - Executing task :entry:default@BuildJS
+[2025-07-03T14:46:45.868] [DEBUG] debug-file - entry : default@BuildJS cost memory 0.110015869140625
+[2025-07-03T14:46:45.868] [DEBUG] debug-file - runTaskFromQueue task cost before running: 781 ms 
+[2025-07-03T14:46:45.869] [INFO] debug-file - Finished :entry:default@BuildJS... after 13 ms 
+[2025-07-03T14:46:45.873] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.873] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.875] [DEBUG] debug-file - Executing task :entry:default@CacheNativeLibs
+[2025-07-03T14:46:45.877] [DEBUG] debug-file - Task 'entry:default@CacheNativeLibs' cost while wrapping incremental declarations: 2 ms 
+[2025-07-03T14:46:45.883] [DEBUG] debug-file - Incremental task entry:default@CacheNativeLibs pre-execution cost: 6 ms .
+[2025-07-03T14:46:45.883] [DEBUG] debug-file - entry : default@CacheNativeLibs cost memory 0.093963623046875
+[2025-07-03T14:46:45.884] [INFO] debug-file - UP-TO-DATE :entry:default@CacheNativeLibs...  
+[2025-07-03T14:46:45.886] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.886] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.887] [DEBUG] debug-file - Executing task :entry:default@GeneratePkgModuleJson
+[2025-07-03T14:46:45.888] [DEBUG] debug-file - Task 'entry:default@GeneratePkgModuleJson' cost while wrapping incremental declarations: 1 ms 
+[2025-07-03T14:46:45.893] [DEBUG] debug-file - Incremental task entry:default@GeneratePkgModuleJson pre-execution cost: 5 ms .
+[2025-07-03T14:46:45.894] [DEBUG] debug-file - entry : default@GeneratePkgModuleJson cost memory 0.07709503173828125
+[2025-07-03T14:46:45.894] [INFO] debug-file - UP-TO-DATE :entry:default@GeneratePkgModuleJson...  
+[2025-07-03T14:46:45.898] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.899] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.902] [DEBUG] debug-file - Executing task :entry:default@PackageHap
+[2025-07-03T14:46:45.946] [DEBUG] debug-file - Incremental task entry:default@PackageHap pre-execution cost: 42 ms .
+[2025-07-03T14:46:45.946] [DEBUG] debug-file - entry : default@PackageHap cost memory 0.5186843872070312
+[2025-07-03T14:46:45.949] [INFO] debug-file - UP-TO-DATE :entry:default@PackageHap...  
+[2025-07-03T14:46:45.951] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.952] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.954] [DEBUG] debug-file - Executing task :entry:default@SignHap
+[2025-07-03T14:46:45.955] [WARN] debug-file - Will skip sign 'hos_hap'. No signingConfigs profile is configured in current project.
+             If needed, configure the signingConfigs in D:\SmartRestaurant\build-profile.json5.
+[2025-07-03T14:46:45.959] [DEBUG] debug-file - entry:default@SignHap is not up-to-date, since the output file 'D:\SmartRestaurant\entry\build\default\outputs\default\entry-default-signed.hap' does not exist.
+[2025-07-03T14:46:45.959] [DEBUG] debug-file - Incremental task entry:default@SignHap pre-execution cost: 3 ms .
+[2025-07-03T14:46:45.959] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.959] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.960] [DEBUG] debug-file - entry : default@SignHap cost memory 0.12157440185546875
+[2025-07-03T14:46:45.960] [DEBUG] debug-file - runTaskFromQueue task cost before running: 872 ms 
+[2025-07-03T14:46:45.961] [INFO] debug-file - Finished :entry:default@SignHap... after 6 ms 
+[2025-07-03T14:46:45.962] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.963] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.964] [DEBUG] debug-file - Executing task :entry:default@CollectDebugSymbol
+[2025-07-03T14:46:45.966] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-07-03T14:46:45.967] [DEBUG] debug-file - jsonObjWithoutParam {"name":"entry","version":"1.0.0","description":"Please describe the basic information.","main":"","author":"","license":"","dependencies":{}} at undefined
+[2025-07-03T14:46:45.967] [DEBUG] debug-file - entry : default@CollectDebugSymbol cost memory 0.10085296630859375
+[2025-07-03T14:46:45.967] [DEBUG] debug-file - runTaskFromQueue task cost before running: 879 ms 
+[2025-07-03T14:46:45.967] [INFO] debug-file - Finished :entry:default@CollectDebugSymbol... after 4 ms 
+[2025-07-03T14:46:45.968] [DEBUG] debug-file - Executing task :entry:assembleHap
+[2025-07-03T14:46:45.968] [DEBUG] debug-file - entry : assembleHap cost memory 0.01433563232421875
+[2025-07-03T14:46:45.968] [DEBUG] debug-file - runTaskFromQueue task cost before running: 881 ms 
+[2025-07-03T14:46:45.969] [INFO] debug-file - Finished :entry:assembleHap... after 1 ms 
+[2025-07-03T14:46:45.993] [DEBUG] debug-file - BUILD SUCCESSFUL in 905 ms 
+[2025-07-03T14:46:45.993] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@PreBuild is up-to-date.
+[2025-07-03T14:46:45.993] [DEBUG] debug-file - Update task entry:default@CreateModuleInfo output file:D:\SmartRestaurant\entry\build\default\generated\profile\default\ModuleInfo.ts cache.
+[2025-07-03T14:46:45.994] [DEBUG] debug-file - Incremental task entry:default@CreateModuleInfo post-execution cost:1 ms .
+[2025-07-03T14:46:45.994] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@GenerateMetadata is up-to-date.
+[2025-07-03T14:46:45.995] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@MergeProfile is up-to-date.
+[2025-07-03T14:46:45.995] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@CreateBuildProfile is up-to-date.
+[2025-07-03T14:46:45.995] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@GeneratePkgContextInfo is up-to-date.
+[2025-07-03T14:46:45.995] [DEBUG] debug-file - Update task entry:default@ProcessIntegratedHsp output file:D:\SmartRestaurant\build\cache\default\integrated_hsp\integratedHspCache.json cache.
+[2025-07-03T14:46:45.995] [DEBUG] debug-file - Incremental task entry:default@ProcessIntegratedHsp post-execution cost:1 ms .
+[2025-07-03T14:46:45.996] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@MakePackInfo is up-to-date.
+[2025-07-03T14:46:45.996] [DEBUG] debug-file - Update task entry:default@SyscapTransform input file:D:\DevEco Studio\sdk\default\openharmony\toolchains\syscap_tool.exe cache by regenerate.
+[2025-07-03T14:46:45.996] [DEBUG] debug-file - Update task entry:default@SyscapTransform input file:D:\DevEco Studio\sdk\default\openharmony\ets\api\device-define cache by regenerate.
+[2025-07-03T14:46:46.000] [DEBUG] debug-file - Update task entry:default@SyscapTransform output file:D:\SmartRestaurant\entry\build\default\intermediates\syscap\default\rpcid.sc cache.
+[2025-07-03T14:46:46.001] [DEBUG] debug-file - Incremental task entry:default@SyscapTransform post-execution cost:6 ms .
+[2025-07-03T14:46:46.001] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessProfile is up-to-date.
+[2025-07-03T14:46:46.001] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessRouterMap is up-to-date.
+[2025-07-03T14:46:46.002] [DEBUG] debug-file - Update task entry:default@ProcessStartupConfig input file:D:\SmartRestaurant\entry\build\default\intermediates\loader\default\pkgContextInfo.json cache by regenerate.
+[2025-07-03T14:46:46.002] [DEBUG] debug-file - Update task entry:default@ProcessStartupConfig output file:D:\SmartRestaurant\entry\build\default\intermediates\startup\default\startup_config.json cache.
+[2025-07-03T14:46:46.003] [DEBUG] debug-file - Incremental task entry:default@ProcessStartupConfig post-execution cost:2 ms .
+[2025-07-03T14:46:46.003] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessResource is up-to-date.
+[2025-07-03T14:46:46.003] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@GenerateLoaderJson is up-to-date.
+[2025-07-03T14:46:46.003] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessLibs is up-to-date.
+[2025-07-03T14:46:46.003] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@CompileResource is up-to-date.
+[2025-07-03T14:46:46.003] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@DoNativeStrip is up-to-date.
+[2025-07-03T14:46:46.003] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@CompileArkTS is up-to-date.
+[2025-07-03T14:46:46.006] [DEBUG] debug-file - Update task entry:default@BuildJS input file:D:\SmartRestaurant\entry\build\default\intermediates\loader\default cache by regenerate.
+[2025-07-03T14:46:46.008] [DEBUG] debug-file - Update task entry:default@BuildJS input file:D:\SmartRestaurant\entry\build\default\intermediates\res\default\resources\rawfile cache by regenerate.
+[2025-07-03T14:46:46.009] [DEBUG] debug-file - Update task entry:default@BuildJS input file:D:\SmartRestaurant\entry\build\default\intermediates\res\default\ResourceTable.txt cache by regenerate.
+[2025-07-03T14:46:46.010] [DEBUG] debug-file - Update task entry:default@BuildJS input file:D:\SmartRestaurant\entry\build\default\intermediates\res\default\ark_module.json cache by regenerate.
+[2025-07-03T14:46:46.010] [DEBUG] debug-file - Update task entry:default@BuildJS input file:D:\SmartRestaurant\entry\build\default\intermediates\res\default\resources\base\profile cache by regenerate.
+[2025-07-03T14:46:46.013] [DEBUG] debug-file - Update task entry:default@BuildJS input file:D:\SmartRestaurant\entry\build\default\intermediates\loader\default\pkgContextInfo.json cache by regenerate.
+[2025-07-03T14:46:46.013] [DEBUG] debug-file - Update task entry:default@BuildJS output file:D:\SmartRestaurant\entry\build\default\intermediates\loader_out\default\js cache.
+[2025-07-03T14:46:46.014] [DEBUG] debug-file - Incremental task entry:default@BuildJS post-execution cost:11 ms .
+[2025-07-03T14:46:46.014] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@CacheNativeLibs is up-to-date.
+[2025-07-03T14:46:46.014] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@GeneratePkgModuleJson is up-to-date.
+[2025-07-03T14:46:46.014] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@PackageHap is up-to-date.
+[2025-07-03T14:46:46.015] [DEBUG] debug-file - Update task entry:default@SignHap input file:D:\SmartRestaurant\entry\build\default\outputs\default\entry-default-unsigned.hap cache by regenerate.
+[2025-07-03T14:46:46.016] [DEBUG] debug-file - Update task entry:default@SignHap output file:D:\SmartRestaurant\entry\build\default\outputs\default\entry-default-signed.hap cache.
+[2025-07-03T14:46:46.017] [DEBUG] debug-file - Incremental task entry:default@SignHap post-execution cost:2 ms .
+[2025-07-03T14:46:46.017] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol input file:D:\SmartRestaurant\entry\build\default\intermediates\loader_out\default\ets\sourceMaps.map cache by regenerate.
+[2025-07-03T14:46:46.018] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol input file:D:\SmartRestaurant\entry\build\default\intermediates\libs\default cache by regenerate.
+[2025-07-03T14:46:46.019] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol output file:D:\SmartRestaurant\entry\build\default\outputs\default\symbol cache.
+[2025-07-03T14:46:46.020] [DEBUG] debug-file - Incremental task entry:default@CollectDebugSymbol post-execution cost:3 ms .
+[2025-07-03T14:46:46.069] [DEBUG] debug-file - hvigor build process will be closed.
+[2025-07-03T14:46:46.082] [DEBUG] debug-file - session manager: send message to worker process.
+[2025-07-03T14:46:46.084] [DEBUG] debug-file - session manager: send message to worker process.
+[2025-07-03T14:46:46.083] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-07-03T14:46:46.084] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.

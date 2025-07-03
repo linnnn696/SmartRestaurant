@@ -16,18 +16,18 @@
     "IS_HVIGORFILE_TYPE_CHECK": false,
     "TASK_TIME": {
       "1043bfc77febe75fafec0c4309faccf1": {
-        "CreateModuleInfo": 4135400,
-        "ConfigureCmake": 1614200,
-        "PreCheckSyscap": 2932100,
-        "ProcessIntegratedHsp": 3849500,
-        "BuildNativeWithCmake": 1590600,
-        "SyscapTransform": 54511000,
-        "ProcessStartupConfig": 23485900,
-        "BuildNativeWithNinja": 3190400,
-        "BuildJS": 11513700,
-        "SignHap": 8643500,
-        "CollectDebugSymbol": 4516800,
-        "assembleHap": 1083000
+        "CreateModuleInfo": 1642800,
+        "ConfigureCmake": 1219700,
+        "PreCheckSyscap": 2831100,
+        "ProcessIntegratedHsp": 2943300,
+        "BuildNativeWithCmake": 1208800,
+        "SyscapTransform": 11774700,
+        "ProcessStartupConfig": 7802300,
+        "BuildNativeWithNinja": 2573700,
+        "BuildJS": 12871200,
+        "SignHap": 6043800,
+        "CollectDebugSymbol": 3490500,
+        "assembleHap": 782200
       }
     },
     "APIS": [
@@ -38,8 +38,6 @@
       "getAllNodes",
       "getRootNode",
       "getNodeName",
-      "getStartParams",
-      "buildFinished",
       "getNodePath",
       "subNodes",
       "getExtraOption",
@@ -57,7 +55,7 @@
       "skipNativeIncremental": false,
       "hvigor_keepDependency": true
     },
-    "BUILD_ID": "202507031438041750",
-    "TOTAL_TIME": 44147349900
+    "TOTAL_TIME": 904122400,
+    "BUILD_ID": "202507031446450880"
   }
 }
