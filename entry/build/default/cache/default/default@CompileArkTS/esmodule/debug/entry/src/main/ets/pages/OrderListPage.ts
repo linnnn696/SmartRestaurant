@@ -5,16 +5,16 @@ interface OrderListPage_Params {
     orders?: Order[];
     currentIndex?: number;
     isLoading?: boolean;
-    newOrderId?: string;
+    newOrderId?: number;
     errorMessage?: string;
-    loadOrdersTimer?: number | null;
+    isRefreshing?: boolean;
 }
 import router from "@ohos:router";
 import promptAction from "@ohos:promptAction";
-import { OrderService, OrderStatus } from "@normalized:N&&&entry/src/main/ets/service/OrderService&";
+import { OrderService } from "@normalized:N&&&entry/src/main/ets/service/OrderService&";
 import type { OrderItem, Order } from "@normalized:N&&&entry/src/main/ets/service/OrderService&";
 interface RouterParams {
-    newOrderId?: string;
+    newOrderId?: number;
 }
 export class OrderListPage extends ViewPU {
     constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
@@ -25,9 +25,9 @@ export class OrderListPage extends ViewPU {
         this.__orders = new ObservedPropertyObjectPU([], this, "orders");
         this.__currentIndex = new ObservedPropertySimplePU(1, this, "currentIndex");
         this.__isLoading = new ObservedPropertySimplePU(false, this, "isLoading");
-        this.__newOrderId = new ObservedPropertySimplePU('', this, "newOrderId");
+        this.__newOrderId = new ObservedPropertySimplePU(0, this, "newOrderId");
         this.__errorMessage = new ObservedPropertySimplePU('', this, "errorMessage");
-        this.loadOrdersTimer = null;
+        this.__isRefreshing = new ObservedPropertySimplePU(false, this, "isRefreshing");
         this.setInitiallyProvidedValue(params);
         this.finalizeConstruction();
     }
@@ -47,8 +47,8 @@ export class OrderListPage extends ViewPU {
         if (params.errorMessage !== undefined) {
             this.errorMessage = params.errorMessage;
         }
-        if (params.loadOrdersTimer !== undefined) {
-            this.loadOrdersTimer = params.loadOrdersTimer;
+        if (params.isRefreshing !== undefined) {
+            this.isRefreshing = params.isRefreshing;
         }
     }
     updateStateVars(params: OrderListPage_Params) {
@@ -59,6 +59,7 @@ export class OrderListPage extends ViewPU {
         this.__isLoading.purgeDependencyOnElmtId(rmElmtId);
         this.__newOrderId.purgeDependencyOnElmtId(rmElmtId);
         this.__errorMessage.purgeDependencyOnElmtId(rmElmtId);
+        this.__isRefreshing.purgeDependencyOnElmtId(rmElmtId);
     }
     aboutToBeDeleted() {
         this.__orders.aboutToBeDeleted();
@@ -66,6 +67,7 @@ export class OrderListPage extends ViewPU {
         this.__isLoading.aboutToBeDeleted();
         this.__newOrderId.aboutToBeDeleted();
         this.__errorMessage.aboutToBeDeleted();
+        this.__isRefreshing.aboutToBeDeleted();
         SubscriberManager.Get().delete(this.id__());
         this.aboutToBeDeletedInternal();
     }
@@ -76,7 +78,7 @@ export class OrderListPage extends ViewPU {
     set orders(newValue: Order[]) {
         this.__orders.set(newValue);
     }
-    private __currentIndex: ObservedPropertySimplePU<number>; // 当前选中的是订单页面
+    private __currentIndex: ObservedPropertySimplePU<number>;
     get currentIndex() {
         return this.__currentIndex.get();
     }
@@ -90,11 +92,11 @@ export class OrderListPage extends ViewPU {
     set isLoading(newValue: boolean) {
         this.__isLoading.set(newValue);
     }
-    private __newOrderId: ObservedPropertySimplePU<string>;
+    private __newOrderId: ObservedPropertySimplePU<number>;
     get newOrderId() {
         return this.__newOrderId.get();
     }
-    set newOrderId(newValue: string) {
+    set newOrderId(newValue: number) {
         this.__newOrderId.set(newValue);
     }
     private __errorMessage: ObservedPropertySimplePU<string>;
@@ -104,27 +106,22 @@ export class OrderListPage extends ViewPU {
     set errorMessage(newValue: string) {
         this.__errorMessage.set(newValue);
     }
-    private loadOrdersTimer: number | null;
-    aboutToAppear() {
+    private __isRefreshing: ObservedPropertySimplePU<boolean>;
+    get isRefreshing() {
+        return this.__isRefreshing.get();
+    }
+    set isRefreshing(newValue: boolean) {
+        this.__isRefreshing.set(newValue);
+    }
+    aboutToAppear(): void {
         // 首次加载订单
         this.loadOrders();
     }
-    aboutToDisappear() {
-        // 清理定时器
-        if (this.loadOrdersTimer !== null) {
-            clearTimeout(this.loadOrdersTimer);
-            this.loadOrdersTimer = null;
-        }
+    onPageShow(): void {
+        // 页面显示时立即刷新一次
+        this.loadOrders();
     }
-    onPageShow() {
-        // 页面显示时，如果不是首次加载，延迟刷新订单列表
-        if (this.orders.length > 0) {
-            this.loadOrdersTimer = setTimeout(() => {
-                this.loadOrders();
-            }, 500) as number;
-        }
-    }
-    async loadOrders() {
+    async loadOrders(): Promise<void> {
         // 如果正在加载中，不重复加载
         if (this.isLoading) {
             return;
@@ -144,14 +141,13 @@ export class OrderListPage extends ViewPU {
             if (params?.newOrderId) {
                 this.newOrderId = params.newOrderId;
                 // 3秒后清除高亮效果
-                const timer: number = setTimeout(() => {
-                    this.newOrderId = '';
-                }, 3000) as number;
+                setTimeout(() => {
+                    this.newOrderId = 0;
+                }, 3000);
             }
         }
-        catch (error) {
-            console.error('加载订单失败:', error);
-            this.errorMessage = error instanceof Error ? error.message : '加载订单失败';
+        catch {
+            this.errorMessage = '加载订单失败';
             // 显示错误提示
             try {
                 await promptAction.showToast({
@@ -160,115 +156,69 @@ export class OrderListPage extends ViewPU {
                     bottom: 50
                 });
             }
-            catch (toastError) {
-                console.error('显示错误提示失败:', toastError);
+            catch {
+                console.error('显示错误提示失败');
             }
         }
         finally {
             this.isLoading = false;
+            this.isRefreshing = false;
         }
     }
-    OrderStatusTag(status: OrderStatus, parent = null) {
+    getStatusColor(status: string): string {
+        switch (status) {
+            case '制作中':
+                return '#FF6B6B';
+            case '已完成':
+                return '#67C23A';
+            case '待取餐':
+                return '#409EFF';
+            case '已提交':
+                return '#E6A23C';
+            default:
+                return '#909399';
+        }
+    }
+    getStatusBackground(status: string): string {
+        switch (status) {
+            case '制作中':
+                return '#FFF0F0';
+            case '已完成':
+                return '#F0F9EB';
+            case '待取餐':
+                return '#ECF5FF';
+            case '已提交':
+                return '#FDF6EC';
+            default:
+                return '#F4F4F5';
+        }
+    }
+    OrderStatusTag(status: string, parent = null): void {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create(status === OrderStatus.PENDING ? '待处理' :
-                status === OrderStatus.PREPARING ? '进行中' :
-                    status === OrderStatus.COMPLETED ? '已完成' : '已取消');
+            Text.create(status);
             Text.fontSize(12);
-            Text.fontColor(status === OrderStatus.PREPARING ? '#FF6B6B' :
-                status === OrderStatus.COMPLETED ? '#67C23A' :
-                    status === OrderStatus.CANCELLED ? '#909399' : '#E6A23C');
-            Text.backgroundColor(status === OrderStatus.PREPARING ? '#FFF0F0' :
-                status === OrderStatus.COMPLETED ? '#F0F9EB' :
-                    status === OrderStatus.CANCELLED ? '#F4F4F5' : '#FDF6EC');
+            Text.fontColor(this.getStatusColor(status));
+            Text.backgroundColor(this.getStatusBackground(status));
             Text.padding({ left: 8, right: 8, top: 4, bottom: 4 });
             Text.borderRadius(4);
         }, Text);
         Text.pop();
     }
-    OrderItemRow(item: OrderItem, parent = null) {
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Row.create();
-            Row.width('100%');
-            Row.justifyContent(FlexAlign.SpaceBetween);
-            Row.margin({ bottom: 8 });
-        }, Row);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create(item.name);
-            Text.fontSize(14);
-            Text.fontColor('#333333');
-        }, Text);
-        Text.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Row.create();
-        }, Row);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create(`x${item.quantity}`);
-            Text.fontSize(14);
-            Text.fontColor('#666666');
-            Text.margin({ right: 8 });
-        }, Text);
-        Text.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create(`¥${(item.price * item.quantity).toFixed(2)}`);
-            Text.fontSize(14);
-            Text.fontColor('#FF6B6B');
-        }, Text);
-        Text.pop();
-        Row.pop();
-        Row.pop();
-    }
-    getStatusText(status: OrderStatus): string {
-        switch (status) {
-            case OrderStatus.PENDING:
-                return '待支付';
-            case OrderStatus.PREPARING:
-                return '制作中';
-            case OrderStatus.COMPLETED:
-                return '已完成';
-            case OrderStatus.CANCELLED:
-                return '已取消';
-            default:
-                return '未知状态';
-        }
-    }
-    getStatusColor(status: OrderStatus): string {
-        switch (status) {
-            case OrderStatus.PREPARING:
-                return '#FF6B6B';
-            case OrderStatus.COMPLETED:
-                return '#52C41A';
-            case OrderStatus.CANCELLED:
-                return '#999999';
-            case OrderStatus.PENDING:
-                return '#FF9500';
-            default:
-                return '#999999';
-        }
-    }
-    OrderItem(order: Order, parent = null) {
+    OrderCard(order: Order, parent = null): void {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
             Column.width('100%');
             Column.padding(16);
-            Column.backgroundColor(this.newOrderId === order.id ? '#FFF0F0' : Color.White);
-            Column.borderRadius(12);
+            Column.backgroundColor(this.newOrderId === order.order_id ? '#FFF9F2' : Color.White);
+            Column.borderRadius(8);
             Column.margin({ bottom: 12 });
             Column.onClick(() => {
-                try {
-                    router.pushUrl({
-                        url: 'pages/OrderTrackPage',
-                        params: { orderId: order.id }
-                    }).catch((error: Error) => {
-                        console.error('导航到订单跟踪页面失败:', error);
-                        promptAction.showToast({
-                            message: '页面跳转失败',
-                            duration: 2000
-                        });
-                    });
-                }
-                catch (error) {
-                    console.error('导航错误:', error);
-                }
+                router.pushUrl({
+                    url: 'pages/OrderDetailPage',
+                    params: {
+                        orderId: order.order_id
+                    }
+                });
             });
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -278,24 +228,16 @@ export class OrderListPage extends ViewPU {
             Row.margin({ bottom: 12 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create(`订单号：${order.id}`);
+            Text.create(`订单号：${order.order_id}`);
             Text.fontSize(14);
             Text.fontColor('#666666');
         }, Text);
         Text.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create(this.getStatusText(order.status));
-            Text.fontSize(14);
-            Text.fontColor(this.getStatusColor(order.status));
-        }, Text);
-        Text.pop();
+        this.OrderStatusTag.bind(this)(order.status);
         Row.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // 订单商品列表
             Column.create();
-            // 订单商品列表
             Column.width('100%');
-            // 订单商品列表
             Column.margin({ bottom: 12 });
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -306,7 +248,36 @@ export class OrderListPage extends ViewPU {
                         ForEach.create();
                         const forEachItemGenFunction = _item => {
                             const item = _item;
-                            this.OrderItemRow.bind(this)(item);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Row.create();
+                                Row.width('100%');
+                                Row.justifyContent(FlexAlign.SpaceBetween);
+                                Row.margin({ bottom: 8 });
+                            }, Row);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Text.create(item.name);
+                                Text.fontSize(14);
+                                Text.fontColor('#333333');
+                            }, Text);
+                            Text.pop();
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Row.create();
+                            }, Row);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Text.create(`x${item.quantity}`);
+                                Text.fontSize(14);
+                                Text.fontColor('#666666');
+                                Text.margin({ right: 8 });
+                            }, Text);
+                            Text.pop();
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Text.create(`¥${item.subtotal.toFixed(2)}`);
+                                Text.fontSize(14);
+                                Text.fontColor('#FF6B6B');
+                            }, Text);
+                            Text.pop();
+                            Row.pop();
+                            Row.pop();
                         };
                         this.forEachUpdateFunction(elmtId, order.items, forEachItemGenFunction);
                     }, ForEach);
@@ -325,7 +296,6 @@ export class OrderListPage extends ViewPU {
             }
         }, If);
         If.pop();
-        // 订单商品列表
         Column.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Divider.create();
@@ -337,7 +307,7 @@ export class OrderListPage extends ViewPU {
             Row.margin({ bottom: 8 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create(`下单时间：${order.createdAt || '未知'}`);
+            Text.create(`下单时间：${order.created_at}`);
             Text.fontSize(14);
             Text.fontColor('#666666');
         }, Text);
@@ -355,10 +325,9 @@ export class OrderListPage extends ViewPU {
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create(`合计：¥${(order.totalAmount || 0).toFixed(2)}`);
-            Text.fontSize(16);
+            Text.create(`合计：¥${order.total_amount.toFixed(2)}`);
+            Text.fontSize(14);
             Text.fontColor('#FF6B6B');
-            Text.fontWeight(FontWeight.Bold);
         }, Text);
         Text.pop();
         Row.pop();
@@ -392,96 +361,111 @@ export class OrderListPage extends ViewPU {
         // 顶部栏
         Row.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // 订单列表区域
+            Refresh.create({ refreshing: { value: this.isRefreshing, changeEvent: newValue => { this.isRefreshing = newValue; } } });
+            // 订单列表区域
+            Refresh.onRefreshing(() => {
+                this.isRefreshing = true;
+                this.loadOrders();
+            });
+        }, Refresh);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            List.create();
+            List.width('100%');
+            List.height('100%');
+            List.padding({ left: 16, right: 16 });
+            List.layoutWeight(1);
+        }, List);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
             If.create();
-            // 加载中状态
-            if (this.isLoading) {
+            if (this.isLoading && !this.isRefreshing) {
                 this.ifElseBranchUpdateFunction(0, () => {
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Column.create();
-                        Column.width('100%');
-                        Column.layoutWeight(1);
-                        Column.justifyContent(FlexAlign.Center);
-                    }, Column);
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        LoadingProgress.create();
-                        LoadingProgress.width(32);
-                        LoadingProgress.height(32);
-                    }, LoadingProgress);
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('加载中...');
-                        Text.fontSize(14);
-                        Text.fontColor('#999999');
-                        Text.margin({ top: 8 });
-                    }, Text);
-                    Text.pop();
-                    Column.pop();
+                    {
+                        const itemCreation = (elmtId, isInitialRender) => {
+                            ViewStackProcessor.StartGetAccessRecordingFor(elmtId);
+                            ListItem.create(deepRenderFunction, true);
+                            if (!isInitialRender) {
+                                ListItem.pop();
+                            }
+                            ViewStackProcessor.StopGetAccessRecording();
+                        };
+                        const itemCreation2 = (elmtId, isInitialRender) => {
+                            ListItem.create(deepRenderFunction, true);
+                        };
+                        const deepRenderFunction = (elmtId, isInitialRender) => {
+                            itemCreation(elmtId, isInitialRender);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Column.create();
+                                Column.width('100%');
+                                Column.height('100%');
+                                Column.justifyContent(FlexAlign.Center);
+                            }, Column);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                LoadingProgress.create();
+                                LoadingProgress.color('#007DFF');
+                                LoadingProgress.width(32);
+                                LoadingProgress.height(32);
+                            }, LoadingProgress);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Text.create('加载中...');
+                                Text.fontSize(14);
+                                Text.fontColor('#999999');
+                                Text.margin({ top: 8 });
+                            }, Text);
+                            Text.pop();
+                            Column.pop();
+                            ListItem.pop();
+                        };
+                        this.observeComponentCreation2(itemCreation2, ListItem);
+                        ListItem.pop();
+                    }
                 });
             }
-            // 错误状态
             else if (this.errorMessage) {
                 this.ifElseBranchUpdateFunction(1, () => {
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Column.create();
-                        Column.width('100%');
-                        Column.layoutWeight(1);
-                        Column.justifyContent(FlexAlign.Center);
-                    }, Column);
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Image.create({ "id": 16777226, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
-                        Image.width(120);
-                        Image.height(120);
-                        Image.fillColor('#CCCCCC');
-                        Image.margin({ bottom: 16 });
-                    }, Image);
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create(this.errorMessage);
-                        Text.fontSize(16);
-                        Text.fontColor('#999999');
-                    }, Text);
-                    Text.pop();
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Button.createWithLabel('重试');
-                        Button.onClick(() => this.loadOrders());
-                        Button.margin({ top: 16 });
-                    }, Button);
-                    Button.pop();
-                    Column.pop();
+                    {
+                        const itemCreation = (elmtId, isInitialRender) => {
+                            ViewStackProcessor.StartGetAccessRecordingFor(elmtId);
+                            ListItem.create(deepRenderFunction, true);
+                            if (!isInitialRender) {
+                                ListItem.pop();
+                            }
+                            ViewStackProcessor.StopGetAccessRecording();
+                        };
+                        const itemCreation2 = (elmtId, isInitialRender) => {
+                            ListItem.create(deepRenderFunction, true);
+                        };
+                        const deepRenderFunction = (elmtId, isInitialRender) => {
+                            itemCreation(elmtId, isInitialRender);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Column.create();
+                                Column.width('100%');
+                                Column.height('100%');
+                                Column.justifyContent(FlexAlign.Center);
+                            }, Column);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Image.create({ "id": 16777226, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
+                                Image.width(120);
+                                Image.height(120);
+                                Image.fillColor('#CCCCCC');
+                                Image.margin({ bottom: 16 });
+                            }, Image);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Text.create(this.errorMessage);
+                                Text.fontSize(14);
+                                Text.fontColor('#999999');
+                            }, Text);
+                            Text.pop();
+                            Column.pop();
+                            ListItem.pop();
+                        };
+                        this.observeComponentCreation2(itemCreation2, ListItem);
+                        ListItem.pop();
+                    }
                 });
             }
-            // 空状态
-            else if (this.orders.length === 0) {
-                this.ifElseBranchUpdateFunction(2, () => {
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Column.create();
-                        Column.width('100%');
-                        Column.layoutWeight(1);
-                        Column.justifyContent(FlexAlign.Center);
-                    }, Column);
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Image.create({ "id": 16777226, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
-                        Image.width(120);
-                        Image.height(120);
-                        Image.fillColor('#CCCCCC');
-                        Image.margin({ bottom: 16 });
-                    }, Image);
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('暂无订单');
-                        Text.fontSize(16);
-                        Text.fontColor('#999999');
-                    }, Text);
-                    Text.pop();
-                    Column.pop();
-                });
-            }
-            // 订单列表
             else {
-                this.ifElseBranchUpdateFunction(3, () => {
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        List.create();
-                        List.width('100%');
-                        List.layoutWeight(1);
-                        List.padding({ left: 16, right: 16, top: 12 });
-                    }, List);
+                this.ifElseBranchUpdateFunction(2, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         ForEach.create();
                         const forEachItemGenFunction = _item => {
@@ -500,7 +484,7 @@ export class OrderListPage extends ViewPU {
                                 };
                                 const deepRenderFunction = (elmtId, isInitialRender) => {
                                     itemCreation(elmtId, isInitialRender);
-                                    this.OrderItem.bind(this)(order);
+                                    this.OrderCard.bind(this)(order);
                                     ListItem.pop();
                                 };
                                 this.observeComponentCreation2(itemCreation2, ListItem);
@@ -510,11 +494,13 @@ export class OrderListPage extends ViewPU {
                         this.forEachUpdateFunction(elmtId, this.orders, forEachItemGenFunction);
                     }, ForEach);
                     ForEach.pop();
-                    List.pop();
                 });
             }
         }, If);
         If.pop();
+        List.pop();
+        // 订单列表区域
+        Refresh.pop();
         Column.pop();
     }
     rerender() {

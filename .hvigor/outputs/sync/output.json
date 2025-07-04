@@ -1,49 +1,49 @@
 {
   "ohos-module-entry": {
     "SELECT_TARGET": "default",
-    "MODULE_BUILD_DIR": "D:\\SmartRestaurant\\entry\\build",
+    "MODULE_BUILD_DIR": "F:\\frontground\\SmartRestaurant\\entry\\build",
     "TARGETS": {
       "default": {
-        "SOURCE_ROOT": "D:\\SmartRestaurant\\entry\\src\\main",
+        "SOURCE_ROOT": "F:\\frontground\\SmartRestaurant\\entry\\src\\main",
         "RESOURCES_PATH": [
-          "D:\\SmartRestaurant\\entry\\src\\main\\resources"
+          "F:\\frontground\\SmartRestaurant\\entry\\src\\main\\resources"
         ],
         "BUILD_PATH": {
-          "OUTPUT_PATH": "D:\\SmartRestaurant\\entry\\build\\default\\outputs\\default",
-          "INTERMEDIA_PATH": "D:\\SmartRestaurant\\entry\\build\\default\\intermediates",
-          "JS_ASSETS_PATH": "D:\\SmartRestaurant\\entry\\build\\default\\intermediates\\loader_out\\default",
-          "JS_LITE_ASSETS_PATH": "D:\\SmartRestaurant\\entry\\build\\default\\intermediates\\loader_out_lite\\default",
-          "RES_PATH": "D:\\SmartRestaurant\\entry\\build\\default\\intermediates\\res\\default",
-          "RES_PROFILE_PATH": "D:\\SmartRestaurant\\entry\\build\\default\\intermediates\\res\\default\\resources\\base\\profile",
-          "ETS_SUPER_VISUAL_PATH": "D:\\SmartRestaurant\\entry\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule",
-          "JS_SUPER_VISUAL_PATH": "D:\\SmartRestaurant\\entry\\build\\default\\cache\\default\\default@CompileJS\\jsbundle",
-          "WORKER_LOADER": "D:\\SmartRestaurant\\entry\\build\\default\\intermediates\\loader\\default\\loader.json",
-          "MANIFEST_JSON": "D:\\SmartRestaurant\\entry\\build\\default\\intermediates\\manifest\\default",
-          "OUTPUT_METADATA_JSON": "D:\\SmartRestaurant\\entry\\build\\default\\intermediates\\hap_metadata\\default\\output_metadata.json",
-          "SOURCE_MAP_DIR": "D:\\SmartRestaurant\\entry\\build\\default\\intermediates\\source_map\\default"
+          "OUTPUT_PATH": "F:\\frontground\\SmartRestaurant\\entry\\build\\default\\outputs\\default",
+          "INTERMEDIA_PATH": "F:\\frontground\\SmartRestaurant\\entry\\build\\default\\intermediates",
+          "JS_ASSETS_PATH": "F:\\frontground\\SmartRestaurant\\entry\\build\\default\\intermediates\\loader_out\\default",
+          "JS_LITE_ASSETS_PATH": "F:\\frontground\\SmartRestaurant\\entry\\build\\default\\intermediates\\loader_out_lite\\default",
+          "RES_PATH": "F:\\frontground\\SmartRestaurant\\entry\\build\\default\\intermediates\\res\\default",
+          "RES_PROFILE_PATH": "F:\\frontground\\SmartRestaurant\\entry\\build\\default\\intermediates\\res\\default\\resources\\base\\profile",
+          "ETS_SUPER_VISUAL_PATH": "F:\\frontground\\SmartRestaurant\\entry\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule",
+          "JS_SUPER_VISUAL_PATH": "F:\\frontground\\SmartRestaurant\\entry\\build\\default\\cache\\default\\default@CompileJS\\jsbundle",
+          "WORKER_LOADER": "F:\\frontground\\SmartRestaurant\\entry\\build\\default\\intermediates\\loader\\default\\loader.json",
+          "MANIFEST_JSON": "F:\\frontground\\SmartRestaurant\\entry\\build\\default\\intermediates\\manifest\\default",
+          "OUTPUT_METADATA_JSON": "F:\\frontground\\SmartRestaurant\\entry\\build\\default\\intermediates\\hap_metadata\\default\\output_metadata.json",
+          "SOURCE_MAP_DIR": "F:\\frontground\\SmartRestaurant\\entry\\build\\default\\intermediates\\source_map\\default"
         },
         "BUILD_OPTION": {
           "debuggable": true
         }
       },
       "ohosTest": {
-        "SOURCE_ROOT": "D:\\SmartRestaurant\\entry\\src\\ohosTest",
+        "SOURCE_ROOT": "F:\\frontground\\SmartRestaurant\\entry\\src\\ohosTest",
         "RESOURCES_PATH": [
-          "D:\\SmartRestaurant\\entry\\src\\ohosTest\\resources"
+          "F:\\frontground\\SmartRestaurant\\entry\\src\\ohosTest\\resources"
         ],
         "BUILD_PATH": {
-          "OUTPUT_PATH": "D:\\SmartRestaurant\\entry\\build\\default\\outputs\\ohosTest",
-          "INTERMEDIA_PATH": "D:\\SmartRestaurant\\entry\\build\\default\\intermediates",
-          "JS_ASSETS_PATH": "D:\\SmartRestaurant\\entry\\build\\default\\intermediates\\loader_out\\ohosTest",
-          "JS_LITE_ASSETS_PATH": "D:\\SmartRestaurant\\entry\\build\\default\\intermediates\\loader_out_lite\\ohosTest",
-          "RES_PATH": "D:\\SmartRestaurant\\entry\\build\\default\\intermediates\\res\\ohosTest",
-          "RES_PROFILE_PATH": "D:\\SmartRestaurant\\entry\\build\\default\\intermediates\\res\\ohosTest\\resources\\base\\profile",
-          "ETS_SUPER_VISUAL_PATH": "D:\\SmartRestaurant\\entry\\build\\default\\cache\\ohosTest\\ohosTest@OhosTestCompileArkTS\\esmodule",
-          "JS_SUPER_VISUAL_PATH": "D:\\SmartRestaurant\\entry\\build\\default\\cache\\ohosTest\\ohosTest@OhosTestCompileJS\\jsbundle",
-          "WORKER_LOADER": "D:\\SmartRestaurant\\entry\\build\\default\\intermediates\\loader\\ohosTest\\loader.json",
-          "MANIFEST_JSON": "D:\\SmartRestaurant\\entry\\build\\default\\intermediates\\manifest\\ohosTest",
-          "OUTPUT_METADATA_JSON": "D:\\SmartRestaurant\\entry\\build\\default\\intermediates\\hap_metadata\\ohosTest\\output_metadata.json",
-          "SOURCE_MAP_DIR": "D:\\SmartRestaurant\\entry\\build\\default\\intermediates\\source_map\\ohosTest"
+          "OUTPUT_PATH": "F:\\frontground\\SmartRestaurant\\entry\\build\\default\\outputs\\ohosTest",
+          "INTERMEDIA_PATH": "F:\\frontground\\SmartRestaurant\\entry\\build\\default\\intermediates",
+          "JS_ASSETS_PATH": "F:\\frontground\\SmartRestaurant\\entry\\build\\default\\intermediates\\loader_out\\ohosTest",
+          "JS_LITE_ASSETS_PATH": "F:\\frontground\\SmartRestaurant\\entry\\build\\default\\intermediates\\loader_out_lite\\ohosTest",
+          "RES_PATH": "F:\\frontground\\SmartRestaurant\\entry\\build\\default\\intermediates\\res\\ohosTest",
+          "RES_PROFILE_PATH": "F:\\frontground\\SmartRestaurant\\entry\\build\\default\\intermediates\\res\\ohosTest\\resources\\base\\profile",
+          "ETS_SUPER_VISUAL_PATH": "F:\\frontground\\SmartRestaurant\\entry\\build\\default\\cache\\ohosTest\\ohosTest@OhosTestCompileArkTS\\esmodule",
+          "JS_SUPER_VISUAL_PATH": "F:\\frontground\\SmartRestaurant\\entry\\build\\default\\cache\\ohosTest\\ohosTest@OhosTestCompileJS\\jsbundle",
+          "WORKER_LOADER": "F:\\frontground\\SmartRestaurant\\entry\\build\\default\\intermediates\\loader\\ohosTest\\loader.json",
+          "MANIFEST_JSON": "F:\\frontground\\SmartRestaurant\\entry\\build\\default\\intermediates\\manifest\\ohosTest",
+          "OUTPUT_METADATA_JSON": "F:\\frontground\\SmartRestaurant\\entry\\build\\default\\intermediates\\hap_metadata\\ohosTest\\output_metadata.json",
+          "SOURCE_MAP_DIR": "F:\\frontground\\SmartRestaurant\\entry\\build\\default\\intermediates\\source_map\\ohosTest"
         },
         "BUILD_OPTION": {
           "debuggable": true
@@ -98,15 +98,15 @@
   },
   "ohos-project": {
     "SELECT_PRODUCT_NAME": "default",
-    "MODULE_BUILD_DIR": "D:\\SmartRestaurant\\build",
+    "MODULE_BUILD_DIR": "F:\\frontground\\SmartRestaurant\\build",
     "BUNDLE_NAME": "com.example.smartrestaurant",
     "BUILD_PATH": {
-      "OUTPUT_PATH": "D:\\SmartRestaurant\\build\\outputs\\default"
+      "OUTPUT_PATH": "F:\\frontground\\SmartRestaurant\\build\\outputs\\default"
     },
     "MODULES": [
       {
         "name": "entry",
-        "srcPath": "D:\\SmartRestaurant\\entry",
+        "srcPath": "F:\\frontground\\SmartRestaurant\\entry",
         "targets": [
           {
             "name": "default",
@@ -115,7 +115,7 @@
             ]
           }
         ],
-        "belongProjectPath": "D:\\SmartRestaurant"
+        "belongProjectPath": "F:\\frontground\\SmartRestaurant"
       }
     ],
     "PROFILE_OPT": {
@@ -166,7 +166,7 @@
       "hvigor.keepDependency": true
     },
     "OVERALL_PROJECT_PATHS": [
-      "D:\\SmartRestaurant"
+      "F:\\frontground\\SmartRestaurant"
     ],
     "BUILD_CACHE_DIR": ""
   },
