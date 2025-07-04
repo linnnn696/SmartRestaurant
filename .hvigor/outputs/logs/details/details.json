@@ -3,15 +3,11 @@
     "MODULES": [
       {
         "MODULE_NAME": "1043bfc77febe75fafec0c4309faccf1",
-        "API_TYPE": "stageMode",
-        "INCREMENTAL_TASKS": {
-          "COMPILE_ARKTS": true
-        }
+        "API_TYPE": "stageMode"
       }
     ],
     "NATIVE_COMPILER": "Default",
-    "BUILD_MODE": "debug",
-    "USE_NORMALIZED_OHMURL": true
+    "BUILD_MODE": "debug"
   },
   "HVIGOR": {
     "IS_INCREMENTAL": true,
@@ -20,35 +16,18 @@
     "IS_HVIGORFILE_TYPE_CHECK": false,
     "TASK_TIME": {
       "1043bfc77febe75fafec0c4309faccf1": {
-        "PreBuild": 260349700,
-        "CreateModuleInfo": 2204600,
-        "GenerateMetadata": 4700300,
-        "ConfigureCmake": 881200,
-        "MergeProfile": 11037900,
-        "CreateBuildProfile": 5407000,
-        "PreCheckSyscap": 1713400,
-        "GeneratePkgContextInfo": 15676400,
-        "ProcessIntegratedHsp": 2175600,
-        "BuildNativeWithCmake": 1161300,
-        "MakePackInfo": 6027100,
-        "SyscapTransform": 3838200,
-        "ProcessProfile": 230010600,
-        "ProcessRouterMap": 8220200,
-        "ProcessStartupConfig": 5383700,
-        "BuildNativeWithNinja": 2520500,
-        "ProcessResource": 15902300,
-        "GenerateLoaderJson": 48415000,
-        "ProcessLibs": 14072100,
-        "CompileResource": 500197200,
-        "DoNativeStrip": 6180200,
-        "BuildJS": 8473300,
-        "CacheNativeLibs": 2839979800,
-        "CompileArkTS": 18548004600,
-        "GeneratePkgModuleJson": 4115600,
-        "PackageHap": 824877800,
-        "SignHap": 4545500,
-        "CollectDebugSymbol": 4171200,
-        "assembleHap": 848900
+        "CreateModuleInfo": 2771000,
+        "ConfigureCmake": 1157400,
+        "PreCheckSyscap": 1608800,
+        "ProcessIntegratedHsp": 2148800,
+        "BuildNativeWithCmake": 1010500,
+        "SyscapTransform": 26916100,
+        "ProcessStartupConfig": 6720300,
+        "BuildNativeWithNinja": 1969100,
+        "BuildJS": 9710700,
+        "SignHap": 7138700,
+        "CollectDebugSymbol": 4455700,
+        "assembleHap": 725200
       }
     },
     "APIS": [
@@ -78,7 +57,7 @@
       "skipNativeIncremental": false,
       "hvigor_keepDependency": true
     },
-    "BUILD_ID": "202507042128432430",
-    "TOTAL_TIME": 26683649000
+    "BUILD_ID": "202507042226339110",
+    "TOTAL_TIME": 7057813900
   }
 }
