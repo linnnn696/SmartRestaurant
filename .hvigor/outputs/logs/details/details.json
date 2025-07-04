@@ -17,14 +17,18 @@
     "IS_HVIGORFILE_TYPE_CHECK": false,
     "TASK_TIME": {
       "1043bfc77febe75fafec0c4309faccf1": {
-        "ConfigureCmake": 370000,
-        "BuildNativeWithCmake": 492400,
-        "BuildNativeWithNinja": 765600,
-        "ColdReloadArkTS": 2793099000,
-        "PrepareQuickfix": 15178600,
-        "PackageHqf": 538346300,
-        "SignHqf": 1483000,
-        "assembleDevHqf": 2205600
+        "CreateModuleInfo": 2137200,
+        "ConfigureCmake": 775800,
+        "PreCheckSyscap": 1001300,
+        "ProcessIntegratedHsp": 2068900,
+        "BuildNativeWithCmake": 2333000,
+        "SyscapTransform": 8661300,
+        "ProcessStartupConfig": 6222400,
+        "BuildNativeWithNinja": 1760500,
+        "BuildJS": 5132800,
+        "SignHap": 5824000,
+        "CollectDebugSymbol": 3060000,
+        "assembleHap": 998500
       }
     },
     "APIS": [
@@ -45,15 +49,14 @@
       "getParameter",
       "getProductName",
       "nodesEvaluated",
-      "getCommandEntryTask",
-      "getStartParams"
+      "getCommandEntryTask"
     ],
     "CONFIG_PROPERTIES": {
       "enableSignTask": true,
       "skipNativeIncremental": false,
       "hvigor_keepDependency": true
     },
-    "TOTAL_TIME": 3494415900,
-    "BUILD_ID": "202507041546176680"
+    "TOTAL_TIME": 753195200,
+    "BUILD_ID": "202507041929027710"
   }
 }
