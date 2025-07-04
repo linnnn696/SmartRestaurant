@@ -8,8 +8,10 @@ interface PaymentPage_Params {
     totalAmount?: number;
 }
 import router from "@ohos:router";
-import { CartModel } from "@normalized:N&&&entry/src/main/ets/model/DishModel&";
+import { CartModel, SAMPLE_DISHES } from "@normalized:N&&&entry/src/main/ets/model/DishModel&";
 import { OrderModel } from "@normalized:N&&&entry/src/main/ets/model/OrderModel&";
+import { OrderService, OrderStatus } from "@normalized:N&&&entry/src/main/ets/service/OrderService&";
+import type { OrderItem } from "@normalized:N&&&entry/src/main/ets/service/OrderService&";
 import promptAction from "@ohos:promptAction";
 interface RouterParams {
     activeTab: number;
@@ -82,24 +84,33 @@ class PaymentPage extends ViewPU {
             return;
         }
         try {
-            // 创建订单（状态直接为completed）
-            const order = this.orderModel.createOrder();
-            // 显示支付中状态
+            // 显示处理中状态
             promptAction.showToast({
-                message: `正在跳转${this.selectedPayment === 'alipay' ? '支付宝' : '微信'}支付...`,
+                message: '订单处理中...',
                 duration: TOAST_DURATION
             });
-            // 模拟支付过程
-            await new Promise<void>((resolve) => setTimeout(resolve, PAYMENT_DELAY));
+            // 准备订单数据
+            const cartItems = this.cartModel.getItems();
+            const orderItems: OrderItem[] = cartItems.map(item => {
+                const dish = SAMPLE_DISHES.find(d => d.id === item.dishId);
+                return {
+                    menuItemId: item.dishId,
+                    name: dish?.name || '未知商品',
+                    price: dish?.price || 0,
+                    quantity: item.quantity
+                } as OrderItem;
+            });
+            // 创建订单并直接设置为制作中状态
+            const order = await OrderService.createOrder(orderItems, "1", OrderStatus.PREPARING);
             // 清空购物车
-            this.orderModel.clearCart();
+            this.cartModel.clearCart();
+            // 显示成功提示
             promptAction.showToast({
-                message: '支付成功！',
+                message: '订单已提交！',
                 duration: TOAST_DURATION
             });
-            // 延迟跳转到订单页面
+            // 跳转到订单页面
             setTimeout(() => {
-                // 返回到主页面并切换到订单标签
                 router.pushUrl({
                     url: 'pages/MainPage',
                     params: {
@@ -110,8 +121,9 @@ class PaymentPage extends ViewPU {
             }, NAVIGATION_DELAY);
         }
         catch (error) {
+            console.error('订单创建失败:', error);
             promptAction.showToast({
-                message: '支付失败，请重试',
+                message: '订单创建失败，请重试',
                 duration: TOAST_DURATION
             });
         }

@@ -1,1 +1,25 @@
-{"modulePathMap":{"entry":"F:\\frontground\\SmartRestaurant\\entry"},"compileMode":"esmodule","projectRootPath":"F:\\frontground\\SmartRestaurant","nodeModulesPath":"F:\\frontground\\SmartRestaurant\\entry\\build\\default\\intermediates\\loader_out\\default\\node_modules","byteCodeHarInfo":{},"declarationEntry":[],"moduleName":"entry","hspNameOhmMap":{},"harNameOhmMap":{},"packageManagerType":"ohpm","compileEntry":[],"otherCompileFiles":[],"dynamicImportLibInfo":{},"routerMap":[],"hspResourcesMap":{},"updateVersionInfo":{},"anBuildOutPut":"F:\\frontground\\SmartRestaurant\\entry\\build\\default\\intermediates\\loader_out\\default\\an\\arm64-v8a","anBuildMode":"type","patchConfig":{"changedFileList":"F:\\frontground\\SmartRestaurant\\entry\\build\\default\\intermediates\\patch\\default\\changedFileList.json"}}
+{
+  "modulePathMap": {
+    "entry": "D:\\Desktop\\5.2\\entry"
+  },
+  "compileMode": "esmodule",
+  "projectRootPath": "D:\\Desktop\\5.2",
+  "nodeModulesPath": "D:\\Desktop\\5.2\\entry\\build\\default\\intermediates\\loader_out\\default\\node_modules",
+  "byteCodeHarInfo": {},
+  "declarationEntry": [],
+  "moduleName": "entry",
+  "hspNameOhmMap": {},
+  "harNameOhmMap": {},
+  "packageManagerType": "ohpm",
+  "compileEntry": [],
+  "otherCompileFiles": [],
+  "dynamicImportLibInfo": {},
+  "routerMap": [],
+  "hspResourcesMap": {},
+  "updateVersionInfo": {},
+  "anBuildOutPut": "D:\\Desktop\\5.2\\entry\\build\\default\\intermediates\\loader_out\\default\\an\\arm64-v8a",
+  "anBuildMode": "type",
+  "patchConfig": {
+    "changedFileList": "D:\\Desktop\\5.2\\entry\\build\\default\\intermediates\\patch\\default\\changedFileList.json"
+  }
+}
