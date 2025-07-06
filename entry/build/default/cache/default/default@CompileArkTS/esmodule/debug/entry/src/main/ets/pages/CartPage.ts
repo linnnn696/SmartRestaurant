@@ -5,12 +5,17 @@ interface CartPage_Params {
     cartItems?: CartItem[];
     totalAmount?: number;
     animatingItems?: Set<string>;
+    dishes?: Map<string, MenuItem>;
+    isLoading?: boolean;
+    isSubmitting?: boolean;
     cartModel?: CartModel;
 }
-import { CartModel, SAMPLE_DISHES } from "@normalized:N&&&entry/src/main/ets/model/DishModel&";
-import type { CartItem, DishItem } from "@normalized:N&&&entry/src/main/ets/model/DishModel&";
+import { CartModel } from "@normalized:N&&&entry/src/main/ets/model/DishModel&";
+import type { CartItem } from "@normalized:N&&&entry/src/main/ets/model/DishModel&";
 import router from "@ohos:router";
 import promptAction from "@ohos:promptAction";
+import { MenuService } from "@normalized:N&&&entry/src/main/ets/service/MenuService&";
+import type { MenuItem } from "@normalized:N&&&entry/src/main/ets/service/MenuService&";
 class CartPage extends ViewPU {
     constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
         super(parent, __localStorage, elmtId, extraInfo);
@@ -20,6 +25,9 @@ class CartPage extends ViewPU {
         this.__cartItems = new ObservedPropertyObjectPU([], this, "cartItems");
         this.__totalAmount = new ObservedPropertySimplePU(0, this, "totalAmount");
         this.__animatingItems = new ObservedPropertyObjectPU(new Set(), this, "animatingItems");
+        this.__dishes = new ObservedPropertyObjectPU(new Map(), this, "dishes");
+        this.__isLoading = new ObservedPropertySimplePU(true, this, "isLoading");
+        this.__isSubmitting = new ObservedPropertySimplePU(false, this, "isSubmitting");
         this.cartModel = CartModel.getInstance();
         this.setInitiallyProvidedValue(params);
         this.finalizeConstruction();
@@ -34,6 +42,15 @@ class CartPage extends ViewPU {
         if (params.animatingItems !== undefined) {
             this.animatingItems = params.animatingItems;
         }
+        if (params.dishes !== undefined) {
+            this.dishes = params.dishes;
+        }
+        if (params.isLoading !== undefined) {
+            this.isLoading = params.isLoading;
+        }
+        if (params.isSubmitting !== undefined) {
+            this.isSubmitting = params.isSubmitting;
+        }
         if (params.cartModel !== undefined) {
             this.cartModel = params.cartModel;
         }
@@ -44,11 +61,17 @@ class CartPage extends ViewPU {
         this.__cartItems.purgeDependencyOnElmtId(rmElmtId);
         this.__totalAmount.purgeDependencyOnElmtId(rmElmtId);
         this.__animatingItems.purgeDependencyOnElmtId(rmElmtId);
+        this.__dishes.purgeDependencyOnElmtId(rmElmtId);
+        this.__isLoading.purgeDependencyOnElmtId(rmElmtId);
+        this.__isSubmitting.purgeDependencyOnElmtId(rmElmtId);
     }
     aboutToBeDeleted() {
         this.__cartItems.aboutToBeDeleted();
         this.__totalAmount.aboutToBeDeleted();
         this.__animatingItems.aboutToBeDeleted();
+        this.__dishes.aboutToBeDeleted();
+        this.__isLoading.aboutToBeDeleted();
+        this.__isSubmitting.aboutToBeDeleted();
         SubscriberManager.Get().delete(this.id__());
         this.aboutToBeDeletedInternal();
     }
@@ -73,16 +96,50 @@ class CartPage extends ViewPU {
     set animatingItems(newValue: Set<string>) {
         this.__animatingItems.set(newValue);
     }
+    private __dishes: ObservedPropertyObjectPU<Map<string, MenuItem>>;
+    get dishes() {
+        return this.__dishes.get();
+    }
+    set dishes(newValue: Map<string, MenuItem>) {
+        this.__dishes.set(newValue);
+    }
+    private __isLoading: ObservedPropertySimplePU<boolean>;
+    get isLoading() {
+        return this.__isLoading.get();
+    }
+    set isLoading(newValue: boolean) {
+        this.__isLoading.set(newValue);
+    }
+    private __isSubmitting: ObservedPropertySimplePU<boolean>;
+    get isSubmitting() {
+        return this.__isSubmitting.get();
+    }
+    set isSubmitting(newValue: boolean) {
+        this.__isSubmitting.set(newValue);
+    }
     private cartModel: CartModel;
-    aboutToAppear() {
+    async aboutToAppear() {
+        try {
+            // 先获取所有菜品数据
+            const allDishes = await MenuService.getAllMenuItems();
+            this.dishes = new Map(allDishes.map(dish => [dish.id, dish]));
+            this.isLoading = false;
+        }
+        catch (error) {
+            console.error('获取菜品数据失败:', error);
+            promptAction.showToast({ message: '获取菜品数据失败' });
+        }
         this.updateCart();
     }
     updateCart() {
         this.cartItems = this.cartModel.getItems();
-        this.totalAmount = this.cartModel.getTotalAmount();
+        this.totalAmount = this.cartItems.reduce((total, item) => {
+            const dish = this.dishes.get(item.dishId);
+            return total + (dish?.price || 0) * item.quantity;
+        }, 0);
     }
-    getDish(dishId: string): DishItem | undefined {
-        return SAMPLE_DISHES.find(dish => dish.id === dishId);
+    getDish(dishId: string): MenuItem | undefined {
+        return this.dishes.get(dishId);
     }
     QuantityControl(item: CartItem, parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -110,7 +167,7 @@ class CartPage extends ViewPU {
             });
         }, Button);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create({ "id": 16777247, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
+            Image.create({ "id": 16777237, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
             Image.width(20);
             Image.height(20);
             Image.fillColor('#FF4081');
@@ -149,7 +206,7 @@ class CartPage extends ViewPU {
             });
         }, Button);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create({ "id": 16777246, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
+            Image.create({ "id": 16777232, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
             Image.width(20);
             Image.height(20);
             Image.fillColor(Color.White);
@@ -183,7 +240,7 @@ class CartPage extends ViewPU {
             Button.onClick(() => router.back());
         }, Button);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create({ "id": 16777232, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
+            Image.create({ "id": 16777234, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
             Image.width(24);
             Image.height(24);
         }, Image);
@@ -199,7 +256,7 @@ class CartPage extends ViewPU {
         Row.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             If.create();
-            if (this.cartItems.length === 0) {
+            if (this.isLoading) {
                 this.ifElseBranchUpdateFunction(0, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         Column.create();
@@ -208,7 +265,30 @@ class CartPage extends ViewPU {
                         Column.justifyContent(FlexAlign.Center);
                     }, Column);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Image.create({ "id": 16777243, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
+                        LoadingProgress.create();
+                        LoadingProgress.width(32);
+                        LoadingProgress.height(32);
+                        LoadingProgress.margin({ bottom: 12 });
+                    }, LoadingProgress);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('正在加载...');
+                        Text.fontSize(14);
+                        Text.fontColor('#666666');
+                    }, Text);
+                    Text.pop();
+                    Column.pop();
+                });
+            }
+            else if (this.cartItems.length === 0) {
+                this.ifElseBranchUpdateFunction(1, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Column.create();
+                        Column.width('100%');
+                        Column.layoutWeight(1);
+                        Column.justifyContent(FlexAlign.Center);
+                    }, Column);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Image.create({ "id": 16777236, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
                         Image.width(120);
                         Image.height(120);
                         Image.fillColor('#cccccc');
@@ -231,7 +311,7 @@ class CartPage extends ViewPU {
                 });
             }
             else {
-                this.ifElseBranchUpdateFunction(1, () => {
+                this.ifElseBranchUpdateFunction(2, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         // 购物车列表
                         List.create();
@@ -340,11 +420,15 @@ class CartPage extends ViewPU {
             // 底部结算栏
             Row.width('100%');
             // 底部结算栏
-            Row.height(80);
+            Row.height(64);
             // 底部结算栏
             Row.padding({ left: 16, right: 16 });
             // 底部结算栏
             Row.backgroundColor(Color.White);
+            // 底部结算栏
+            Row.position({ y: '100%' });
+            // 底部结算栏
+            Row.translate({ y: -64 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
@@ -360,18 +444,20 @@ class CartPage extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('¥' + this.totalAmount.toFixed(2));
             Text.fontSize(20);
-            Text.fontColor('#ff4081');
             Text.fontWeight(FontWeight.Bold);
+            Text.fontColor('#ff4081');
         }, Text);
         Text.pop();
         Column.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Button.createWithLabel('去结算');
+            Button.createWithLabel('结算');
             Button.width(120);
             Button.height(40);
-            Button.backgroundColor('#ff4081');
+            Button.backgroundColor(this.cartItems.length > 0 ? '#ff4081' : '#cccccc');
+            Button.enabled(this.cartItems.length > 0 && !this.isSubmitting);
             Button.onClick(() => {
                 if (this.cartItems.length > 0) {
+                    // 跳转到支付页面
                     router.pushUrl({
                         url: 'pages/PaymentPage',
                         params: {

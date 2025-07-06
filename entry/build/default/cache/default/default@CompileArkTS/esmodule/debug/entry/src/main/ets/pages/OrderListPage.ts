@@ -3,11 +3,9 @@ if (!("finalizeConstruction" in ViewPU.prototype)) {
 }
 interface OrderListPage_Params {
     orders?: Order[];
-    currentIndex?: number;
     isLoading?: boolean;
     newOrderId?: string;
     errorMessage?: string;
-    loadOrdersTimer?: number | null;
 }
 import router from "@ohos:router";
 import promptAction from "@ohos:promptAction";
@@ -15,6 +13,7 @@ import { OrderService, OrderStatus } from "@normalized:N&&&entry/src/main/ets/se
 import type { OrderItem, Order } from "@normalized:N&&&entry/src/main/ets/service/OrderService&";
 interface RouterParams {
     newOrderId?: string;
+    shouldRefresh?: boolean;
 }
 export class OrderListPage extends ViewPU {
     constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
@@ -23,20 +22,15 @@ export class OrderListPage extends ViewPU {
             this.paramsGenerator_ = paramsLambda;
         }
         this.__orders = new ObservedPropertyObjectPU([], this, "orders");
-        this.__currentIndex = new ObservedPropertySimplePU(1, this, "currentIndex");
         this.__isLoading = new ObservedPropertySimplePU(false, this, "isLoading");
         this.__newOrderId = new ObservedPropertySimplePU('', this, "newOrderId");
         this.__errorMessage = new ObservedPropertySimplePU('', this, "errorMessage");
-        this.loadOrdersTimer = null;
         this.setInitiallyProvidedValue(params);
         this.finalizeConstruction();
     }
     setInitiallyProvidedValue(params: OrderListPage_Params) {
         if (params.orders !== undefined) {
             this.orders = params.orders;
-        }
-        if (params.currentIndex !== undefined) {
-            this.currentIndex = params.currentIndex;
         }
         if (params.isLoading !== undefined) {
             this.isLoading = params.isLoading;
@@ -47,22 +41,17 @@ export class OrderListPage extends ViewPU {
         if (params.errorMessage !== undefined) {
             this.errorMessage = params.errorMessage;
         }
-        if (params.loadOrdersTimer !== undefined) {
-            this.loadOrdersTimer = params.loadOrdersTimer;
-        }
     }
     updateStateVars(params: OrderListPage_Params) {
     }
     purgeVariableDependenciesOnElmtId(rmElmtId) {
         this.__orders.purgeDependencyOnElmtId(rmElmtId);
-        this.__currentIndex.purgeDependencyOnElmtId(rmElmtId);
         this.__isLoading.purgeDependencyOnElmtId(rmElmtId);
         this.__newOrderId.purgeDependencyOnElmtId(rmElmtId);
         this.__errorMessage.purgeDependencyOnElmtId(rmElmtId);
     }
     aboutToBeDeleted() {
         this.__orders.aboutToBeDeleted();
-        this.__currentIndex.aboutToBeDeleted();
         this.__isLoading.aboutToBeDeleted();
         this.__newOrderId.aboutToBeDeleted();
         this.__errorMessage.aboutToBeDeleted();
@@ -75,13 +64,6 @@ export class OrderListPage extends ViewPU {
     }
     set orders(newValue: Order[]) {
         this.__orders.set(newValue);
-    }
-    private __currentIndex: ObservedPropertySimplePU<number>; // 当前选中的是订单页面
-    get currentIndex() {
-        return this.__currentIndex.get();
-    }
-    set currentIndex(newValue: number) {
-        this.__currentIndex.set(newValue);
     }
     private __isLoading: ObservedPropertySimplePU<boolean>;
     get isLoading() {
@@ -104,87 +86,44 @@ export class OrderListPage extends ViewPU {
     set errorMessage(newValue: string) {
         this.__errorMessage.set(newValue);
     }
-    private loadOrdersTimer: number | null;
     aboutToAppear() {
-        // 首次加载订单
+        // 获取路由参数，检查是否有新订单
+        const params = router.getParams() as RouterParams;
+        if (params?.newOrderId) {
+            this.newOrderId = params.newOrderId;
+        }
+        // 加载订单列表
         this.loadOrders();
     }
-    aboutToDisappear() {
-        // 清理定时器
-        if (this.loadOrdersTimer !== null) {
-            clearTimeout(this.loadOrdersTimer);
-            this.loadOrdersTimer = null;
-        }
-    }
-    onPageShow() {
-        // 页面显示时，如果不是首次加载，延迟刷新订单列表
-        if (this.orders.length > 0) {
-            this.loadOrdersTimer = setTimeout(() => {
-                this.loadOrders();
-            }, 500) as number;
-        }
-    }
     async loadOrders() {
-        console.info('[OrderListPage] 开始加载订单');
+        if (this.isLoading)
+            return;
         try {
-            console.info('[OrderListPage] 设置加载状态');
             this.isLoading = true;
             this.errorMessage = '';
-            console.info('[OrderListPage] 调用后端API获取订单列表');
             const orderList = await OrderService.getAllOrders();
-            console.info('[OrderListPage] 获取到订单列表:', JSON.stringify(orderList));
-            // 检查返回数据的有效性
             if (!Array.isArray(orderList)) {
-                console.error('[OrderListPage] 订单数据格式无效');
                 throw new Error('返回的订单数据格式无效');
             }
-            console.info('[OrderListPage] 更新订单列表数据');
             this.orders = orderList;
-            console.info('[OrderListPage] 订单列表更新完成，数量:', orderList.length);
-            // 获取路由参数中的新订单ID
-            const params: RouterParams = router.getParams() as RouterParams;
-            if (params?.newOrderId) {
-                console.info('[OrderListPage] 发现新订单ID:', params.newOrderId);
-                this.newOrderId = params.newOrderId;
-                // 3秒后清除高亮效果
-                const timer: number = setTimeout(() => {
+            // 如果有新订单ID，3秒后清除高亮效果
+            if (this.newOrderId) {
+                setTimeout(() => {
                     this.newOrderId = '';
-                }, 3000) as number;
+                }, 3000);
             }
         }
         catch (error) {
-            console.error('[OrderListPage] 加载订单失败:', error);
-            this.errorMessage = error instanceof Error ? error.message : '加载订单失败';
-            // 显示错误提示
-            try {
-                await promptAction.showToast({
-                    message: this.errorMessage,
-                    duration: 3000,
-                    bottom: 50
-                });
-            }
-            catch (toastError) {
-                console.error('[OrderListPage] 显示错误提示失败:', toastError);
-            }
+            console.error('加载订单失败:', error);
+            this.errorMessage = '加载订单失败，请下拉刷新重试';
+            promptAction.showToast({
+                message: this.errorMessage,
+                duration: 2000
+            });
         }
         finally {
-            console.info('[OrderListPage] 完成加载，重置加载状态');
             this.isLoading = false;
-            // 强制页面重新渲染
-            console.info('[OrderListPage] 触发页面重新渲染');
-            this.forceUpdate();
         }
-    }
-    // 强制更新页面的方法
-    private forceUpdate() {
-        // 创建一个临时数组来保存当前订单
-        const tempOrders = [...this.orders];
-        // 清空订单列表
-        this.orders = [];
-        // 在下一个事件循环中恢复订单列表，触发重新渲染
-        setTimeout(() => {
-            this.orders = tempOrders;
-        }, 0);
     }
     initialRender() {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -218,9 +157,7 @@ export class OrderListPage extends ViewPU {
             Refresh.width('100%');
             Refresh.layoutWeight(1);
             Refresh.onStateChange((refreshStatus: RefreshStatus) => {
-                console.info('[OrderListPage] 刷新状态改变:', refreshStatus);
                 if (refreshStatus === RefreshStatus.Refresh) {
-                    console.info('[OrderListPage] 触发下拉刷新，调用loadOrders');
                     this.loadOrders();
                 }
             });
@@ -252,7 +189,7 @@ export class OrderListPage extends ViewPU {
                 });
             }
             // 错误状态
-            else if (this.errorMessage) {
+            else if (this.errorMessage && this.orders.length === 0) {
                 this.ifElseBranchUpdateFunction(1, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         Column.create();
@@ -261,7 +198,7 @@ export class OrderListPage extends ViewPU {
                         Column.justifyContent(FlexAlign.Center);
                     }, Column);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Image.create({ "id": 16777226, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
+                        Image.create({ "id": 16777242, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
                         Image.width(120);
                         Image.height(120);
                         Image.fillColor('#CCCCCC');
@@ -292,7 +229,7 @@ export class OrderListPage extends ViewPU {
                         Column.justifyContent(FlexAlign.Center);
                     }, Column);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Image.create({ "id": 16777226, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
+                        Image.create({ "id": 16777242, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
                         Image.width(120);
                         Image.height(120);
                         Image.fillColor('#CCCCCC');
@@ -331,6 +268,12 @@ export class OrderListPage extends ViewPU {
                                 };
                                 const itemCreation2 = (elmtId, isInitialRender) => {
                                     ListItem.create(deepRenderFunction, true);
+                                    Context.animation({
+                                        duration: 300,
+                                        curve: Curve.EaseOut
+                                    });
+                                    ListItem.backgroundColor(order.id === this.newOrderId ? '#FFF0F4' : Color.White);
+                                    Context.animation(null);
                                 };
                                 const deepRenderFunction = (elmtId, isInitialRender) => {
                                     itemCreation(elmtId, isInitialRender);
@@ -354,14 +297,10 @@ export class OrderListPage extends ViewPU {
     }
     OrderStatusTag(status: OrderStatus, parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create(status === OrderStatus.SUBMITTED ? '已提交' :
-                status === OrderStatus.PREPARING ? '制作中' :
-                    status === OrderStatus.COMPLETED ? '已完成' : '已提交');
+            Text.create(status === OrderStatus.COMPLETED ? '已完成' : '制作中');
             Text.fontSize(12);
-            Text.fontColor(status === OrderStatus.PREPARING ? '#FF6B6B' :
-                status === OrderStatus.COMPLETED ? '#52C41A' : '#FF9500');
-            Text.backgroundColor(status === OrderStatus.PREPARING ? '#FFF0F0' :
-                status === OrderStatus.COMPLETED ? '#F0F9EB' : '#FDF6EC');
+            Text.fontColor(status === OrderStatus.COMPLETED ? '#52C41A' : '#FF6B6B');
+            Text.backgroundColor(status === OrderStatus.COMPLETED ? '#F0F9EB' : '#FFF0F0');
             Text.padding({ left: 8, right: 8, top: 4, bottom: 4 });
             Text.borderRadius(4);
         }, Text);
@@ -518,29 +457,13 @@ export class OrderListPage extends ViewPU {
         Row.pop();
         Column.pop();
     }
-    getStatusText(status: OrderStatus): string {
-        switch (status) {
-            case OrderStatus.SUBMITTED:
-                return '已提交';
-            case OrderStatus.PREPARING:
-                return '制作中';
-            case OrderStatus.COMPLETED:
-                return '已完成';
-            default:
-                return '已提交';
-        }
+    // 获取状态文本
+    private getStatusText(status: OrderStatus): string {
+        return status === OrderStatus.COMPLETED ? '已完成' : '制作中';
     }
-    getStatusColor(status: OrderStatus): string {
-        switch (status) {
-            case OrderStatus.SUBMITTED:
-                return '#FF9500'; // 橙色
-            case OrderStatus.PREPARING:
-                return '#FF6B6B'; // 红色
-            case OrderStatus.COMPLETED:
-                return '#52C41A'; // 绿色
-            default:
-                return '#FF9500'; // 默认使用已提交的颜色
-        }
+    // 获取状态颜色
+    private getStatusColor(status: OrderStatus): string {
+        return status === OrderStatus.COMPLETED ? '#52C41A' : '#FF6B6B';
     }
     rerender() {
         this.updateDirtyElements();

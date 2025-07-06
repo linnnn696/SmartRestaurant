@@ -10,8 +10,7 @@
       }
     ],
     "NATIVE_COMPILER": "Default",
-    "BUILD_MODE": "debug",
-    "USE_NORMALIZED_OHMURL": true
+    "BUILD_MODE": "debug"
   },
   "HVIGOR": {
     "IS_INCREMENTAL": true,
@@ -20,35 +19,20 @@
     "IS_HVIGORFILE_TYPE_CHECK": false,
     "TASK_TIME": {
       "1043bfc77febe75fafec0c4309faccf1": {
-        "PreBuild": 260349700,
-        "CreateModuleInfo": 2204600,
-        "GenerateMetadata": 4700300,
-        "ConfigureCmake": 881200,
-        "MergeProfile": 11037900,
-        "CreateBuildProfile": 5407000,
-        "PreCheckSyscap": 1713400,
-        "GeneratePkgContextInfo": 15676400,
-        "ProcessIntegratedHsp": 2175600,
-        "BuildNativeWithCmake": 1161300,
-        "MakePackInfo": 6027100,
-        "SyscapTransform": 3838200,
-        "ProcessProfile": 230010600,
-        "ProcessRouterMap": 8220200,
-        "ProcessStartupConfig": 5383700,
-        "BuildNativeWithNinja": 2520500,
-        "ProcessResource": 15902300,
-        "GenerateLoaderJson": 48415000,
-        "ProcessLibs": 14072100,
-        "CompileResource": 500197200,
-        "DoNativeStrip": 6180200,
-        "BuildJS": 8473300,
-        "CacheNativeLibs": 2839979800,
-        "CompileArkTS": 18548004600,
-        "GeneratePkgModuleJson": 4115600,
-        "PackageHap": 824877800,
-        "SignHap": 4545500,
-        "CollectDebugSymbol": 4171200,
-        "assembleHap": 848900
+        "CreateModuleInfo": 925200,
+        "ConfigureCmake": 610000,
+        "PreCheckSyscap": 1028000,
+        "ProcessIntegratedHsp": 1672600,
+        "BuildNativeWithCmake": 1316200,
+        "SyscapTransform": 6799000,
+        "ProcessStartupConfig": 3710300,
+        "BuildNativeWithNinja": 1630000,
+        "BuildJS": 5076200,
+        "CompileArkTS": 1918688200,
+        "PackageHap": 135054500,
+        "SignHap": 3481700,
+        "CollectDebugSymbol": 1448300,
+        "assembleHap": 305200
       }
     },
     "APIS": [
@@ -59,8 +43,6 @@
       "getAllNodes",
       "getRootNode",
       "getNodeName",
-      "getStartParams",
-      "buildFinished",
       "getNodePath",
       "subNodes",
       "getExtraOption",
@@ -71,14 +53,15 @@
       "getParameter",
       "getProductName",
       "nodesEvaluated",
-      "getCommandEntryTask"
+      "getCommandEntryTask",
+      "getStartParams"
     ],
     "CONFIG_PROPERTIES": {
       "enableSignTask": true,
       "skipNativeIncremental": false,
       "hvigor_keepDependency": true
     },
-    "BUILD_ID": "202507042128432430",
-    "TOTAL_TIME": 26683649000
+    "TOTAL_TIME": 2528948400,
+    "BUILD_ID": "202507061723104590"
   }
 }

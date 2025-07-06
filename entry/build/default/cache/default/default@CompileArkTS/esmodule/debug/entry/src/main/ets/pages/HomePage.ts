@@ -7,17 +7,22 @@ interface HomePage_Params {
     dinerCount?: number;
     tableId?: string;
     cartItemCount?: number;
-    dishes?: DishItem[];
-    recommendedDishes?: DishItem[];
+    dishes?: MenuItem[];
+    recommendedDishes?: MenuItem[];
+    isLoading?: boolean;
+    isRefreshing?: boolean;
     cartModel?: CartModel;
     categories?: CategoryItem[];
+    allDishes?: MenuItem[];
     cartUpdateCallback?;
     animatingItems?: Set<string>;
 }
 import router from "@ohos:router";
 import promptAction from "@ohos:promptAction";
-import { SAMPLE_DISHES, DISH_CATEGORIES, CartModel, eventBus } from "@normalized:N&&&entry/src/main/ets/model/DishModel&";
-import type { DishItem, CategoryItem } from "@normalized:N&&&entry/src/main/ets/model/DishModel&";
+import { DISH_CATEGORIES, CartModel, eventBus } from "@normalized:N&&&entry/src/main/ets/model/DishModel&";
+import type { CategoryItem } from "@normalized:N&&&entry/src/main/ets/model/DishModel&";
+import { MenuService } from "@normalized:N&&&entry/src/main/ets/service/MenuService&";
+import type { MenuItem } from "@normalized:N&&&entry/src/main/ets/service/MenuService&";
 interface RouterParams {
     dinerCount?: number;
     tableId?: string;
@@ -34,15 +39,18 @@ export class HomePage extends ViewPU {
         this.__tableId = new ObservedPropertySimplePU('33', this, "tableId");
         this.__cartItemCount = new ObservedPropertySimplePU(0, this, "cartItemCount");
         this.__dishes = new ObservedPropertyObjectPU([], this, "dishes");
-        this.__recommendedDishes = new ObservedPropertyObjectPU(SAMPLE_DISHES
-            .filter(dish => dish.tag === '推荐' || dish.tag === '特色' || dish.tag === '招牌')
-            .slice(0, 4), this, "recommendedDishes");
+        this.__recommendedDishes = new ObservedPropertyObjectPU([], this, "recommendedDishes");
+        this.__isLoading = new ObservedPropertySimplePU(true, this, "isLoading");
+        this.__isRefreshing = new ObservedPropertySimplePU(false, this, "isRefreshing");
         this.cartModel = CartModel.getInstance();
         this.__categories = new ObservedPropertyObjectPU(DISH_CATEGORIES, this, "categories");
+        this.allDishes = [];
         this.cartUpdateCallback = () => {
             this.cartItemCount = this.cartModel.getTotalCount();
         };
-        this.__animatingItems = new ObservedPropertyObjectPU(new Set<string>(), this, "animatingItems");
+        this.__animatingItems = new ObservedPropertyObjectPU(new Set<string>()
+        // 加载所有菜品数据
+        , this, "animatingItems");
         this.setInitiallyProvidedValue(params);
         this.finalizeConstruction();
     }
@@ -68,11 +76,20 @@ export class HomePage extends ViewPU {
         if (params.recommendedDishes !== undefined) {
             this.recommendedDishes = params.recommendedDishes;
         }
+        if (params.isLoading !== undefined) {
+            this.isLoading = params.isLoading;
+        }
+        if (params.isRefreshing !== undefined) {
+            this.isRefreshing = params.isRefreshing;
+        }
         if (params.cartModel !== undefined) {
             this.cartModel = params.cartModel;
         }
         if (params.categories !== undefined) {
             this.categories = params.categories;
+        }
+        if (params.allDishes !== undefined) {
+            this.allDishes = params.allDishes;
         }
         if (params.cartUpdateCallback !== undefined) {
             this.cartUpdateCallback = params.cartUpdateCallback;
@@ -91,6 +108,8 @@ export class HomePage extends ViewPU {
         this.__cartItemCount.purgeDependencyOnElmtId(rmElmtId);
         this.__dishes.purgeDependencyOnElmtId(rmElmtId);
         this.__recommendedDishes.purgeDependencyOnElmtId(rmElmtId);
+        this.__isLoading.purgeDependencyOnElmtId(rmElmtId);
+        this.__isRefreshing.purgeDependencyOnElmtId(rmElmtId);
         this.__categories.purgeDependencyOnElmtId(rmElmtId);
         this.__animatingItems.purgeDependencyOnElmtId(rmElmtId);
     }
@@ -102,6 +121,8 @@ export class HomePage extends ViewPU {
         this.__cartItemCount.aboutToBeDeleted();
         this.__dishes.aboutToBeDeleted();
         this.__recommendedDishes.aboutToBeDeleted();
+        this.__isLoading.aboutToBeDeleted();
+        this.__isRefreshing.aboutToBeDeleted();
         this.__categories.aboutToBeDeleted();
         this.__animatingItems.aboutToBeDeleted();
         SubscriberManager.Get().delete(this.id__());
@@ -142,19 +163,33 @@ export class HomePage extends ViewPU {
     set cartItemCount(newValue: number) {
         this.__cartItemCount.set(newValue);
     }
-    private __dishes: ObservedPropertyObjectPU<DishItem[]>;
+    private __dishes: ObservedPropertyObjectPU<MenuItem[]>;
     get dishes() {
         return this.__dishes.get();
     }
-    set dishes(newValue: DishItem[]) {
+    set dishes(newValue: MenuItem[]) {
         this.__dishes.set(newValue);
     }
-    private __recommendedDishes: ObservedPropertyObjectPU<DishItem[]>;
+    private __recommendedDishes: ObservedPropertyObjectPU<MenuItem[]>;
     get recommendedDishes() {
         return this.__recommendedDishes.get();
     }
-    set recommendedDishes(newValue: DishItem[]) {
+    set recommendedDishes(newValue: MenuItem[]) {
         this.__recommendedDishes.set(newValue);
+    }
+    private __isLoading: ObservedPropertySimplePU<boolean>;
+    get isLoading() {
+        return this.__isLoading.get();
+    }
+    set isLoading(newValue: boolean) {
+        this.__isLoading.set(newValue);
+    }
+    private __isRefreshing: ObservedPropertySimplePU<boolean>;
+    get isRefreshing() {
+        return this.__isRefreshing.get();
+    }
+    set isRefreshing(newValue: boolean) {
+        this.__isRefreshing.set(newValue);
     }
     private cartModel: CartModel;
     private __categories: ObservedPropertyObjectPU<CategoryItem[]>;
@@ -164,6 +199,7 @@ export class HomePage extends ViewPU {
     set categories(newValue: CategoryItem[]) {
         this.__categories.set(newValue);
     }
+    private allDishes: MenuItem[];
     private cartUpdateCallback;
     private __animatingItems: ObservedPropertyObjectPU<Set<string>>;
     get animatingItems() {
@@ -172,7 +208,40 @@ export class HomePage extends ViewPU {
     set animatingItems(newValue: Set<string>) {
         this.__animatingItems.set(newValue);
     }
-    aboutToAppear() {
+    // 加载所有菜品数据
+    private async loadAllDishes() {
+        try {
+            this.isLoading = true;
+            // 获取所有菜品数据
+            this.allDishes = await MenuService.getAllMenuItems();
+            // 更新当前分类显示
+            this.updateDisplayedDishes();
+            // 更新推荐菜品
+            this.updateRecommendedDishes();
+        }
+        catch (error) {
+            console.error('获取菜品数据失败:', error);
+            promptAction.showToast({
+                message: '获取菜品数据失败，请检查网络连接',
+                duration: 2000
+            });
+        }
+        finally {
+            this.isLoading = false;
+            this.isRefreshing = false;
+        }
+    }
+    // 更新当前显示的菜品
+    private updateDisplayedDishes() {
+        this.dishes = this.allDishes.filter(dish => dish.category === this.selectedCategory);
+    }
+    // 更新推荐菜品
+    private updateRecommendedDishes() {
+        this.recommendedDishes = this.allDishes
+            .filter(dish => dish.tag?.includes('推荐') || dish.tag?.includes('特色') || dish.tag?.includes('招牌'))
+            .slice(0, 4);
+    }
+    async aboutToAppear() {
         // 获取路由参数中的就餐人数和桌号
         const params = router.getParams() as RouterParams;
         if (params?.dinerCount) {
@@ -185,8 +254,8 @@ export class HomePage extends ViewPU {
         this.cartItemCount = this.cartModel.getTotalCount();
         // 添加购物车更新事件监听
         eventBus.on('cart-updated', this.cartUpdateCallback);
-        // 初始化显示热菜分类
-        this.dishes = SAMPLE_DISHES.filter(dish => dish.category === this.selectedCategory);
+        // 加载数据
+        await this.loadAllDishes();
     }
     aboutToDisappear() {
         // 移除事件监听
@@ -352,7 +421,7 @@ export class HomePage extends ViewPU {
                     Column.justifyContent(FlexAlign.Center);
                     Column.onClick(() => {
                         this.selectedCategory = category.name;
-                        this.dishes = SAMPLE_DISHES.filter(dish => dish.category === category.name);
+                        this.updateDisplayedDishes();
                     });
                 }, Column);
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -560,7 +629,7 @@ export class HomePage extends ViewPU {
             Stack.create();
         }, Stack);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create({ "id": 16777243, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
+            Image.create({ "id": 16777236, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
             Image.width(24);
             Image.height(24);
         }, Image);
@@ -589,44 +658,126 @@ export class HomePage extends ViewPU {
         Stack.pop();
         Button.pop();
     }
-    handleAddToCart(dish: DishItem) {
+    handleAddToCart(dish: MenuItem) {
         this.cartModel.addToCart(dish.id);
         this.cartItemCount = this.cartModel.getTotalCount();
         promptAction.showToast({ message: `已添加${dish.name}` });
     }
-    handleRemoveFromCart(dish: DishItem) {
+    handleRemoveFromCart(dish: MenuItem) {
         this.cartModel.removeFromCart(dish.id);
         this.cartItemCount = this.cartModel.getTotalCount();
         promptAction.showToast({ message: `已减少${dish.name}` });
     }
     initialRender() {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Stack.create({ alignContent: Alignment.Bottom });
-        }, Stack);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
             Column.width('100%');
             Column.height('100%');
+            Column.backgroundColor('#F5F5F5');
         }, Column);
         this.TopBar.bind(this)();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Scroll.create();
-            Scroll.scrollBar(BarState.Off);
-            Scroll.scrollable(ScrollDirection.Vertical);
-            Scroll.layoutWeight(1);
-            Scroll.backgroundColor('#F5F5F5');
-        }, Scroll);
+            If.create();
+            if (this.isLoading) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Column.create();
+                        Column.width('100%');
+                        Column.height('80%');
+                        Column.justifyContent(FlexAlign.Center);
+                    }, Column);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        LoadingProgress.create();
+                        LoadingProgress.width(32);
+                        LoadingProgress.height(32);
+                        LoadingProgress.margin({ bottom: 12 });
+                    }, LoadingProgress);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('正在加载菜品数据...');
+                        Text.fontSize(14);
+                        Text.fontColor('#666666');
+                    }, Text);
+                    Text.pop();
+                    Column.pop();
+                });
+            }
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Refresh.create({ refreshing: { value: this.isRefreshing, changeEvent: newValue => { this.isRefreshing = newValue; } } });
+                        Refresh.onRefreshing(async () => {
+                            await this.loadAllDishes();
+                        });
+                    }, Refresh);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Scroll.create();
+                        Scroll.scrollBar(BarState.Off);
+                        Scroll.edgeEffect(EdgeEffect.Spring);
+                    }, Scroll);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Column.create();
+                    }, Column);
+                    this.RecommendedDishes.bind(this)();
+                    this.CategoryTabs.bind(this)();
+                    this.DishGrid.bind(this)();
+                    Column.pop();
+                    Scroll.pop();
+                    Refresh.pop();
+                });
+            }
+        }, If);
+        If.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Column.create();
-        }, Column);
-        this.RecommendedDishes.bind(this)();
-        this.CategoryTabs.bind(this)();
-        this.DishGrid.bind(this)();
+            If.create();
+            // 购物车按钮
+            if (this.cartItemCount > 0) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Button.createWithChild();
+                        Button.width(80);
+                        Button.height(40);
+                        Button.backgroundColor('#FF4081');
+                        Button.borderRadius(20);
+                        Button.margin({ bottom: 16 });
+                        Button.onClick(() => {
+                            router.pushUrl({
+                                url: 'pages/CartPage',
+                                params: {
+                                    dinerCount: this.dinerCount,
+                                    tableId: this.tableId
+                                }
+                            });
+                        });
+                        Button.position({ x: '50%', y: '90%' });
+                        Button.translate({ x: '-50%', y: '-50%' });
+                    }, Button);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Row.create();
+                    }, Row);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Image.create({ "id": 16777236, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
+                        Image.width(24);
+                        Image.height(24);
+                        Image.fillColor(Color.White);
+                    }, Image);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create(`${this.cartItemCount}`);
+                        Text.fontSize(16);
+                        Text.fontColor(Color.White);
+                        Text.margin({ left: 8 });
+                    }, Text);
+                    Text.pop();
+                    Row.pop();
+                    Button.pop();
+                });
+            }
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                });
+            }
+        }, If);
+        If.pop();
         Column.pop();
-        Scroll.pop();
-        Column.pop();
-        this.CartButton.bind(this)();
-        Stack.pop();
     }
     rerender() {
         this.updateDirtyElements();

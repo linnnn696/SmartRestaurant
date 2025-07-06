@@ -1,6 +1,5 @@
 import { CartItem, CartModel, SAMPLE_DISHES } from './DishModel';
-
-export type OrderStatus = 'pending' | 'processing' | 'completed' | 'cancelled';
+import { OrderStatus } from '../service/OrderService';
 
 // 定义基础订单项接口
 export interface BaseOrderItem {
@@ -59,7 +58,7 @@ export class OrderModel {
       id: Math.floor(100000 + Math.random() * 900000).toString(), // 6位随机数
       items: orderItems,
       totalAmount: cartModel.getTotalAmount(),
-      status: 'completed',
+      status: OrderStatus.COMPLETED,
       createTime: new Date().toLocaleString('zh-CN', {
         year: 'numeric',
         month: '2-digit',

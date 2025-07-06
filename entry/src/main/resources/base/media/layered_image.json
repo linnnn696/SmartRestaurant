@@ -1,7 +1,11 @@
 {
-  "layered-image":
+  "type": "LAYERED_IMAGE",
+  "images": [
   {
-    "background" : "$media:background",
-    "foreground" : "$media:foreground"
+      "path": "media/background.png"
+    },
+    {
+      "path": "media/foreground.png"
   }
+  ]
 }

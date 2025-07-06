@@ -1,6 +1,8 @@
-import { CartItem, CartModel, DishItem, SAMPLE_DISHES } from '../model/DishModel'
+import { CartItem, CartModel } from '../model/DishModel'
 import router from '@ohos.router'
 import promptAction from '@ohos.promptAction'
+import { MenuService, MenuItem } from '../service/MenuService'
+import { OrderService, OrderItem } from '../service/OrderService'
 
 @Entry
 @Component
@@ -8,19 +10,34 @@ struct CartPage {
   @State cartItems: CartItem[] = []
   @State totalAmount: number = 0
   @State animatingItems: Set<string> = new Set()
+  @State dishes: Map<string, MenuItem> = new Map()
+  @State isLoading: boolean = true
+  @State isSubmitting: boolean = false
   private cartModel: CartModel = CartModel.getInstance()
 
-  aboutToAppear() {
+  async aboutToAppear() {
+    try {
+      // 先获取所有菜品数据
+      const allDishes = await MenuService.getAllMenuItems()
+      this.dishes = new Map(allDishes.map(dish => [dish.id, dish]))
+      this.isLoading = false
+    } catch (error) {
+      console.error('获取菜品数据失败:', error)
+      promptAction.showToast({ message: '获取菜品数据失败' })
+    }
     this.updateCart()
   }
 
   updateCart() {
     this.cartItems = this.cartModel.getItems()
-    this.totalAmount = this.cartModel.getTotalAmount()
+    this.totalAmount = this.cartItems.reduce((total, item) => {
+      const dish = this.dishes.get(item.dishId)
+      return total + (dish?.price || 0) * item.quantity
+    }, 0)
   }
 
-  getDish(dishId: string): DishItem | undefined {
-    return SAMPLE_DISHES.find(dish => dish.id === dishId)
+  getDish(dishId: string): MenuItem | undefined {
+    return this.dishes.get(dishId)
   }
 
   @Builder
@@ -95,7 +112,20 @@ struct CartPage {
       .padding({ left: 16, right: 16 })
       .backgroundColor(Color.White)
 
-      if (this.cartItems.length === 0) {
+      if (this.isLoading) {
+        Column() {
+          LoadingProgress()
+            .width(32)
+            .height(32)
+            .margin({ bottom: 12 })
+          Text('正在加载...')
+            .fontSize(14)
+            .fontColor('#666666')
+        }
+        .width('100%')
+        .layoutWeight(1)
+        .justifyContent(FlexAlign.Center)
+      } else if (this.cartItems.length === 0) {
         Column() {
           Image($r('app.media.ic_cart'))
             .width(120)
@@ -171,18 +201,20 @@ struct CartPage {
             .fontColor('#666666')
           Text('¥' + this.totalAmount.toFixed(2))
             .fontSize(20)
-            .fontColor('#ff4081')
             .fontWeight(FontWeight.Bold)
+            .fontColor('#ff4081')
         }
         .alignItems(HorizontalAlign.Start)
         .layoutWeight(1)
 
-        Button('去结算')
+        Button('结算')
           .width(120)
           .height(40)
-          .backgroundColor('#ff4081')
+          .backgroundColor(this.cartItems.length > 0 ? '#ff4081' : '#cccccc')
+          .enabled(this.cartItems.length > 0 && !this.isSubmitting)
           .onClick(() => {
             if (this.cartItems.length > 0) {
+              // 跳转到支付页面
               router.pushUrl({
                 url: 'pages/PaymentPage',
                 params: {
@@ -195,9 +227,11 @@ struct CartPage {
           })
       }
       .width('100%')
-      .height(80)
+      .height(64)
       .padding({ left: 16, right: 16 })
       .backgroundColor(Color.White)
+      .position({ y: '100%' })
+      .translate({ y: -64 })
     }
     .width('100%')
     .height('100%')

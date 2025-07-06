@@ -34,7 +34,7 @@
 					"abilities":	["EntryAbility"],
 					"when":	"always"
 				},
-				"reasonId":	16777248
+				"reasonId":	16777223
 			}, {
 				"name":	"ohos.permission.CAMERA",
 				"reason":	"$string:camera_reason",
@@ -60,8 +60,8 @@
 				"descriptionId":	16777220,
 				"iconId":	16777219,
 				"labelId":	16777221,
-				"startWindowIconId":	16777229,
-				"startWindowBackgroundId":	16777224
+				"startWindowIconId":	16777252,
+				"startWindowBackgroundId":	16777225
 			}],
 		"extensionAbilities":	[{
 				"name":	"EntryBackupAbility",
@@ -71,13 +71,13 @@
 				"metadata":	[{
 						"name":	"ohos.extension.backup",
 						"resource":	"$profile:backup_config",
-						"resourceId":	16777230
+						"resourceId":	16777256
 					}]
 			}],
 		"packageName":	"entry",
 		"virtualMachine":	"ark13.0.1.0",
 		"compileMode":	"esmodule",
 		"dependencies":	[],
-		"descriptionId":	16777223
+		"descriptionId":	16777224
 	}
 }

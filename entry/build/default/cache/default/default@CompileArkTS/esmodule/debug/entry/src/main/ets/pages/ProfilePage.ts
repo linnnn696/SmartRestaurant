@@ -101,7 +101,7 @@ export class ProfilePage extends ViewPU {
         Text.pop();
         Row.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create({ "id": 16777232, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
+            Image.create({ "id": 16777234, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
             Image.width(20);
             Image.height(20);
             Image.fillColor('#999999');
@@ -142,7 +142,7 @@ export class ProfilePage extends ViewPU {
             Column.alignItems(HorizontalAlign.Center);
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create({ "id": 16777227, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
+            Image.create({ "id": 16777245, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
             Image.width(80);
             Image.height(80);
             Image.fillColor('#CCCCCC');
@@ -182,7 +182,7 @@ export class ProfilePage extends ViewPU {
             Row.create();
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create({ "id": 16777227, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
+            Image.create({ "id": 16777245, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
             Image.width(24);
             Image.height(24);
             Image.margin({ right: 8 });
@@ -205,7 +205,7 @@ export class ProfilePage extends ViewPU {
             // 功能列表
             Column.backgroundColor(Color.White);
         }, Column);
-        this.MenuItem.bind(this)({ "id": 16777227, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" }, '餐后评价', () => {
+        this.MenuItem.bind(this)({ "id": 16777245, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" }, '餐后评价', () => {
             router.pushUrl({
                 url: 'pages/ReviewPage',
                 params: {}
@@ -219,7 +219,7 @@ export class ProfilePage extends ViewPU {
             Divider.color('#F5F5F5');
             Divider.height(1);
         }, Divider);
-        this.MenuItem.bind(this)({ "id": 16777227, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" }, '联系客服', () => {
+        this.MenuItem.bind(this)({ "id": 16777245, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" }, '联系客服', () => {
             promptAction.showToast({
                 message: '客服电话：400-123-4567',
                 duration: 2000

@@ -1,28 +1,33 @@
 import router from '@ohos.router';
-import { CartModel, SAMPLE_DISHES } from '../model/DishModel';
+import { CartModel } from '../model/DishModel';
 import { OrderModel } from '../model/OrderModel';
 import { OrderService, OrderItem, OrderStatus } from '../service/OrderService';
+import { MenuService, MenuItem } from '../service/MenuService';
 import promptAction from '@ohos.promptAction';
 
 interface RouterParams {
-  activeTab: number;
-  newOrderId: string;
+  amount: number;
 }
 
-const PAYMENT_DELAY = 1500;
-const TOAST_DURATION = 1000;
-const NAVIGATION_DELAY = 1000;
+const PAYMENT_DELAY = 1000;
 
 @Entry
 @Component
 struct PaymentPage {
   @State selectedPayment: string = '';
+  @State dishes: Map<string, MenuItem> = new Map();
   private cartModel: CartModel = CartModel.getInstance();
   private orderModel: OrderModel = OrderModel.getInstance();
   @State totalAmount: number = 0;
 
-  aboutToAppear() {
-    this.totalAmount = this.cartModel.getTotalAmount();
+  async aboutToAppear() {
+    // 获取路由参数
+    const params = router.getParams() as RouterParams;
+    this.totalAmount = params?.amount || 0;
+
+    // 获取菜品数据
+    const allDishes = await MenuService.getAllMenuItems();
+    this.dishes = new Map(allDishes.map(dish => [dish.id, dish]));
   }
 
   async handlePayment() {
@@ -34,36 +39,71 @@ struct PaymentPage {
     try {
       // 显示处理中状态
       promptAction.showToast({ 
-        message: '订单处理中...',
-        duration: TOAST_DURATION
+        message: '支付处理中...',
+        duration: 1000
       });
 
       // 准备订单数据
+      console.info('[PaymentPage] 开始准备订单数据');
       const cartItems = this.cartModel.getItems();
-      const orderItems: OrderItem[] = cartItems.map(item => {
-        const dish = SAMPLE_DISHES.find(d => d.id === item.dishId);
-        return {
-          menuItemId: item.dishId,
-          name: dish?.name || '未知商品',
-          price: dish?.price || 0,
-          quantity: item.quantity
-        } as OrderItem;
-      });
+      if (!cartItems || cartItems.length === 0) {
+        throw new Error('购物车为空，请先添加商品');
+      }
+      console.info('[PaymentPage] 购物车商品:', JSON.stringify(cartItems));
 
-      // 创建订单并直接设置为制作中状态
+      // 检查菜品信息是否完整
+      console.info('[PaymentPage] 检查菜品信息');
+      if (this.dishes.size === 0) {
+        throw new Error('菜品数据加载失败，请重试');
+      }
+      console.info('[PaymentPage] 当前菜品列表:', JSON.stringify(Array.from(this.dishes.entries())));
+      
+      const orderItems: OrderItem[] = [];
+      for (const item of cartItems) {
+        const dish = this.dishes.get(item.dishId);
+        console.info(`[PaymentPage] 处理菜品 ${item.dishId}:`, JSON.stringify(dish));
+        
+        if (!dish) {
+          console.error(`[PaymentPage] 找不到菜品信息: ${item.dishId}`);
+          throw new Error(`菜品信息不完整，请重新选择`);
+        }
+
+        if (!item.quantity || item.quantity <= 0) {
+          throw new Error(`商品 ${dish.name} 的数量无效`);
+        }
+
+        if (!dish.price || dish.price <= 0) {
+          throw new Error(`商品 ${dish.name} 的价格无效`);
+        }
+        
+        orderItems.push({
+          menuItemId: item.dishId,
+          name: dish.name,
+          price: dish.price,
+          quantity: item.quantity
+      });
+      }
+      console.info('[PaymentPage] 准备的订单项:', JSON.stringify(orderItems));
+
+      // 创建订单
+      console.info('[PaymentPage] 开始创建订单');
       const order = await OrderService.createOrder(orderItems, "1", OrderStatus.PREPARING);
+      console.info('[PaymentPage] 订单创建成功:', JSON.stringify(order));
       
       // 清空购物车
       this.cartModel.clearCart();
+      console.info('[PaymentPage] 购物车已清空');
 
       // 显示成功提示
       promptAction.showToast({ 
-        message: '订单已提交！',
-        duration: TOAST_DURATION
+        message: '支付成功！',
+        duration: 1000
       });
 
-      // 跳转到订单页面
+      // 清空页面栈并跳转到订单列表
       setTimeout(() => {
+        console.info('[PaymentPage] 准备跳转到订单列表');
+        router.clear();
         router.pushUrl({
           url: 'pages/MainPage',
           params: {
@@ -71,12 +111,37 @@ struct PaymentPage {
             newOrderId: order.id
           }
         });
-      }, NAVIGATION_DELAY);
+      }, PAYMENT_DELAY);
     } catch (error) {
-      console.error('订单创建失败:', error);
+      console.error('[PaymentPage] 支付过程出错:', error);
+      let errorMessage = '支付失败，请重试';
+      
+      if (error instanceof Error) {
+        // 根据错误类型显示不同的提示信息
+        if (error.message.includes('购物车为空')) {
+          errorMessage = '购物车为空，请先添加商品';
+        } else if (error.message.includes('菜品数据加载失败')) {
+          errorMessage = '菜品数据加载失败，请重试';
+        } else if (error.message.includes('菜品信息不完整')) {
+          errorMessage = '菜品信息不完整，请重新选择';
+        } else if (error.message.includes('数量无效')) {
+          errorMessage = error.message;
+        } else if (error.message.includes('价格无效')) {
+          errorMessage = error.message;
+        } else if (error.message.includes('订单数据格式错误')) {
+          errorMessage = '订单数据格式错误，请重试';
+        } else if (error.message.includes('服务器响应为空')) {
+          errorMessage = '网络异常，请重试';
+        } else if (error.message.includes('订单ID为空')) {
+          errorMessage = '创建订单失败，请重试';
+        } else {
+          errorMessage = '支付失败：' + error.message;
+        }
+      }
+
       promptAction.showToast({ 
-        message: '订单创建失败，请重试',
-        duration: TOAST_DURATION
+        message: errorMessage,
+        duration: 3000
       });
     }
   }
@@ -168,7 +233,6 @@ struct PaymentPage {
           .alignSelf(ItemAlign.Start)
           .margin({ bottom: 16 })
 
-        // TODO: 需要添加支付宝和微信支付的图标资源
         this.PaymentMethodItem($r('app.media.ic_alipay'), '支付宝支付', 'alipay')
         this.PaymentMethodItem($r('app.media.ic_wechat'), '微信支付', 'wechat')
       }
@@ -184,7 +248,8 @@ struct PaymentPage {
         .height(50)
         .fontSize(18)
         .fontWeight(FontWeight.Medium)
-        .backgroundColor(this.selectedPayment ? '#2D7AF6' : '#CCCCCC')
+        .backgroundColor(this.selectedPayment ? '#FF4081' : '#CCCCCC')
+        .enabled(this.selectedPayment !== '')
         .margin({ top: 32 })
         .onClick(() => {
           this.handlePayment();

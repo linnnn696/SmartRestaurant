@@ -9,7 +9,7 @@
 		"SELECT_BUILD_PRODUCT":"default",
 		"BUNDLE_NAME":"com.example.smartrestaurant",
 		"BUILD_PATH":{
-			"OUTPUT_PATH":"D:\\Desktop\\5.2\\build\\outputs\\default"
+			"OUTPUT_PATH":"D:\\SmartRestaurant\\build\\outputs\\default"
 		},
 		"SELECT_BUILD_MODE":""
 	}

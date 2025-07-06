@@ -123,7 +123,7 @@ class ScanPage extends ViewPU {
             Row.backgroundColor(Color.White);
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create({ "id": 16777232, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
+            Image.create({ "id": 16777234, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
             Image.width(24);
             Image.height(24);
             Image.margin({ left: 16 });
@@ -155,7 +155,7 @@ class ScanPage extends ViewPU {
         }, Stack);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // Scan frame
-            Image.create({ "id": 16777234, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
+            Image.create({ "id": 16777249, "type": 20000, params: [], "bundleName": "com.example.smartrestaurant", "moduleName": "entry" });
             // Scan frame
             Image.width(280);
             // Scan frame
