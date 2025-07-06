@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cbeec96a-fd98-449c-b55b-1a418d6bb127" name="Changes" comment="Changes">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/background/src/checkMenuItems.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/background/src/fixMenuItems.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/background/src/updateSchema.ts" afterDir="false" />
@@ -114,6 +115,10 @@
       <change beforePath="$PROJECT_DIR$/entry/src/main/resources/base/media/dish_soup.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/entry/src/main/resources/base/media/dish_veggie.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/entry/src/main/resources/base/media/layered_image.json" beforeDir="false" afterPath="$PROJECT_DIR$/entry/src/main/resources/base/media/layered_image.json" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Git使用指南.md" beforeDir="false" afterPath="$PROJECT_DIR$/Git使用指南.md" afterDir="false" />
+>>>>>>> 070165fadaa4d2420413844eb927185d243d84b9
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,6 +151,7 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< HEAD
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "127.0.0.1:5555": "5372126501751793699772",
@@ -162,8 +168,26 @@
     "resolution": "1080*2340",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "shape": "phone"
+=======
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;127.0.0.1:5555&quot;: &quot;5372126501751635751161&quot;,
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Application.entry.executor&quot;: &quot;Run&quot;,
+    &quot;MODULE_HAP_TIME&quot;: &quot;{\&quot;127.0.0.1:5555entry\&quot;:\&quot;2025-07-04T13:29:09.835017200Z\&quot;}&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;ace.nodejs.version&quot;: &quot;18.20.1&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/frontGround5.1&quot;,
+    &quot;projectSizeLastTraceTimestamp-3dd7ec8397bcc53552e7a5cec72bf3790b2434b9b04ed488c4ba2b0e5c0d&quot;: &quot;1751502635848&quot;,
+    &quot;projectSizeLastTraceTimestamp-862af24808feb507175cacbe3a63b8b73b4637eb94c826e38b15e8a56404&quot;: &quot;1751611461176&quot;,
+    &quot;projectSizeLastTraceTimestamp-9e62885e34e6709027825a17899fd0aee344ca03a404e7183b0d2e995773&quot;: &quot;1751635701168&quot;,
+    &quot;resolution&quot;: &quot;1080*2340&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;shape&quot;: &quot;phone&quot;
+>>>>>>> 070165fadaa4d2420413844eb927185d243d84b9
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.entry">
     <configuration name="entry" type="HotReLoadTask" factoryName="Hot Reload">
       <MODULE_NAME />
