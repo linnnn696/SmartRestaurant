@@ -19,22 +19,7 @@ async function initTables() {
     await connection.query('USE `order`');
     console.log('已切换到 order 数据库');
 
-    // 1. 初始化基础数据：餐桌
-    await connection.query(`
-      INSERT INTO tables (qr_code, location) VALUES 
-      ('TABLE_001', '一楼靠窗1号桌'),
-      ('TABLE_002', '一楼靠窗2号桌'),
-      ('TABLE_003', '一楼中区3号桌'),
-      ('TABLE_004', '一楼中区4号桌'),
-      ('TABLE_005', '二楼包间1号'),
-      ('TABLE_006', '二楼包间2号'),
-      ('TABLE_007', '二楼靠窗7号桌'),
-      ('TABLE_008', '二楼靠窗8号桌')
-      ON DUPLICATE KEY UPDATE updated_at = CURRENT_TIMESTAMP;
-    `);
-    console.log('1. 餐桌数据初始化成功！');
-
-    // 2. 初始化用户数据
+    // 1. 初始化用户数据
     await connection.query(`
       INSERT INTO users (phone_number, points, total_points) VALUES 
       ('13800138000', 150, 500),
@@ -48,7 +33,7 @@ async function initTables() {
         total_points = VALUES(total_points),
         updated_at = CURRENT_TIMESTAMP;
     `);
-    console.log('2. 用户数据初始化成功！');
+    console.log('1. 用户数据初始化成功！');
 
     // 检查用户数据是否存在
     const [userCheck] = await connection.query<RowDataPacket[]>('SELECT user_id, phone_number FROM users');
@@ -57,7 +42,7 @@ async function initTables() {
     }
     console.log(`已确认：${userCheck.length} 个用户数据初始化成功`);
 
-    // 3. 初始化菜品数据
+    // 2. 初始化菜品数据
     await connection.query(`
       INSERT INTO menu_items (name, category, price, image_url, description, tag) VALUES 
       -- 热菜
@@ -103,35 +88,35 @@ async function initTables() {
         tag = VALUES(tag),
         updated_at = CURRENT_TIMESTAMP;
     `);
-    console.log('3. 菜品数据初始化成功！');
+    console.log('2. 菜品数据初始化成功！');
 
-    // 4. 创建订单
-    console.log('4. 开始初始化订单数据...');
+    // 3. 创建订单
+    console.log('3. 开始初始化订单数据...');
     
-    // 4.1 先获取用户ID
+    // 3.1 先获取用户ID
     const [users] = await connection.query<RowDataPacket[]>('SELECT user_id, phone_number FROM users LIMIT 3');
     if (users.length < 3) {
       throw new Error('没有足够的用户数据来创建订单');
     }
 
-    // 4.2 创建订单
+    // 3.2 创建订单
     await connection.query(`
-      INSERT INTO orders (table_id, status, user_id) VALUES 
-      (1, '已完成', ?),
-      (2, '制作中', ?),
-      (3, '已提交', ?)
+      INSERT INTO orders (user_id, status) VALUES 
+      (?, '已完成'),
+      (?, '制作中'),
+      (?, '已提交')
       ON DUPLICATE KEY UPDATE updated_at = CURRENT_TIMESTAMP;
     `, [users[0].user_id, users[1].user_id, users[2].user_id]);
-    console.log('4.2 订单基本信息创建成功');
+    console.log('3.2 订单基本信息创建成功');
 
-    // 4.3 检查订单是否创建成功
+    // 3.3 检查订单是否创建成功
     const [orderCheck] = await connection.query<RowDataPacket[]>('SELECT order_id, user_id FROM orders');
     if (orderCheck.length === 0) {
       throw new Error('订单创建失败，无法继续初始化订单明细和评价');
     }
     console.log(`已确认：${orderCheck.length} 个订单创建成功`);
 
-    // 4.4 添加订单明细
+    // 3.4 添加订单明细
     await connection.query(`
       INSERT INTO order_items (order_id, item_id, quantity, price) VALUES 
       -- 第一个订单的明细
@@ -149,19 +134,19 @@ async function initTables() {
       (3, 6, 1, 18.00)    -- 凉拌黄瓜
       ON DUPLICATE KEY UPDATE updated_at = CURRENT_TIMESTAMP;
     `);
-    console.log('4.4 订单明细数据初始化成功！');
+    console.log('3.4 订单明细数据初始化成功！');
 
-    // 5. 最后添加评价数据
-    console.log('5. 开始初始化评价数据...');
+    // 4. 最后添加评价数据
+    console.log('4. 开始初始化评价数据...');
     
-    // 5.1 检查订单
+    // 4.1 检查订单
     const [orders] = await connection.query<RowDataPacket[]>('SELECT order_id FROM orders');
     
     if (orders.length === 0) {
       throw new Error('找不到有效的订单，无法添加评价');
     }
 
-    // 5.2 添加评价
+    // 4.2 添加评价
     for (const order of orders) {
       await connection.query(`
         INSERT INTO reviews (
@@ -181,10 +166,9 @@ async function initTables() {
         '感谢您的评价，欢迎再次光临！'
       ]);
     }
-    console.log('5.2 评价数据初始化成功！');
+    console.log('4.2 评价数据初始化成功！');
 
-    // 6. 最后进行数据统计
-    const [tableCount] = await connection.query('SELECT COUNT(*) as count FROM tables');
+    // 5. 最后进行数据统计
     const [userCount] = await connection.query('SELECT COUNT(*) as count FROM users');
     const [menuCount] = await connection.query('SELECT COUNT(*) as count FROM menu_items');
     const [orderCount] = await connection.query('SELECT COUNT(*) as count FROM orders');
@@ -192,7 +176,6 @@ async function initTables() {
     const [reviewCount] = await connection.query('SELECT COUNT(*) as count FROM reviews');
 
     console.log('\n=== 最终数据统计 ===');
-    console.log('餐桌数量:', (tableCount as any)[0].count);
     console.log('用户数量:', (userCount as any)[0].count);
     console.log('菜品数量:', (menuCount as any)[0].count);
     console.log('订单数量:', (orderCount as any)[0].count);
@@ -202,10 +185,11 @@ async function initTables() {
     // 关闭连接
     await connection.end();
     console.log('\n数据库连接已关闭');
+
   } catch (error) {
-    console.error('发生错误:', error);
+    console.error('初始化数据时出错:', error);
+    process.exit(1);
   }
 }
 
-// 只运行一个初始化函数
-initTables().catch(console.error); 
+initTables(); 

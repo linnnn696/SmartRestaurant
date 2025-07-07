@@ -81,13 +81,14 @@ struct PaymentPage {
           name: dish.name,
           price: dish.price,
           quantity: item.quantity
-      });
+        });
       }
       console.info('[PaymentPage] 准备的订单项:', JSON.stringify(orderItems));
 
       // 创建订单
       console.info('[PaymentPage] 开始创建订单');
-      const order = await OrderService.createOrder(orderItems, "1", OrderStatus.PREPARING);
+      const userId = "1"; // 这里可以从用户系统获取实际的用户ID
+      const order = await OrderService.createOrder(orderItems, userId, OrderStatus.PREPARING);
       console.info('[PaymentPage] 订单创建成功:', JSON.stringify(order));
       
       // 清空购物车

@@ -6,22 +6,19 @@ import { createSuccessResponse, createErrorResponse } from '../utils/response';
 const router: Router = express.Router();
 
 interface OrderItem {
-  item_id: number;
+  menu_item_id: number;
   quantity: number;
   price: number;
 }
 
 interface CreateOrderBody {
-  table_id: string;
-  items: Array<{
-    menu_item_id: number;
-    quantity: number;
-  }>;
+  user_id: string;
+  items: OrderItem[];
 }
 
 interface OrderDetail extends RowDataPacket {
   order_id: number;
-  table_id: number;
+  user_id: number;
   status: string;
   total_amount: number;
   created_at: string;
@@ -64,13 +61,13 @@ router.get('/', async (req: Request, res: Response): Promise<void> => {
   try {
     const [rows] = await pool.query<OrderDetail[]>(
       `SELECT o.order_id, 
-              o.table_id,
+              o.user_id,
               o.status,
               o.created_at,
               o.updated_at,
               JSON_ARRAYAGG(
                 JSON_OBJECT(
-                  'item_id', oi.item_id,
+                  'menu_item_id', oi.item_id,
                   'name', mi.name,
                   'quantity', oi.quantity,
                   'price', oi.price,
@@ -110,69 +107,146 @@ function calculateTotalAmount(items: CreateOrderBody['items']): number {
   }, 0);
 }
 
+// 请求体类型定义
+interface UpdateOrderStatusBody {
+  status: OrderStatus;
+}
+
 // 创建订单
-router.post('/', async (req: Request<{}, {}, CreateOrderBody>, res: Response) => {
-  const { table_id, items } = req.body;
+router.post('/', async (req: Request<{}, {}, CreateOrderBody>, res: Response): Promise<void> => {
+  console.log('收到创建订单请求，请求体:', JSON.stringify(req.body, null, 2));
+  const { user_id, items } = req.body;
+
+  // 数据验证
+  if (!user_id || !Array.isArray(items) || items.length === 0) {
+    console.error('请求数据验证失败:', { user_id, items });
+    res.status(400).json({ 
+      code: 400, 
+      message: '请求数据格式错误',
+      details: '缺少必要的订单信息'
+    });
+    return;
+  }
+
+  // 验证订单项数据
+  for (const item of items) {
+    if (!item.menu_item_id || !item.quantity || !item.price || 
+        item.quantity <= 0 || item.price <= 0) {
+      console.error('订单项数据验证失败:', item);
+      res.status(400).json({ 
+        code: 400, 
+        message: '订单项数据格式错误',
+        details: '菜品ID、数量和价格必须为正数'
+      });
+      return;
+    }
+  }
   
+  let connection;
   try {
-    const connection = await pool.getConnection();
+    // 开始事务
+    connection = await pool.getConnection();
     await connection.beginTransaction();
 
     try {
-      // 获取菜品价格
-      const menuItemIds = items.map(item => item.menu_item_id);
-      const [menuItems] = await connection.execute<RowDataPacket[]>(
-        'SELECT item_id, price FROM menu_items WHERE item_id IN (?)',
-        [menuItemIds]
-      );
+      // 验证菜品是否存在并获取名称
+      const itemIds = items.map(item => item.menu_item_id);
+      const [menuItems] = await connection.query(
+        'SELECT item_id, name FROM menu_items WHERE item_id IN (?)',
+        [itemIds]
+      ) as [MenuItem[], any];
 
-      // 创建价格映射
-      const priceMap = new Map(menuItems.map(item => [item.item_id, item.price]));
-
-      // 计算总金额并验证价格
-      const totalAmount = items.reduce((total, item) => {
-        const price = priceMap.get(item.menu_item_id);
-        if (typeof price !== 'number') {
-          throw new Error(`菜品 ${item.menu_item_id} 不存在或价格无效`);
-        }
-        return total + (price * item.quantity);
-      }, 0);
-
-      // 创建订单
-      const [orderResult] = await connection.execute<ResultSetHeader>(
-        'INSERT INTO orders (table_id, status, total_amount, created_at, updated_at) VALUES (?, ?, ?, NOW(), NOW())',
-        [table_id, OrderStatus.PREPARING, totalAmount]
-      );
-
-      const orderId = orderResult.insertId;
-
-      // 创建订单项
-      for (const item of items) {
-        const price = priceMap.get(item.menu_item_id);
-        if (typeof price !== 'number') {
-          throw new Error(`菜品 ${item.menu_item_id} 不存在或价格无效`);
-        }
-
-        await connection.execute(
-          'INSERT INTO order_items (order_id, item_id, quantity, price) VALUES (?, ?, ?, ?)',
-          [orderId, item.menu_item_id, item.quantity, price]
-        );
+      if (menuItems.length !== itemIds.length) {
+        throw new Error('部分菜品不存在');
       }
 
+      // 创建菜品ID到名称的映射
+      const menuItemMap = new Map(
+        menuItems.map(item => [item.item_id, item.name])
+      );
+
+      // 获取当前时间
+      const now = new Date();
+      const currentTime = formatDateTime(now);
+
+      // 创建订单记录
+      const [orderResult] = await connection.query(
+        'INSERT INTO orders (user_id, status, created_at, updated_at) VALUES (?, ?, ?, ?)',
+        [user_id, '制作中', currentTime, currentTime]
+      ) as [ResultSetHeader, any];
+      
+      const orderId = orderResult.insertId;
+      console.log('订单创建成功，ID:', orderId);
+      
+      // 添加订单项
+      let totalAmount = 0;
+      const orderItems = [];
+      for (const item of items) {
+        const [result] = await connection.query(
+          'INSERT INTO order_items (order_id, item_id, quantity, price) VALUES (?, ?, ?, ?)',
+          [orderId, item.menu_item_id, item.quantity, item.price]
+        ) as [ResultSetHeader, any];
+
+        if (result.affectedRows !== 1) {
+          throw new Error(`添加订单项失败: ${JSON.stringify(item)}`);
+        }
+
+        totalAmount += item.quantity * item.price;
+        orderItems.push({
+          menu_item_id: String(item.menu_item_id),
+          name: menuItemMap.get(item.menu_item_id),
+          quantity: item.quantity,
+          price: item.price
+        });
+      }
+
+      // 更新订单总金额
+      const [updateResult] = await connection.query(
+        'UPDATE orders SET total_amount = ? WHERE order_id = ?',
+        [totalAmount, orderId]
+      ) as [ResultSetHeader, any];
+
+      if (updateResult.affectedRows !== 1) {
+        throw new Error('更新订单总金额失败');
+      }
+      
       await connection.commit();
-      return res.json(createSuccessResponse({ order_id: orderId }));
+
+      // 构造返回数据
+      const responseData = {
+        order_id: orderId,
+        table_id: null,
+        status: '制作中',
+        total_amount: totalAmount,
+        created_at: currentTime,
+        updated_at: currentTime,
+        items: orderItems
+      };
+
+      console.log('返回数据:', JSON.stringify(responseData, null, 2));
+      
+      res.json({ 
+        code: 200,
+        message: '订单创建成功',
+        data: responseData
+      });
+
     } catch (error) {
       await connection.rollback();
       throw error;
-    } finally {
+    }
+
+  } catch (error) {
+    console.error('创建订单错误:', error);
+    res.status(500).json({ 
+      code: 500, 
+      message: '创建订单失败',
+      details: error instanceof Error ? error.message : '未知错误'
+    });
+  } finally {
+    if (connection) {
       connection.release();
     }
-  } catch (error) {
-    console.error('创建订单失败:', error);
-    if (error instanceof Error && error.message.includes('菜品')) {
-      return res.status(400).json(createErrorResponse(error.message));
-    }
-    return res.status(500).json(createErrorResponse('创建订单失败'));
   }
 });
 
@@ -212,7 +286,7 @@ router.get('/:id', async (req: Request<{ id: string }>, res: Response): Promise<
 });
 
 // 更新订单状态
-router.put('/:id/status', async (req: Request<{ id: string }, {}, { status: OrderStatus }>, res: Response) => {
+router.put('/:id/status', async (req: Request<{ id: string }, {}, UpdateOrderStatusBody>, res: Response) => {
   const { id } = req.params;
   const { status } = req.body;
 

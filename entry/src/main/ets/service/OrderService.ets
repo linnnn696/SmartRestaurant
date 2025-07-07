@@ -3,7 +3,7 @@ import { HttpService } from './HttpService';
 // 后端返回的订单数据格式
 interface BackendOrder {
   order_id: number;
-  table_id: number;
+  user_id: number;  // 修改为user_id
   status: string;
   created_at: string;
   updated_at: string;
@@ -41,14 +41,13 @@ export interface OrderStatusUpdate {
 }
 
 export interface CreateOrderItem {
-  item_id: number;
+  menu_item_id: number;
   quantity: number;
   price: number;
 }
 
 export interface CreateOrderRequest {
-  table_id: number;
-  user_id: number;
+  user_id: string;
   items: CreateOrderItem[];
 }
 
@@ -60,7 +59,7 @@ export enum OrderStatus {
 // 后端创建订单的响应格式
 interface CreateOrderResponse {
   order_id: number;
-  table_id: number;
+  user_id: number;  // 修改为user_id
   status: string;
   total_amount: number;
   created_at: string;
@@ -112,7 +111,7 @@ export class OrderService {
     
     return {
       id: String(backendOrder.order_id),
-      userId: String(backendOrder.table_id), // 暂时用 table_id 代替 userId
+      userId: String(backendOrder.user_id),  // 使用user_id
       status: StatusMapping.getOrderStatus(backendOrder.status),
       items: (backendOrder.items || []).map((item: BackendOrderItem): OrderItem => ({
         menuItemId: String(item.menu_item_id),
@@ -149,25 +148,24 @@ export class OrderService {
     
     const orderItems: CreateOrderItem[] = items.map((item): CreateOrderItem => {
       // 确保数值类型正确
-      const itemId = Number(item.menuItemId);
+      const menuItemId = Number(item.menuItemId);
       const quantity = Number(item.quantity);
       const price = Number(item.price);
 
-      if (isNaN(itemId) || isNaN(quantity) || isNaN(price)) {
-        console.error('[OrderService] 数据类型转换错误:', { itemId, quantity, price });
+      if (isNaN(menuItemId) || isNaN(quantity) || isNaN(price)) {
+        console.error('[OrderService] 数据类型转换错误:', { menuItemId, quantity, price });
         throw new Error('订单数据格式错误');
       }
 
       return {
-        item_id: itemId,
+        menu_item_id: menuItemId,
         quantity: quantity,
         price: price
       };
     });
 
     const data: CreateOrderRequest = {
-      table_id: 1, // 默认值
-      user_id: 1,  // 默认值
+      user_id: userId,
       items: orderItems
     };
 

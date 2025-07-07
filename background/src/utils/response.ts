@@ -48,4 +48,4 @@ export function createErrorResponse(message: string, code: number = 400): ApiRes
     code,
     message
   };
-} 
+}
