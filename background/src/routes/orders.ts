@@ -98,15 +98,6 @@ router.get('/', async (req: Request, res: Response): Promise<void> => {
   }
 });
 
-// 计算订单总金额
-function calculateTotalAmount(items: CreateOrderBody['items']): number {
-  return items.reduce((total, item) => {
-    // 这里需要从数据库中获取菜品价格，暂时使用固定价格
-    const price = 10; // 假设所有菜品价格都是10元
-    return total + (price * item.quantity);
-  }, 0);
-}
-
 // 请求体类型定义
 interface UpdateOrderStatusBody {
   status: OrderStatus;
@@ -114,12 +105,10 @@ interface UpdateOrderStatusBody {
 
 // 创建订单
 router.post('/', async (req: Request<{}, {}, CreateOrderBody>, res: Response): Promise<void> => {
-  console.log('收到创建订单请求，请求体:', JSON.stringify(req.body, null, 2));
   const { user_id, items } = req.body;
 
   // 数据验证
   if (!user_id || !Array.isArray(items) || items.length === 0) {
-    console.error('请求数据验证失败:', { user_id, items });
     res.status(400).json({ 
       code: 400, 
       message: '请求数据格式错误',
@@ -132,7 +121,6 @@ router.post('/', async (req: Request<{}, {}, CreateOrderBody>, res: Response): P
   for (const item of items) {
     if (!item.menu_item_id || !item.quantity || !item.price || 
         item.quantity <= 0 || item.price <= 0) {
-      console.error('订单项数据验证失败:', item);
       res.status(400).json({ 
         code: 400, 
         message: '订单项数据格式错误',
@@ -149,6 +137,12 @@ router.post('/', async (req: Request<{}, {}, CreateOrderBody>, res: Response): P
     await connection.beginTransaction();
 
     try {
+      // 查找最新的制作中订单
+      const [previousOrders] = await connection.query(
+        'SELECT order_id FROM orders WHERE status = ? ORDER BY created_at DESC LIMIT 1',
+        ['制作中']
+      ) as [RowDataPacket[], any];
+
       // 验证菜品是否存在并获取名称
       const itemIds = items.map(item => item.menu_item_id);
       const [menuItems] = await connection.query(
@@ -176,7 +170,6 @@ router.post('/', async (req: Request<{}, {}, CreateOrderBody>, res: Response): P
       ) as [ResultSetHeader, any];
       
       const orderId = orderResult.insertId;
-      console.log('订单创建成功，ID:', orderId);
       
       // 添加订单项
       let totalAmount = 0;
@@ -209,21 +202,28 @@ router.post('/', async (req: Request<{}, {}, CreateOrderBody>, res: Response): P
       if (updateResult.affectedRows !== 1) {
         throw new Error('更新订单总金额失败');
       }
+
+      // 如果存在之前的制作中订单，将其状态更新为已完成
+      if (previousOrders.length > 0) {
+        const previousOrderId = previousOrders[0].order_id;
+        await connection.query(
+          'UPDATE orders SET status = ?, updated_at = ? WHERE order_id = ?',
+          ['已完成', currentTime, previousOrderId]
+        );
+      }
       
       await connection.commit();
 
       // 构造返回数据
       const responseData = {
         order_id: orderId,
-        table_id: null,
+        user_id: Number(user_id),
         status: '制作中',
         total_amount: totalAmount,
         created_at: currentTime,
         updated_at: currentTime,
         items: orderItems
       };
-
-      console.log('返回数据:', JSON.stringify(responseData, null, 2));
       
       res.json({ 
         code: 200,

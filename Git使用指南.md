@@ -5,21 +5,31 @@
 每当完成一个功能或修复后，按以下步骤保存：
 
 ```bash
+#（一）本地提交与标签管理
 # 1. 查看修改了哪些文件
 git status
 
 # 2. 添加修改的文件到暂存区
 git add .    # 添加所有修改
-# 或者
-git add 文件名    # 添加特定文件
+
 
 # 3. 提交修改（创建新版本）
 git commit -m "描述信息"    # 例如：git commit -m "添加购物车功能"
 
-# 4. 推送到GitHub
-git push origin main
-```
+# （可选）4. 创建本地标签（用于标记版本，如发布新版本时）
+git tag v版本号    # 例如 git tag v5.3 ，也可结合 -a、-m 细化，如 git tag -a v2.0 -m "完成订单管理功能" 
 
+#（二）推送到远程仓库（GitHub 等
+# 1. 推送提交到远程仓库主分支（若之前仅本地提交）
+git push origin main  
+
+# （可选）2. 若创建了本地标签，推送标签到远程仓库 
+git push origin v版本号    # 例如 git push origin v5.3
+
+
+
+
+ 
 ## 二、查看版本历史
 
 ```bash

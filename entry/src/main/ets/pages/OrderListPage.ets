@@ -144,6 +144,10 @@ export struct OrderListPage {
       .onStateChange((refreshStatus: RefreshStatus) => {
         if (refreshStatus === RefreshStatus.Refresh) {
           this.loadOrders();
+          // 2秒後強制結束刷新動畫
+          setTimeout(() => {
+            this.isLoading = false;
+          }, 2000);
         }
       })
     }

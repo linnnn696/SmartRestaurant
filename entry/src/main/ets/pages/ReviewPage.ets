@@ -82,6 +82,7 @@ struct ReviewPage {
             .onClick(() => {
               console.info(`[ReviewPage] 点击星星 - orderId: ${orderId}, type: ${type}, star: ${star}`);
               this.updateRating(orderId, type, star);
+              vibrator.vibrate(10);
             })
         }
       })
@@ -141,6 +142,10 @@ struct ReviewPage {
         .fontColor('#333333')
         .width(60)
       this.StarRating(orderId, type)
+      Text(this.getRatingText(this.getRating(orderId, type)))
+        .fontSize(14)
+        .fontColor('#666666')
+        .margin({ left: 8 })
     }
     .width('100%')
     .height(48)
@@ -148,7 +153,6 @@ struct ReviewPage {
     .margin({ bottom: 16 })
   }
 
-  // 获取评分描述文本
   private getRatingText(rating: number): string {
     switch (rating) {
       case 0:
@@ -198,17 +202,11 @@ struct ReviewPage {
 
       await ReviewService.createReview(reviewData);
       promptAction.showToast({ message: '评价提交成功' });
-      
-      // 刷新订单列表
-      await this.refreshOrders();
-
-      // 如果没有更多可评价的订单，返回上一页
-      if (this.orders.length === 0) {
-        router.back();
-      }
+      vibrator.vibrate(50);
+      router.back();
     } catch (error) {
-      console.error('提交评价失败:', error);
-      promptAction.showToast({ message: '提交评价失败，请重试' });
+      console.error('[ReviewPage] 提交评价失败:', error);
+      promptAction.showToast({ message: '评价提交失败，请重试' });
     } finally {
       this.isSubmitting = false;
     }
@@ -216,26 +214,27 @@ struct ReviewPage {
 
   build() {
     Column() {
-      // 顶部栏
+      // 顶部导航栏
       Row() {
         Image($r('app.media.ic_back'))
           .width(24)
           .height(24)
-          .onClick(() => router.back())
+          .margin({ right: 16 })
+          .onClick(() => {
+            router.back();
+          })
         Text('餐后评价')
           .fontSize(20)
-          .fontWeight(FontWeight.Bold)
-          .margin({ left: 16 })
+          .fontWeight(FontWeight.Medium)
       }
       .width('100%')
       .height(56)
       .padding({ left: 16, right: 16 })
-      .backgroundColor(Color.White)
       .alignItems(VerticalAlign.Center)
 
-      Scroll() {
-        Column() {
-          ForEach(this.orders, (order: Order) => {
+      List() {
+        ForEach(this.orders, (order: Order) => {
+          ListItem() {
             Column() {
               // 订单信息
               Row() {
@@ -251,11 +250,38 @@ struct ReviewPage {
               .margin({ bottom: 12 })
 
               // 订单内容
-              ForEach(order.items, (item: OrderItem) => {
-                Text(`${item.name} x${item.quantity}`)
-                  .fontSize(14)
-                  .margin({ bottom: 4 })
+              ForEach(order.items || [], (item: OrderItem) => {
+                Row() {
+                  Row() {
+                    Text(item.name || '未知商品')
+                      .fontSize(14)
+                      .fontColor('#333333')
+                    Text(` x${item.quantity || 0}`)
+                      .fontSize(14)
+                      .fontColor('#666666')
+                  }
+                  Text(`¥${Number(item.price || 0).toFixed(2)}`)
+                    .fontSize(14)
+                    .fontColor('#333333')
+                }
+                .width('100%')
+                .justifyContent(FlexAlign.SpaceBetween)
+                .margin({ bottom: 8 })
               })
+
+              // 订单总价
+              Row() {
+                Text('订单总价')
+                  .fontSize(14)
+                  .fontColor('#666666')
+                Text(`¥${order.items.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)}`)
+                  .fontSize(16)
+                  .fontColor('#E4A331')
+                  .fontWeight(FontWeight.Medium)
+              }
+              .width('100%')
+              .justifyContent(FlexAlign.SpaceBetween)
+              .margin({ top: 8, bottom: 8 })
 
               Divider()
                 .color('#EEEEEE')
@@ -267,37 +293,49 @@ struct ReviewPage {
                 .fontWeight(FontWeight.Medium)
                 .margin({ bottom: 24 })
 
+              // 评分项
               this.RatingItem('口味', order.id, 'taste')
               this.RatingItem('服务', order.id, 'service')
               this.RatingItem('环境', order.id, 'environment')
 
-              TextArea({ placeholder: '请输入评价内容（可选）' })
+              // 评价内容
+              TextArea({ placeholder: '请输入您的评价内容（选填）' })
+                .width('100%')
                 .height(120)
                 .backgroundColor('#F5F5F5')
-                .margin({ bottom: 24 })
+                .borderRadius(8)
+                .fontSize(16)
+                .padding(16)
+                .margin({ bottom: 16 })
                 .onChange((value: string) => {
                   const review = this.getReviewByOrderId(order.id);
                   review.comment = value;
                 })
 
+              // 提交按钮
               Button('提交评价')
                 .width('100%')
-                .height(44)
-                .backgroundColor('#007AFF')
-                .fontColor(Color.White)
-                .borderRadius(22)
-                .onClick(() => this.submitReview(order.id))
+                .height(48)
+                .backgroundColor('#E4A331')
+                .borderRadius(24)
+                .fontSize(16)
+                .fontColor('#FFFFFF')
+                .enabled(!this.isSubmitting)
+                .onClick(() => {
+                  this.submitReview(order.id);
+                })
             }
             .width('100%')
             .padding(16)
-            .backgroundColor(Color.White)
-            .borderRadius(12)
-            .margin({ bottom: 12 })
-          })
-        }
-        .padding(16)
+            .backgroundColor('#FFFFFF')
+            .borderRadius(16)
+            .margin({ bottom: 16 })
+          }
+        })
       }
+      .width('100%')
       .layoutWeight(1)
+      .padding(16)
     }
     .width('100%')
     .height('100%')

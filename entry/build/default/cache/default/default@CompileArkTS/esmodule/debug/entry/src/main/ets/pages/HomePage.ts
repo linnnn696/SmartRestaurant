@@ -292,16 +292,16 @@ export class HomePage extends ViewPU {
     RecommendedDishes(parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
-            Column.margin({ bottom: 12 });
+            Column.margin({ bottom: 8 });
             Column.width('100%');
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('推荐菜品');
+            Text.create('！！！店长主推 不好吃不要钱！！！');
             Text.fontSize(18);
             Text.fontWeight(FontWeight.Bold);
             Text.fontFamily('HarmonyHeiTi-Medium');
             Text.fontStyle(FontStyle.Normal);
-            Text.margin({ left: 16, bottom: 6 });
+            Text.margin({ left: 16, bottom: 4 });
             Text.decoration({ type: TextDecorationType.None });
         }, Text);
         Text.pop();
@@ -321,7 +321,7 @@ export class HomePage extends ViewPU {
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Column.create();
                     Column.width(150);
-                    Column.padding(8);
+                    Column.padding(6);
                     Column.margin({ right: 8 });
                     Column.backgroundColor(Color.White);
                     Column.borderRadius(12);
@@ -363,7 +363,7 @@ export class HomePage extends ViewPU {
                     Column.create();
                     Column.alignItems(HorizontalAlign.Start);
                     Column.width('100%');
-                    Column.padding({ top: 8 });
+                    Column.padding({ top: 4 });
                 }, Column);
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Text.create(dish.name);
@@ -385,7 +385,7 @@ export class HomePage extends ViewPU {
                     Text.fontSize(16);
                     Text.fontWeight(FontWeight.Bold);
                     Text.fontColor('#FF4081');
-                    Text.margin({ top: 4 });
+                    Text.margin({ top: 2 });
                 }, Text);
                 Text.pop();
                 Column.pop();
@@ -402,10 +402,10 @@ export class HomePage extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create();
             Row.width('100%');
-            Row.padding({ left: 16, right: 16, top: 12, bottom: 12 });
+            Row.padding({ left: 16, right: 16, top: 8, bottom: 8 });
             Row.backgroundColor(Color.White);
             Row.justifyContent(FlexAlign.SpaceEvenly);
-            Row.margin({ top: 8, bottom: 8 });
+            Row.margin({ top: 4, bottom: 4 });
             Row.borderRadius(16);
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -415,7 +415,7 @@ export class HomePage extends ViewPU {
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
                     Column.create();
                     Column.width(48);
-                    Column.height(48);
+                    Column.height(44);
                     Column.backgroundColor(this.selectedCategory === category.name ? '#FFF0F0' : '#F8F8F8');
                     Column.borderRadius(8);
                     Column.justifyContent(FlexAlign.Center);
@@ -434,7 +434,7 @@ export class HomePage extends ViewPU {
                     Text.fontSize(12);
                     Text.fontColor(this.selectedCategory === category.name ? '#FF6B6B' : '#666666');
                     Text.fontWeight(this.selectedCategory === category.name ? FontWeight.Bold : FontWeight.Normal);
-                    Text.margin({ top: 4 });
+                    Text.margin({ top: 2 });
                 }, Text);
                 Text.pop();
                 Column.pop();
@@ -448,10 +448,10 @@ export class HomePage extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Grid.create();
             Grid.width('100%');
-            Grid.padding(16);
+            Grid.padding(12);
             Grid.columnsTemplate('1fr 1fr');
-            Grid.columnsGap(12);
-            Grid.rowsGap(12);
+            Grid.columnsGap(8);
+            Grid.rowsGap(8);
         }, Grid);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             ForEach.create();
@@ -475,7 +475,7 @@ export class HomePage extends ViewPU {
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                             Image.create(item.image);
                             Image.width('100%');
-                            Image.height(160);
+                            Image.height(140);
                             Image.borderRadius({ topLeft: 12, topRight: 12 });
                             Image.objectFit(ImageFit.Cover);
                         }, Image);
@@ -505,13 +505,13 @@ export class HomePage extends ViewPU {
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                             Column.create();
                             Column.width('100%');
-                            Column.padding(12);
+                            Column.padding(8);
                         }, Column);
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                             Text.create(item.name);
                             Text.fontSize(16);
                             Text.fontWeight(FontWeight.Medium);
-                            Text.margin({ top: 8 });
+                            Text.margin({ top: 6 });
                         }, Text);
                         Text.pop();
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -522,7 +522,7 @@ export class HomePage extends ViewPU {
                                         Text.create(item.description);
                                         Text.fontSize(12);
                                         Text.fontColor('#999999');
-                                        Text.margin({ top: 4 });
+                                        Text.margin({ top: 2 });
                                         Text.maxLines(1);
                                         Text.textOverflow({ overflow: TextOverflow.Ellipsis });
                                     }, Text);
@@ -538,7 +538,7 @@ export class HomePage extends ViewPU {
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                             Row.create();
                             Row.width('100%');
-                            Row.margin({ top: 8 });
+                            Row.margin({ top: 6 });
                         }, Row);
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                             Text.create(`¥${item.price.toFixed(2)}`);

@@ -248,7 +248,8 @@
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\declarations\\pattern_lock.d.ts",
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.web.webview.d.ts",
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.print.d.ts",
-        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.vibrator.d.ts"
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.vibrator.d.ts",
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.data.preferences.d.ts"
       ],
       "error": false
     },
@@ -539,7 +540,8 @@
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.window.d.ts",
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.app.ability.common.d.ts",
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\app\\context.d.ts",
-        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.data.rdb.d.ts"
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.data.rdb.d.ts",
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.data.preferences.d.ts"
       ],
       "error": false
     },
@@ -855,7 +857,8 @@
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\application\\UIServiceExtensionConnectCallback.d.ts"
       ],
       "parent": [
-        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.UIContext.d.ts"
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.UIContext.d.ts",
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\service\\ReviewService.ets"
       ],
       "error": false
     },
@@ -1430,7 +1433,7 @@
       "error": false
     },
     "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\HomePage.ets": {
-      "mtimeMs": 1751772796456.5432,
+      "mtimeMs": 1751886635808.576,
       "children": [
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.promptAction.d.ts",
@@ -1446,7 +1449,7 @@
       ]
     },
     "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\OrderListPage.ets": {
-      "mtimeMs": 1751857853671.5486,
+      "mtimeMs": 1751885807177.78,
       "children": [
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.promptAction.d.ts",
@@ -1476,7 +1479,7 @@
       ]
     },
     "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\MainPage.ets": {
-      "mtimeMs": 1751510203983.8372,
+      "mtimeMs": 1751885481987.9856,
       "children": [
         "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\HomePage.ets",
         "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\OrderListPage.ets",
@@ -1535,7 +1538,7 @@
       "error": false
     },
     "D:\\SmartRestaurant\\entry\\src\\main\\ets\\service\\HttpService.ets": {
-      "mtimeMs": 1751817683436.8916,
+      "mtimeMs": 1751885482417.5996,
       "children": [
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.net.http.d.ts"
       ],
@@ -1594,7 +1597,7 @@
       "error": false
     },
     "D:\\SmartRestaurant\\entry\\src\\main\\ets\\service\\OrderService.ets": {
-      "mtimeMs": 1751854770274.054,
+      "mtimeMs": 1751885482413.878,
       "children": [
         "D:\\SmartRestaurant\\entry\\src\\main\\ets\\service\\HttpService.ets"
       ],
@@ -1726,7 +1729,7 @@
       ]
     },
     "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\ReviewPage.ets": {
-      "mtimeMs": 1751858124790.62,
+      "mtimeMs": 1751885482237.5242,
       "children": [
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
         "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.promptAction.d.ts",
@@ -2143,7 +2146,7 @@
       "error": false
     },
     "D:\\SmartRestaurant\\entry\\src\\main\\ets\\service\\ReviewService.ets": {
-      "mtimeMs": 1751802116037.9468,
+      "mtimeMs": 1751883554102.6953,
       "children": [
         "D:\\SmartRestaurant\\entry\\src\\main\\ets\\service\\HttpService.ets"
       ],
@@ -2179,6 +2182,17 @@
       ],
       "parent": [
         "D:\\SmartRestaurant\\entry\\src\\main\\ets\\pages\\ReviewPage.ets"
+      ],
+      "error": false
+    },
+    "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.data.preferences.d.ts": {
+      "mtimeMs": 1751107187000,
+      "children": [
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.base.d.ts",
+        "D:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\application\\BaseContext.d.ts"
+      ],
+      "parent": [
+        "D:\\SmartRestaurant\\entry\\src\\main\\ets\\service\\ReviewService.ets"
       ],
       "error": false
     }

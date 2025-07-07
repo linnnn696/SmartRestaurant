@@ -41,17 +41,13 @@ async function main() {
     await connection.query('USE `order`');
     console.log('已切换到 order 数据库');
 
-    // 创建餐桌信息表
-    await connection.query(`
-      CREATE TABLE IF NOT EXISTS tables (
-        table_id INT AUTO_INCREMENT PRIMARY KEY COMMENT '餐桌编号',
-        qr_code VARCHAR(255) UNIQUE NOT NULL COMMENT '餐桌二维码编码',
-        location VARCHAR(100) COMMENT '餐桌位置',
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
-      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='餐桌信息表';
-    `);
-    console.log('餐桌信息表创建成功！');
+    // 删除现有表（按照依赖关系的反序删除）
+    await connection.query('DROP TABLE IF EXISTS reviews');
+    await connection.query('DROP TABLE IF EXISTS order_items');
+    await connection.query('DROP TABLE IF EXISTS orders');
+    await connection.query('DROP TABLE IF EXISTS menu_items');
+    await connection.query('DROP TABLE IF EXISTS tables');
+    await connection.query('DROP TABLE IF EXISTS users');
 
     // 创建用户信息表
     await connection.query(`
@@ -67,6 +63,18 @@ async function main() {
     `);
     console.log('用户信息表创建成功！');
 
+    // 创建餐桌信息表
+    await connection.query(`
+      CREATE TABLE IF NOT EXISTS tables (
+        table_id INT AUTO_INCREMENT PRIMARY KEY COMMENT '餐桌编号',
+        qr_code VARCHAR(255) UNIQUE NOT NULL COMMENT '餐桌二维码编码',
+        location VARCHAR(100) COMMENT '餐桌位置',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='餐桌信息表';
+    `);
+    console.log('餐桌信息表创建成功！');
+
     // 创建菜单菜品表
     await connection.query(`
       CREATE TABLE IF NOT EXISTS menu_items (
@@ -75,6 +83,8 @@ async function main() {
         category VARCHAR(50) NOT NULL COMMENT '分类',
         price DECIMAL(10,2) NOT NULL COMMENT '单价',
         image_url VARCHAR(255) COMMENT '图片链接',
+        description TEXT COMMENT '描述',
+        tag VARCHAR(50) COMMENT '标签',
         is_hot BOOLEAN DEFAULT FALSE COMMENT '是否热销菜',
         is_new BOOLEAN DEFAULT FALSE COMMENT '是否新品',
         is_combo BOOLEAN DEFAULT FALSE COMMENT '是否套餐',
@@ -88,14 +98,10 @@ async function main() {
     console.log('菜单菜品表创建成功！');
 
     // 创建订单总表
-    await connection.query('DROP TABLE IF EXISTS order_items');
-    await connection.query('DROP TABLE IF EXISTS reviews');
-    await connection.query('DROP TABLE IF EXISTS orders');
-    
     await connection.query(`
       CREATE TABLE IF NOT EXISTS orders (
         order_id INT AUTO_INCREMENT PRIMARY KEY COMMENT '订单ID',
-        table_id INT NOT NULL COMMENT '对应桌台ID',
+        table_id INT COMMENT '对应桌台ID',
         user_id INT NOT NULL COMMENT '下单用户ID',
         status VARCHAR(20) NOT NULL DEFAULT '已提交' COMMENT '状态（已提交/制作中/待取餐/已完成）',
         total_amount DECIMAL(10,2) NOT NULL DEFAULT 0.00 COMMENT '订单总金额',
@@ -127,6 +133,27 @@ async function main() {
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='订单详情表';
     `);
     console.log('订单详情表创建成功！');
+
+    // 创建评价表
+    await connection.query(`
+      CREATE TABLE IF NOT EXISTS reviews (
+        review_id INT AUTO_INCREMENT PRIMARY KEY COMMENT '评价ID',
+        order_id INT NOT NULL COMMENT '关联订单ID',
+        taste_rating TINYINT NOT NULL COMMENT '口味评分(1-5)',
+        service_rating TINYINT NOT NULL COMMENT '服务评分(1-5)',
+        environment_rating TINYINT NOT NULL COMMENT '环境评分(1-5)',
+        overall_rating TINYINT NOT NULL COMMENT '整体评分(1-5)',
+        comment TEXT COMMENT '评价内容',
+        reply TEXT COMMENT '商家回复',
+        reply_time DATETIME COMMENT '回复时间',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '评价时间',
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+        FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE,
+        INDEX idx_order (order_id),
+        INDEX idx_ratings (overall_rating, taste_rating, service_rating, environment_rating)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='餐后评价表';
+    `);
+    console.log('评价表创建成功！');
 
     // 创建触发器：更新订单总金额
     await connection.query(`
@@ -174,27 +201,6 @@ async function main() {
         throw error;
       }
     }
-
-    // 创建评价表
-    await connection.query(`
-      CREATE TABLE IF NOT EXISTS reviews (
-        review_id INT AUTO_INCREMENT PRIMARY KEY COMMENT '评价ID',
-        order_id INT NOT NULL COMMENT '关联订单ID',
-        taste_rating TINYINT NOT NULL COMMENT '口味评分(1-5)',
-        service_rating TINYINT NOT NULL COMMENT '服务评分(1-5)',
-        environment_rating TINYINT NOT NULL COMMENT '环境评分(1-5)',
-        overall_rating TINYINT NOT NULL COMMENT '整体评分(1-5)',
-        comment TEXT COMMENT '评价内容',
-        reply TEXT COMMENT '商家回复',
-        reply_time DATETIME COMMENT '回复时间',
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '评价时间',
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-        FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE,
-        INDEX idx_order (order_id),
-        INDEX idx_ratings (overall_rating, taste_rating, service_rating, environment_rating)
-      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='餐后评价表';
-    `);
-    console.log('评价表创建成功！');
 
     // 查询所有表的信息
     const [tables] = await connection.query(`

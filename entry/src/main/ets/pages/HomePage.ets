@@ -111,12 +111,12 @@ export struct HomePage {
 
   @Builder RecommendedDishes() {
     Column() {
-      Text('推荐菜品')
+      Text('！！！店长主推 不好吃不要钱！！！')
         .fontSize(18)
         .fontWeight(FontWeight.Bold)
         .fontFamily('HarmonyHeiTi-Medium')
         .fontStyle(FontStyle.Normal)
-        .margin({ left: 16, bottom: 6 })
+        .margin({ left: 16, bottom: 4 })
         .decoration({ type: TextDecorationType.None })
 
       Scroll() {
@@ -154,14 +154,14 @@ export struct HomePage {
                   .fontSize(16)
                   .fontWeight(FontWeight.Bold)
                   .fontColor('#FF4081')
-                  .margin({ top: 4 })
+                  .margin({ top: 2 })
               }
               .alignItems(HorizontalAlign.Start)
               .width('100%')
-              .padding({ top: 8 })
+              .padding({ top: 4 })
             }
             .width(150)
-            .padding(8)
+            .padding(6)
             .margin({ right: 8 })
             .backgroundColor(Color.White)
             .borderRadius(12)
@@ -172,7 +172,7 @@ export struct HomePage {
       .width('100%')
       .padding({ left: 16 })
     }
-    .margin({ bottom: 12 })
+    .margin({ bottom: 8 })
     .width('100%')
   }
 
@@ -187,10 +187,10 @@ export struct HomePage {
             .fontSize(12)
             .fontColor(this.selectedCategory === category.name ? '#FF6B6B' : '#666666')
             .fontWeight(this.selectedCategory === category.name ? FontWeight.Bold : FontWeight.Normal)
-            .margin({ top: 4 })
+            .margin({ top: 2 })
         }
         .width(48)
-        .height(48)
+        .height(44)
         .backgroundColor(this.selectedCategory === category.name ? '#FFF0F0' : '#F8F8F8')
         .borderRadius(8)
         .justifyContent(FlexAlign.Center)
@@ -201,10 +201,10 @@ export struct HomePage {
       })
     }
     .width('100%')
-    .padding({ left: 16, right: 16, top: 12, bottom: 12 })
+    .padding({ left: 16, right: 16, top: 8, bottom: 8 })
     .backgroundColor(Color.White)
     .justifyContent(FlexAlign.SpaceEvenly)
-    .margin({ top: 8, bottom: 8 })
+    .margin({ top: 4, bottom: 4 })
     .borderRadius(16)
   }
 
@@ -216,7 +216,7 @@ export struct HomePage {
             Stack() {
               Image(item.image)
                 .width('100%')
-                .height(160)
+                .height(140)
                 .borderRadius({ topLeft: 12, topRight: 12 })
                 .objectFit(ImageFit.Cover)
 
@@ -235,13 +235,13 @@ export struct HomePage {
               Text(item.name)
                 .fontSize(16)
                 .fontWeight(FontWeight.Medium)
-                .margin({ top: 8 })
+                .margin({ top: 6 })
               
               if (item.description) {
                 Text(item.description)
                   .fontSize(12)
                   .fontColor('#999999')
-                  .margin({ top: 4 })
+                  .margin({ top: 2 })
                   .maxLines(1)
                   .textOverflow({ overflow: TextOverflow.Ellipsis })
               }
@@ -277,7 +277,7 @@ export struct HomePage {
                 })
               }
               .width('100%')
-              .margin({ top: 8 })
+              .margin({ top: 6 })
 
               Row() {
                 Text(`月售${item.sales || 0}`)
@@ -287,7 +287,7 @@ export struct HomePage {
               .margin({ top: 2 })
             }
             .width('100%')
-            .padding(12)
+            .padding(8)
           }
           .width('100%')
           .backgroundColor(Color.White)
@@ -296,10 +296,10 @@ export struct HomePage {
       })
     }
     .width('100%')
-    .padding(16)
+    .padding(12)
     .columnsTemplate('1fr 1fr')
-    .columnsGap(12)
-    .rowsGap(12)
+    .columnsGap(8)
+    .rowsGap(8)
   }
 
   @Builder CartButton() {
