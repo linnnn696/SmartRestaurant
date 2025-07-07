@@ -24,3 +24,6 @@ Thumbs.db
 
 # Large files
 Git-Setup.exe
+.hvigor/cache/
+.hvigor/outputs/
+.idea/
