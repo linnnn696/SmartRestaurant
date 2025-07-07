@@ -1,28 +1,40 @@
 import router from '@ohos.router';
 import promptAction from '@ohos.promptAction';
+import vibrator from '@ohos.vibrator';
 import { OrderService, Order, OrderItem, OrderStatus } from '../service/OrderService';
 import { ReviewService, CreateReviewRequest } from '../service/ReviewService';
 
-interface ReviewInfo {
+@Observed
+class ReviewInfo {
   orderId: number;
   tasteRating: number;
   serviceRating: number;
   environmentRating: number;
   comment: string;
+
+  constructor(orderId: number) {
+    this.orderId = orderId;
+    this.tasteRating = 0;
+    this.serviceRating = 0;
+    this.environmentRating = 0;
+    this.comment = '';
+  }
 }
 
 @Entry
 @Component
 struct ReviewPage {
   @State orders: Order[] = [];
-  @State reviews: Map<string, ReviewInfo> = new Map();
+  @State reviewsMap: Map<string, ReviewInfo> = new Map();
   @State isSubmitting: boolean = false;
 
   aboutToAppear() {
+    console.info('[ReviewPage] 页面即将显示');
     this.refreshOrders();
   }
 
   onPageShow() {
+    console.info('[ReviewPage] 页面显示');
     this.refreshOrders();
   }
 
@@ -33,14 +45,20 @@ struct ReviewPage {
       console.info('[ReviewPage] 获取到所有订单:', JSON.stringify(allOrders));
       
       // 过滤已完成的订单
-      this.orders = allOrders.filter(order => order.status === OrderStatus.COMPLETED);
+      this.orders = allOrders.filter(order => {
+        console.info(`[ReviewPage] 检查订单状态 - orderId: ${order.id}, status: ${order.status}`);
+        return order.status === OrderStatus.COMPLETED;
+      });
       console.info('[ReviewPage] 过滤后的已完成订单:', JSON.stringify(this.orders));
 
       // 获取每个订单的评价状态
       for (const order of this.orders) {
+        console.info(`[ReviewPage] 检查订单评价状态 - orderId: ${order.id}`);
         const review = await ReviewService.getOrderReview(Number(order.id));
+        console.info(`[ReviewPage] 订单评价结果:`, JSON.stringify(review));
         if (review) {
           // 如果订单已经评价过，从列表中移除
+          console.info(`[ReviewPage] 移除已评价订单 - orderId: ${order.id}`);
           this.orders = this.orders.filter(o => o.id !== order.id);
         }
       }
@@ -54,38 +72,37 @@ struct ReviewPage {
   @Builder StarRating(orderId: string, type: 'taste' | 'service' | 'environment') {
     Row() {
       ForEach([1, 2, 3, 4, 5], (star: number) => {
-        Image($r('app.media.ic_star'))
-          .width(24)
-          .height(24)
-          .fillColor(this.getRating(orderId, type) >= star ? '#FFD700' : '#CCCCCC')
-          .margin({ right: 8 })
-          .onClick(() => {
-            this.updateRating(orderId, type, star);
-          })
+        Stack() {
+          Image($r('app.media.ic_star'))
+            .width(24)
+            .height(24)
+            .margin({ right: 12 })
+            .objectFit(ImageFit.Contain)
+            .opacity(this.getRating(orderId, type) >= star ? 1 : 0.3)
+            .onClick(() => {
+              console.info(`[ReviewPage] 点击星星 - orderId: ${orderId}, type: ${type}, star: ${star}`);
+              this.updateRating(orderId, type, star);
+            })
+        }
       })
     }
+    .width('100%')
+    .height(32)
+    .alignItems(VerticalAlign.Center)
   }
 
-  getRating(orderId: string, type: 'taste' | 'service' | 'environment'): number {
-    const review: ReviewInfo | undefined = this.reviews.get(orderId);
-    switch (type) {
-      case 'taste':
-        return review?.tasteRating || 0;
-      case 'service':
-        return review?.serviceRating || 0;
-      case 'environment':
-        return review?.environmentRating || 0;
+  private getReviewByOrderId(orderId: string): ReviewInfo {
+    let review = this.reviewsMap.get(orderId);
+    if (!review) {
+      review = new ReviewInfo(Number(orderId));
+      this.reviewsMap.set(orderId, review);
     }
+    return review;
   }
 
   updateRating(orderId: string, type: 'taste' | 'service' | 'environment', rating: number) {
-    const review: ReviewInfo = this.reviews.get(orderId) || {
-      orderId: Number(orderId),
-      tasteRating: 0,
-      serviceRating: 0,
-      environmentRating: 0,
-      comment: ''
-    };
+    console.info(`[ReviewPage] 更新评分 - orderId: ${orderId}, type: ${type}, rating: ${rating}`);
+    const review = this.getReviewByOrderId(orderId);
 
     switch (type) {
       case 'taste':
@@ -99,20 +116,56 @@ struct ReviewPage {
         break;
     }
 
-    this.reviews.set(orderId, review);
+    // 强制触发UI更新
+    this.reviewsMap = new Map(this.reviewsMap);
+  }
+
+  getRating(orderId: string, type: 'taste' | 'service' | 'environment'): number {
+    const review = this.getReviewByOrderId(orderId);
+    switch (type) {
+      case 'taste':
+        return review.tasteRating;
+      case 'service':
+        return review.serviceRating;
+      case 'environment':
+        return review.environmentRating;
+      default:
+        return 0;
+    }
   }
 
   @Builder RatingItem(title: string, orderId: string, type: 'taste' | 'service' | 'environment') {
     Row() {
       Text(title)
-        .fontSize(14)
-        .fontColor('#666666')
+        .fontSize(16)
+        .fontColor('#333333')
         .width(60)
       this.StarRating(orderId, type)
     }
     .width('100%')
-    .justifyContent(FlexAlign.Start)
-    .margin({ bottom: 12 })
+    .height(48)
+    .alignItems(VerticalAlign.Center)
+    .margin({ bottom: 16 })
+  }
+
+  // 获取评分描述文本
+  private getRatingText(rating: number): string {
+    switch (rating) {
+      case 0:
+        return '请评分';
+      case 1:
+        return '非常差';
+      case 2:
+        return '差';
+      case 3:
+        return '一般';
+      case 4:
+        return '好';
+      case 5:
+        return '非常好';
+      default:
+        return '请评分';
+    }
   }
 
   private async submitReview(orderId: string) {
@@ -120,11 +173,7 @@ struct ReviewPage {
       return;
     }
 
-    const review = this.reviews.get(orderId);
-    if (!review) {
-      promptAction.showToast({ message: '评价数据不完整' });
-      return;
-    }
+    const review = this.getReviewByOrderId(orderId);
 
     if (review.tasteRating === 0 || review.serviceRating === 0 || review.environmentRating === 0) {
       promptAction.showToast({ message: '请完成所有评分项' });
@@ -169,14 +218,10 @@ struct ReviewPage {
     Column() {
       // 顶部栏
       Row() {
-        Button() {
-          Image($r('app.media.ic_back'))
-            .width(24)
-            .height(24)
-        }
-        .backgroundColor('transparent')
-        .onClick(() => router.back())
-
+        Image($r('app.media.ic_back'))
+          .width(24)
+          .height(24)
+          .onClick(() => router.back())
         Text('餐后评价')
           .fontSize(20)
           .fontWeight(FontWeight.Bold)
@@ -186,108 +231,73 @@ struct ReviewPage {
       .height(56)
       .padding({ left: 16, right: 16 })
       .backgroundColor(Color.White)
+      .alignItems(VerticalAlign.Center)
 
-      if (this.orders.length === 0) {
+      Scroll() {
         Column() {
-          Image($r('app.media.order'))
-            .width(120)
-            .height(120)
-            .fillColor('#CCCCCC')
-            .margin({ bottom: 16 })
-          Text('暂无可评价的订单')
-            .fontSize(16)
-            .fontColor('#999999')
-        }
-        .width('100%')
-        .layoutWeight(1)
-        .justifyContent(FlexAlign.Center)
-      } else {
-        List() {
           ForEach(this.orders, (order: Order) => {
-            ListItem() {
-              Column() {
-                // 订单信息
-                Row() {
-                  Text(`订单号：${order.id}`)
-                    .fontSize(14)
-                    .fontColor('#666666')
-                  Text(order.createTime)
-                    .fontSize(14)
-                    .fontColor('#999999')
-                }
-                .width('100%')
-                .justifyContent(FlexAlign.SpaceBetween)
-                .margin({ bottom: 12 })
-
-                // 订单内容
-                Column() {
-                  ForEach(order.items, (item: OrderItem) => {
-                    Text(`${item.name} x${item.quantity}`)
-                      .fontSize(14)
-                      .margin({ bottom: 4 })
-                  })
-                }
-                .alignItems(HorizontalAlign.Start)
-                .margin({ bottom: 12 })
-
-                Divider().color('#EEEEEE')
-
-                // 评分区域
-                Column() {
-                  Text('为本次用餐评分')
-                    .fontSize(16)
-                    .fontWeight(FontWeight.Medium)
-                    .margin({ top: 12, bottom: 16 })
-                    .alignSelf(ItemAlign.Start)
-
-                  this.RatingItem('口味', order.id, 'taste')
-                  this.RatingItem('服务', order.id, 'service')
-                  this.RatingItem('环境', order.id, 'environment')
-
-                  TextArea({ placeholder: '请输入评价内容（可选）' })
-                    .height(100)
-                    .backgroundColor('#F5F5F5')
-                    .margin({ bottom: 16 })
-                    .onChange((value: string) => {
-                      const review = this.reviews.get(order.id) || {
-                        orderId: Number(order.id),
-                        tasteRating: 0,
-                        serviceRating: 0,
-                        environmentRating: 0,
-                        comment: ''
-                      };
-                      review.comment = value;
-                      this.reviews.set(order.id, review);
-                    })
-
-                  Button('提交评价')
-                    .width('100%')
-                    .height(44)
-                    .backgroundColor('#007AFF')
-                    .onClick(() => this.submitReview(order.id))
-                }
-                .padding(16)
-                .backgroundColor(Color.White)
-                .borderRadius(8)
+            Column() {
+              // 订单信息
+              Row() {
+                Text(`订单号：${order.id}`)
+                  .fontSize(14)
+                  .fontColor('#666666')
+                Text(order.createTime || '')
+                  .fontSize(14)
+                  .fontColor('#999999')
               }
               .width('100%')
-              .padding(16)
-              .backgroundColor(Color.White)
-              .borderRadius(8)
+              .justifyContent(FlexAlign.SpaceBetween)
               .margin({ bottom: 12 })
-              .onClick(() => {
-                router.pushUrl({
-                  url: 'pages/OrderTrackPage',
-                  params: { orderId: order.id }
-                });
+
+              // 订单内容
+              ForEach(order.items, (item: OrderItem) => {
+                Text(`${item.name} x${item.quantity}`)
+                  .fontSize(14)
+                  .margin({ bottom: 4 })
               })
+
+              Divider()
+                .color('#EEEEEE')
+                .margin({ top: 16, bottom: 16 })
+
+              // 评分区域
+              Text('为本次用餐评分')
+                .fontSize(16)
+                .fontWeight(FontWeight.Medium)
+                .margin({ bottom: 24 })
+
+              this.RatingItem('口味', order.id, 'taste')
+              this.RatingItem('服务', order.id, 'service')
+              this.RatingItem('环境', order.id, 'environment')
+
+              TextArea({ placeholder: '请输入评价内容（可选）' })
+                .height(120)
+                .backgroundColor('#F5F5F5')
+                .margin({ bottom: 24 })
+                .onChange((value: string) => {
+                  const review = this.getReviewByOrderId(order.id);
+                  review.comment = value;
+                })
+
+              Button('提交评价')
+                .width('100%')
+                .height(44)
+                .backgroundColor('#007AFF')
+                .fontColor(Color.White)
+                .borderRadius(22)
+                .onClick(() => this.submitReview(order.id))
             }
+            .width('100%')
+            .padding(16)
+            .backgroundColor(Color.White)
+            .borderRadius(12)
+            .margin({ bottom: 12 })
           })
         }
-        .width('100%')
-        .layoutWeight(1)
         .padding(16)
       }
+      .layoutWeight(1)
     }
     .width('100%')
     .height('100%')

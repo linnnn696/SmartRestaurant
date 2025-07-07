@@ -241,22 +241,6 @@ export struct OrderListPage {
     .backgroundColor(this.newOrderId === order.id ? '#FFF0F0' : Color.White)
     .borderRadius(12)
     .margin({ bottom: 12 })
-    .onClick(() => {
-      try {
-        router.pushUrl({
-          url: 'pages/OrderTrackPage',
-          params: { orderId: order.id }
-        }).catch((error: Error) => {
-          console.error('导航到订单跟踪页面失败:', error);
-          promptAction.showToast({
-            message: '页面跳转失败',
-            duration: 2000
-          });
-        });
-      } catch (error) {
-        console.error('导航错误:', error);
-      }
-    })
   }
 
   // 获取状态文本
